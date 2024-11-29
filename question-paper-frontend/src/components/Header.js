@@ -18,16 +18,13 @@ const Header = () => {
               </Link>
             </li>
             <li>
-              <Link
-                to="/action?type=upload"
-                className="hover:text-blue-300 transition-all"
-              >
+              <Link to="/upload" className="hover:text-blue-300 transition-all">
                 Upload
               </Link>
             </li>
             <li>
               <Link
-                to="/action?type=download"
+                to="/download"
                 className="hover:text-blue-300 transition-all"
               >
                 Download

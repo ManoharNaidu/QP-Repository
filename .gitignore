@@ -22,3 +22,6 @@
 /question-paper-frontend/npm-debug.log*
 /question-paper-frontend/yarn-debug.log*
 /question-paper-frontend/yarn-error.log*
+
+/question-paper-backend/node_modules
+/question-paper-backend/.env
