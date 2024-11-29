@@ -1,0 +1,24 @@
+/question-paper-frontend/node_modules
+
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/question-paper-frontend/.pnp
+/question-paper-frontend/.pnp.js
+
+# testing
+/question-paper-frontend/coverage
+
+# production
+/question-paper-frontend/build
+
+# misc
+/question-paper-frontend/.DS_Store
+/question-paper-frontend/.env.local
+/question-paper-frontend/.env.development.local
+/question-paper-frontend/.env.test.local
+/question-paper-frontend/.env.production.local
+
+/question-paper-frontend/npm-debug.log*
+/question-paper-frontend/yarn-debug.log*
+/question-paper-frontend/yarn-error.log*
