@@ -15,12 +15,12 @@ QP Repository is a web application for managing question papers. Users can uploa
 
 ### Landing Page
 
-![Landing Page](/question-paper-frontend\screenshots\LandingPage.png)
+![Landing Page](screenshots\LandingPage.png)
 
 ### Upload Page
 
-![Upload Page](/question-paper-frontend\screenshots\UploadPage.png)
+![Upload Page](screenshots\UploadPage.png)
 
 ### Download Page
 
-![Download Page](/question-paper-frontend\screenshots\DownloadPage.png)
+![Download Page](screenshots\DownloadPage.png)
