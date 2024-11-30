@@ -1,4 +1,7 @@
 Server.js : The file uploading problem, where i want to rename the file to a unique one with branch, academic year, year, semester and cycle. - Done
 DownloadPage.js : After searching, the cloudinary link is not working - Done
 
-What if the user is uploading twice or the attibutes goes wrong.
+If the user sets the attribute wrong and uploads the pdf
+If the user tries to upload the pdf which is already present.
+Generating README for frontend, backend and for whole setup.
+Move Front-end and Back-end to online hosting.
