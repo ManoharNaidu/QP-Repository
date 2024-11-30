@@ -1,11 +1,14 @@
 const express = require("express");
-const mongoose = require("mongoose");
 const multer = require("multer");
-const QPapers = require("./db/QPaper");
 const cors = require("cors");
 const AWS = require("aws-sdk");
 const fs = require("fs");
 const path = require("path");
+const QuestionPapers = require("./models/QuestionPaper");
+const Feedback = require("./models/Feedback");
+
+require("./config/AWS.config")();
+require("./config/MongoDB")();
 require("dotenv").config();
 
 const app = express();
@@ -15,19 +18,7 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// AWS Connection
-AWS.config.update({
-  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-  region: process.env.AWS_REGION,
-});
-
-// MongoDB connection
-mongoose
-  .connect(process.env.MONGO_URI, {})
-  .then(() => console.log("MongoDB connected"))
-  .catch((err) => console.error("MongoDB connection error:", err));
-
+// Multer upload and S3 setup
 const upload = multer({ dest: "uploads/" });
 const s3 = new AWS.S3();
 
@@ -61,7 +52,7 @@ app.post("/api/upload", upload.single("file"), async (req, res) => {
     fs.unlinkSync(filePath);
 
     // Save metadata to MongoDB
-    const newQPaper = await QPapers.findOneAndUpdate(
+    const newQPaper = await QuestionPapers.findOneAndUpdate(
       { branch, academicYear, year, cycle, semester, courseCode },
       { fileUrl: data.Location }, // S3 file URL
       { upsert: true, new: true }
@@ -91,7 +82,7 @@ app.get("/api/download", async (req, res) => {
     if (cycle) query.cycle = cycle;
     if (courseCode) query.courseCode = courseCode;
 
-    const papers = await QPapers.find(query);
+    const papers = await QuestionPapers.find(query);
 
     if (papers.length === 0) {
       return res.status(404).json({ message: "No question papers found." });
@@ -101,6 +92,25 @@ app.get("/api/download", async (req, res) => {
   } catch (error) {
     console.error("Download error:", error);
     res.status(500).json({ error: "Server error" });
+  }
+});
+
+// Feedback route
+app.post("/api/feedback", async (req, res) => {
+  try {
+    const { content } = req.body;
+
+    if (!content) {
+      return res.status(400).json({ message: "Feedback content is required" });
+    }
+
+    const feedback = new Feedback({ content });
+    await feedback.save();
+
+    res.status(201).json({ message: "Feedback submitted successfully" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Failed to submit feedback" });
   }
 });
 

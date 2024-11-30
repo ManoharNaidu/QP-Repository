@@ -30,6 +30,14 @@ const Header = () => {
                 Download
               </Link>
             </li>
+            <li>
+              <Link
+                to="/feedback"
+                className="hover:text-blue-300 transition-all"
+              >
+                Feedback
+              </Link>
+            </li>
           </ul>
         </nav>
       </div>
