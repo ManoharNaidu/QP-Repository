@@ -1,11 +1,11 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const multer = require("multer");
-const { v2: cloudinary } = require("cloudinary");
-const { CloudinaryStorage } = require("multer-storage-cloudinary");
 const QPapers = require("./db/QPaper");
 const cors = require("cors");
-require("./db/CloudinaryConfig");
+const AWS = require("aws-sdk");
+const fs = require("fs");
+const path = require("path");
 require("dotenv").config();
 
 const app = express();
@@ -15,57 +15,63 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// AWS Connection
+AWS.config.update({
+  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+  region: process.env.AWS_REGION,
+});
+
 // MongoDB connection
 mongoose
   .connect(process.env.MONGO_URI, {})
   .then(() => console.log("MongoDB connected"))
   .catch((err) => console.error("MongoDB connection error:", err));
 
-// Cloudinary storage for Multer with renamed files
-const storage = new CloudinaryStorage({
-  cloudinary: cloudinary,
-  params: async (req, file) => {
-    const { branch, academicYear, year, semester, cycle } = req.body;
-    console.log(req.body);
-
-    const publicId =
-      `${branch}_${academicYear}_${year}_${semester}_${cycle}`.replace(
-        /[\s/]/g,
-        "_"
-      ); // Replace spaces or slashes with underscores
-    return {
-      folder: "question-papers",
-      resource_type: "raw",
-      format: "pdf",
-      public_id: publicId,
-    };
-  },
-});
-
-const upload = multer({ storage });
+const upload = multer({ dest: "uploads/" });
+const s3 = new AWS.S3();
 
 // Upload route
 app.post("/api/upload", upload.single("file"), async (req, res) => {
-  console.log(req.body);
-
   const { branch, academicYear, year, semester, cycle } = req.body;
 
-  try {
-    // Save the metadata and file URL in MongoDB
-    const fileUrl = req.file.path;
+  if (!req.file) {
+    return res.status(400).json({ error: "File Not Uploaded" });
+  }
 
-    // Update or insert a new record
-    const updatedQPaper = await QPapers.findOneAndUpdate(
+  const filePath = path.join(__dirname, req.file.path);
+  const fileName =
+    `${branch}_${academicYear}_${year}_${semester}_${cycle}.pdf`.replace(
+      /[\s/]/g,
+      "_"
+    );
+
+  const params = {
+    Bucket: process.env.AWS_BUCKET_NAME,
+    Key: `question-papers/${fileName}`,
+    Body: fs.createReadStream(filePath),
+    ContentType: "application/pdf",
+  };
+
+  try {
+    // Upload file to S3
+    const data = await s3.upload(params).promise();
+
+    // Remove the file from local uploads folder
+    fs.unlinkSync(filePath);
+
+    // Save metadata to MongoDB
+    const newQPaper = await QPapers.findOneAndUpdate(
       { branch, academicYear, year, semester, cycle },
-      { fileUrl },
-      { upsert: true, new: true } // Insert if not found, return the updated document
+      { fileUrl: data.Location }, // S3 file URL
+      { upsert: true, new: true }
     );
 
     res
       .status(201)
-      .json({ message: "QPaper uploaded successfully", paper: updatedQPaper });
+      .json({ message: "File uploaded successfully", paper: newQPaper });
   } catch (error) {
-    console.error("Upload error", error);
+    console.error("Error uploading to S3:", error);
     res.status(500).json({ error: "Server error" });
   }
 });

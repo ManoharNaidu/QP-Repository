@@ -8,6 +8,7 @@ const UploadPage = () => {
   const [semester, setSemester] = useState("");
   const [cycle, setCycle] = useState("");
   const [file, setFile] = useState(null);
+  const [courseCode, setCourseCode] = useState("");
   const [message, setMessage] = useState("");
 
   const handleUpload = async (e) => {
@@ -18,8 +19,9 @@ const UploadPage = () => {
     formData.append("branch", branch);
     formData.append("academicYear", academicYear);
     formData.append("year", year);
-    formData.append("semester", semester);
     formData.append("cycle", cycle);
+    formData.append("semester", semester);
+    formData.append("courseCode", courseCode);
 
     try {
       setMessage("Uploading file...");
@@ -91,6 +93,19 @@ const UploadPage = () => {
           </select>
         </div>
         <div>
+          <label className="block font-medium">Cycle:</label>
+          <select
+            required
+            className="border rounded p-2 w-full"
+            value={cycle}
+            onChange={(e) => setCycle(e.target.value)}
+          >
+            <option value="">Select Cycle</option>
+            <option value="Jan-Jun">Jan-Jun</option>
+            <option value="Jul-Dec">Jul-Dec</option>
+          </select>
+        </div>
+        <div>
           <label className="block font-medium">Semester:</label>
           <select
             required
@@ -104,17 +119,13 @@ const UploadPage = () => {
           </select>
         </div>
         <div>
-          <label className="block font-medium">Cycle:</label>
-          <select
+          <label className="block font-medium">Course Code:</label>
+          <input
             required
+            type="text"
             className="border rounded p-2 w-full"
-            value={cycle}
-            onChange={(e) => setCycle(e.target.value)}
-          >
-            <option value="">Select Cycle</option>
-            <option value="Jan-Jun">Jan-Jun</option>
-            <option value="Jul-Dec">Jul-Dec</option>
-          </select>
+            onChange={(e) => setCourseCode(e.target.value)}
+          />
         </div>
         <div>
           <label className="block font-medium">File:</label>

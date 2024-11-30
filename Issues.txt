@@ -1,2 +1,4 @@
-Server.js : The file uploading problem, where i want to rename the file to a unique one with branch, academic year, year, semester and cycle.
-DownloadPage.js : After searching, the cloudinary link is not working
+Server.js : The file uploading problem, where i want to rename the file to a unique one with branch, academic year, year, semester and cycle. - Done
+DownloadPage.js : After searching, the cloudinary link is not working - Done
+
+What if the user is uploading twice or the attibutes goes wrong.
