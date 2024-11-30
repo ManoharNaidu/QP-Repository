@@ -33,7 +33,7 @@ const s3 = new AWS.S3();
 
 // Upload route
 app.post("/api/upload", upload.single("file"), async (req, res) => {
-  const { branch, academicYear, year, semester, cycle } = req.body;
+  const { branch, academicYear, year, semester, cycle, courseCode } = req.body;
 
   if (!req.file) {
     return res.status(400).json({ error: "File Not Uploaded" });
@@ -41,7 +41,7 @@ app.post("/api/upload", upload.single("file"), async (req, res) => {
 
   const filePath = path.join(__dirname, req.file.path);
   const fileName =
-    `${branch}_${academicYear}_${year}_${semester}_${cycle}.pdf`.replace(
+    `${branch}_${academicYear}_${year}_${cycle}_${semester}_${courseCode}.pdf`.replace(
       /[\s/]/g,
       "_"
     );
@@ -62,7 +62,7 @@ app.post("/api/upload", upload.single("file"), async (req, res) => {
 
     // Save metadata to MongoDB
     const newQPaper = await QPapers.findOneAndUpdate(
-      { branch, academicYear, year, semester, cycle },
+      { branch, academicYear, year, cycle, semester, courseCode },
       { fileUrl: data.Location }, // S3 file URL
       { upsert: true, new: true }
     );
@@ -79,7 +79,8 @@ app.post("/api/upload", upload.single("file"), async (req, res) => {
 // Download route
 app.get("/api/download", async (req, res) => {
   try {
-    const { branch, academicYear, year, semester, cycle } = req.query;
+    const { branch, academicYear, year, semester, cycle, courseCode } =
+      req.query;
 
     // Query MongoDB for matching question papers
     const query = {};
@@ -88,6 +89,7 @@ app.get("/api/download", async (req, res) => {
     if (year) query.year = year;
     if (semester) query.semester = semester;
     if (cycle) query.cycle = cycle;
+    if (courseCode) query.courseCode = courseCode;
 
     const papers = await QPapers.find(query);
 
@@ -97,7 +99,7 @@ app.get("/api/download", async (req, res) => {
 
     res.status(200).json({ papers });
   } catch (error) {
-    console.error("Download error", error);
+    console.error("Download error:", error);
     res.status(500).json({ error: "Server error" });
   }
 });
