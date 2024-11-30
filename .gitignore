@@ -1,5 +1,5 @@
 /question-paper-frontend/node_modules
-
+/question-paper-frontend/.env
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
