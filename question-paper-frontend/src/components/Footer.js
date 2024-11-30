@@ -23,8 +23,7 @@ const Footer = () => {
           &copy; {new Date().getFullYear()} QP Repository. All rights reserved.
         </p>
         <p className="text-sm mt-1">
-          Built with <span className="text-red-400">❤️</span> by Manohar Naidu
-          Bheesetti.
+          Built with <span className="text-red-400">❤️</span> by Manu.
         </p>
       </div>
       <a
