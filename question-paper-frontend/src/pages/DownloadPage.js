@@ -29,7 +29,7 @@ const DownloadPage = () => {
 
   const fetchPapers = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/api/download", {
+      const response = await axios.get("https://qp-repository.onrender.com/api/download", {
         params: filters,
       });
       setPapers(response.data.papers);
@@ -79,7 +79,7 @@ const DownloadPage = () => {
         {/* Filter Section (1/4 width) */}
         <div className="w-full sm:w-1/4 p-4">
           <form className="flex flex-col gap-4" onSubmit={handleFilterSubmit}>
-            <h2 className="text-xl font-semibold">Filters</h2>
+            <h2 className="text-xl font-semibold justify-center">Filters</h2>
             {/* Branch Dropdown */}
             <select
               name="branch"
@@ -164,14 +164,6 @@ const DownloadPage = () => {
               onChange={handleInputChange}
               className="p-2 border border-gray-300 rounded shadow-md"
             />
-
-            {/* Filter Button */}
-            <button
-              type="submit"
-              className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 shadow-lg"
-            >
-              Filter
-            </button>
           </form>
         </div>
 

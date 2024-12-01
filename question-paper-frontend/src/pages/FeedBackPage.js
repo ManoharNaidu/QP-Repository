@@ -9,7 +9,7 @@ const FeedbackPage = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post("http://localhost:5000/api/feedback", {
+      const response = await axios.post("https://qp-repository.onrender.com/api/feedback", {
         content: feedback,
       });
 
