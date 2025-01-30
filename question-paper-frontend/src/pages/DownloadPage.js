@@ -29,9 +29,12 @@ const DownloadPage = () => {
 
   const fetchPapers = async () => {
     try {
-      const response = await axios.get("https://qp-repository.onrender.com/api/download", {
-        params: filters,
-      });
+      const response = await axios.get(
+        "https://qp-repository.onrender.com/api/download",
+        {
+          params: filters,
+        }
+      );
       setPapers(response.data.papers);
       setTotalPages(Math.ceil(response.data.papers.length / papersPerPage)); // Calculate total pages
     } catch (error) {
@@ -69,25 +72,24 @@ const DownloadPage = () => {
   };
 
   return (
-    <div className="container mx-auto">
-      <h1 className="text-3xl font-bold text-center mb-6">
+    <div className="bg-gradient-to-br from-blue-300 to-blue-500 p-6 flex-auto container mx-auto pt-8">
+      <h1 className="text-4xl font-bold text-center mb-8 text-gray-800">
         Download Question Papers
       </h1>
 
-      {/* Flexbox Layout for Filters and Results */}
-      <div className="flex flex-wrap">
-        {/* Filter Section (1/4 width) */}
-        <div className="w-full sm:w-1/4 p-4">
+      {/* Main Layout */}
+      <div className="flex flex-wrap gap-8 px-4">
+        {/* Filter Section - White Card */}
+        <div className="w-full sm:w-80 bg-gradient-to-br from-red-300 to-red-500 rounded-lg p-6 shadow-lg">
+          <h2 className="text-xl font-semibold mb-4">Filters</h2>
           <form className="flex flex-col gap-4" onSubmit={handleFilterSubmit}>
-            <h2 className="text-xl font-semibold justify-center">Filters</h2>
-            {/* Branch Dropdown */}
             <select
               name="branch"
               value={filters.branch}
               onChange={handleInputChange}
-              className="p-2 border border-gray-300 rounded shadow-md"
+              className="w-full p-2.5 border border-gray-300 rounded-md text-gray-700"
             >
-              <option value="">Branch</option>
+              <option value="">Select Branch</option>
               {branchOptions.map((branch, index) => (
                 <option key={index} value={branch}>
                   {branch}
@@ -95,14 +97,13 @@ const DownloadPage = () => {
               ))}
             </select>
 
-            {/* Academic Year Dropdown */}
             <select
               name="academicYear"
               value={filters.academicYear}
               onChange={handleInputChange}
-              className="p-2 border border-gray-300 rounded shadow-md"
+              className="w-full p-2.5 border border-gray-300 rounded-md text-gray-700"
             >
-              <option value="">Academic Year</option>
+              <option value="">Select Academic Year</option>
               {academicYearOptions.map((year, index) => (
                 <option key={index} value={year}>
                   {year}
@@ -110,14 +111,13 @@ const DownloadPage = () => {
               ))}
             </select>
 
-            {/* Year Dropdown */}
             <select
               name="year"
               value={filters.year}
               onChange={handleInputChange}
-              className="p-2 border border-gray-300 rounded shadow-md"
+              className="w-full p-2.5 border border-gray-300 rounded-md text-gray-700"
             >
-              <option value="">Year</option>
+              <option value="">Select Year</option>
               {yearOptions.map((year, index) => (
                 <option key={index} value={year}>
                   {year}
@@ -125,14 +125,13 @@ const DownloadPage = () => {
               ))}
             </select>
 
-            {/* Semester Dropdown */}
             <select
               name="semester"
               value={filters.semester}
               onChange={handleInputChange}
-              className="p-2 border border-gray-300 rounded shadow-md"
+              className="w-full p-2.5 border border-gray-300 rounded-md text-gray-700"
             >
-              <option value="">Semester</option>
+              <option value="">Select Semester</option>
               {semesterOptions.map((semester, index) => (
                 <option key={index} value={semester}>
                   {semester}
@@ -140,14 +139,13 @@ const DownloadPage = () => {
               ))}
             </select>
 
-            {/* Cycle Dropdown */}
             <select
               name="cycle"
               value={filters.cycle}
               onChange={handleInputChange}
-              className="p-2 border border-gray-300 rounded shadow-md"
+              className="w-full p-2.5 border border-gray-300 rounded-md text-gray-700"
             >
-              <option value="">Cycle</option>
+              <option value="">Select Cycle</option>
               {cycleOptions.map((cycle, index) => (
                 <option key={index} value={cycle}>
                   {cycle}
@@ -155,21 +153,27 @@ const DownloadPage = () => {
               ))}
             </select>
 
-            {/* Course Code Input */}
             <input
               type="text"
               name="courseCode"
               placeholder="Course Code"
               value={filters.courseCode}
               onChange={handleInputChange}
-              className="p-2 border border-gray-300 rounded shadow-md"
+              className="w-full p-2.5 border border-gray-300 rounded-md text-gray-700"
             />
+
+            <button
+              type="submit"
+              className="w-full bg-blue-500 text-black py-2.5 rounded-md hover:bg-blue-600 transition-colors"
+            >
+              Apply Filters
+            </button>
           </form>
         </div>
 
-        {/* Results Section (3/4 width) */}
-        <div className="w-full sm:w-3/4 p-4">
-          <div className="grid grid-cols-3 sm:grid-cols-3 lg:grid-cols-3 gap-6">
+        {/* Results Section */}
+        <div className="flex-initial">
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
             {paginateResults().length === 0 ? (
               <p className="text-center  text-gray-500 justify-center">
                 No question papers found.
@@ -178,7 +182,7 @@ const DownloadPage = () => {
               paginateResults().map((paper, index) => (
                 <div
                   key={index}
-                  className="p-4 border border-gray-300 rounded shadow-md flex flex-col justify-between h-full"
+                  className="bg-gradient-to-br from-yellow-300 to-yellow-500 p-4 border-2 border-black rounded shadow-md flex flex-col h-full"
                 >
                   <div>
                     <p>
@@ -201,13 +205,12 @@ const DownloadPage = () => {
                     </p>
                   </div>
 
-                  {/* Align the Download button to the right and center it vertically */}
-                  <div className="mt-4 flex justify-start items-center h-full">
+                  <div className="flex justify-center mt-4 ">
                     <a
                       href={paper.fileUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 shadow-md"
+                      className="w-full px-4 py-2 bg-gradient-to-br from-green-300 to-green-500  text-black rounded hover:bg-green-700 shadow-md text-center"
                     >
                       Download
                     </a>
@@ -225,7 +228,7 @@ const DownloadPage = () => {
           <button
             onClick={() => changePage(currentPage - 1)}
             disabled={currentPage === 1}
-            className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 disabled:opacity-50"
+            className="px-4 py-2 bg-blue-500 text-black rounded hover:bg-blue-600 disabled:opacity-50"
           >
             Previous
           </button>
@@ -235,7 +238,7 @@ const DownloadPage = () => {
           <button
             onClick={() => changePage(currentPage + 1)}
             disabled={currentPage === totalPages}
-            className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 disabled:opacity-50"
+            className="px-4 py-2 bg-blue-500 text-black rounded hover:bg-blue-600 disabled:opacity-50"
           >
             Next
           </button>

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { motion } from "framer-motion";
 
 const UploadPage = () => {
   const [branch, setBranch] = useState("");
@@ -13,7 +14,6 @@ const UploadPage = () => {
 
   const handleUpload = async (e) => {
     e.preventDefault();
-
     const formData = new FormData();
     formData.append("file", file);
     formData.append("branch", branch);
@@ -37,115 +37,206 @@ const UploadPage = () => {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8 w-1/2">
-      <h1 className="text-2xl font-bold mb-6">Upload Question Papers</h1>
-      <form className="space-y-4" onSubmit={handleUpload}>
-        <div>
-          <label className="block font-medium">Branch:</label>
-          <select
-            required
-            className="border rounded p-2 w-full"
-            value={branch}
-            onChange={(e) => setBranch(e.target.value)}
-          >
-            <option value="">Select Branch</option>
-            <option value="CSE">CSE</option>
-            <option value="ECE">ECE</option>
-            <option value="ME">ME</option>
-            <option value="CE">CE</option>
-            <option value="EEE">EEE</option>
-          </select>
-        </div>
-        <div>
-          <label className="block font-medium">Year:</label>
-          <select
-            required
-            className="border rounded p-2 w-full"
-            value={academicYear}
-            onChange={(e) => setAcademicYear(e.target.value)}
-          >
-            <option value="">Select Year</option>
-            {Array.from({ length: new Date().getFullYear() - 2014 }).map(
-              (_, idx) => {
-                const yearOption = 2015 + idx;
-                return (
-                  <option key={yearOption} value={yearOption}>
-                    {yearOption}
-                  </option>
-                );
-              }
-            )}
-          </select>
-        </div>
-        <div>
-          <label className="block font-medium">Academic Year:</label>
-          <select
-            required
-            className="border rounded p-2 w-full"
-            value={year}
-            onChange={(e) => setYear(e.target.value)}
-          >
-            <option value="">Select Academic Year</option>
-            <option value="1st Year">1st Year</option>
-            <option value="2nd Year">2nd Year</option>
-            <option value="3rd Year">3rd Year</option>
-            <option value="4th Year">4th Year</option>
-          </select>
-        </div>
-        <div>
-          <label className="block font-medium">Cycle:</label>
-          <select
-            required
-            className="border rounded p-2 w-full"
-            value={cycle}
-            onChange={(e) => setCycle(e.target.value)}
-          >
-            <option value="">Select Cycle</option>
-            <option value="Jan-Jun">Jan-Jun</option>
-            <option value="Jul-Dec">Jul-Dec</option>
-          </select>
-        </div>
-        <div>
-          <label className="block font-medium">Semester:</label>
-          <select
-            required
-            className="border rounded p-2 w-full"
-            value={semester}
-            onChange={(e) => setSemester(e.target.value)}
-          >
-            <option value="">Select Semester</option>
-            <option value="Mid">Mid Semester</option>
-            <option value="End">End Semester</option>
-          </select>
-        </div>
-        <div>
-          <label className="block font-medium">Course Code:</label>
-          <input
-            required
-            type="text"
-            className="border rounded p-2 w-full"
-            onChange={(e) => setCourseCode(e.target.value)}
-          />
-        </div>
-        <div>
-          <label className="block font-medium">File:</label>
-          <input
-            required
-            type="file"
-            accept=".pdf"
-            className="border rounded p-2 w-full"
-            onChange={(e) => setFile(e.target.files[0])}
-          />
-        </div>
-        <button
-          type="submit"
-          className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+    <div className="bg-gradient-to-br from-green-800 via-green-600 to-green-400 py-4 px-4 rounded-xl">
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        className="container mx-auto max-w-4xl bg-white/10 backdrop-blur-lg rounded-xl p-8 shadow-xl"
+      >
+        <h1 className="text-4xl font-bold mb-12 text-white text-center">
+          Upload Question Papers
+        </h1>
+        <form
+          className="grid grid-cols-1 md:grid-cols-2 gap-5"
+          onSubmit={handleUpload}
         >
-          Upload
-        </button>
-      </form>
+          <div>
+            <label className="block font-medium text-green-100 mb-2">
+              Branch:
+            </label>
+            <select
+              required
+              className="w-full px-4 py-3 rounded-lg bg-white/20 border border-green-200/20 text-white placeholder-green-200 focus:outline-none focus:ring-2 focus:ring-green-400"
+              value={branch}
+              onChange={(e) => setBranch(e.target.value)}
+            >
+              <option value="" className="text-gray-800">
+                Select Branch
+              </option>
+              <option value="CSE" className="text-gray-800">
+                CSE
+              </option>
+              <option value="ECE" className="text-gray-800">
+                ECE
+              </option>
+              <option value="ME" className="text-gray-800">
+                ME
+              </option>
+              <option value="CE" className="text-gray-800">
+                CE
+              </option>
+              <option value="EEE" className="text-gray-800">
+                EEE
+              </option>
+            </select>
+          </div>
 
-      {message && <p className="text-red-500 mt-4">{message}</p>}
+          <div>
+            <label className="block font-medium text-green-100 mb-2">
+              Year:
+            </label>
+            <select
+              required
+              className="w-full px-4 py-3 rounded-lg bg-white/20 border border-green-200/20 text-white placeholder-green-200 focus:outline-none focus:ring-2 focus:ring-green-400"
+              value={academicYear}
+              onChange={(e) => setAcademicYear(e.target.value)}
+            >
+              <option value="" className="text-gray-800">
+                Select Year
+              </option>
+              {Array.from({ length: new Date().getFullYear() - 2014 }).map(
+                (_, idx) => {
+                  const yearOption = 2015 + idx;
+                  return (
+                    <option
+                      key={yearOption}
+                      value={yearOption}
+                      className="text-gray-800"
+                    >
+                      {yearOption}
+                    </option>
+                  );
+                }
+              )}
+            </select>
+          </div>
+
+          <div>
+            <label className="block font-medium text-green-100 mb-2">
+              Academic Year:
+            </label>
+            <select
+              required
+              className="w-full px-4 py-3 rounded-lg bg-white/20 border border-green-200/20 text-white placeholder-green-200 focus:outline-none focus:ring-2 focus:ring-green-400"
+              value={year}
+              onChange={(e) => setYear(e.target.value)}
+            >
+              <option value="" className="text-gray-800">
+                Select Academic Year
+              </option>
+              <option value="1st Year" className="text-gray-800">
+                1st Year
+              </option>
+              <option value="2nd Year" className="text-gray-800">
+                2nd Year
+              </option>
+              <option value="3rd Year" className="text-gray-800">
+                3rd Year
+              </option>
+              <option value="4th Year" className="text-gray-800">
+                4th Year
+              </option>
+            </select>
+          </div>
+
+          <div>
+            <label className="block font-medium text-green-100 mb-2">
+              Cycle:
+            </label>
+            <select
+              required
+              className="w-full px-4 py-3 rounded-lg bg-white/20 border border-green-200/20 text-white placeholder-green-200 focus:outline-none focus:ring-2 focus:ring-green-400"
+              value={cycle}
+              onChange={(e) => setCycle(e.target.value)}
+            >
+              <option value="" className="text-gray-800">
+                Select Cycle
+              </option>
+              <option value="Jan-Jun" className="text-gray-800">
+                Jan-Jun
+              </option>
+              <option value="Jul-Dec" className="text-gray-800">
+                Jul-Dec
+              </option>
+            </select>
+          </div>
+
+          <div>
+            <label className="block font-medium text-green-100 mb-2">
+              Semester:
+            </label>
+            <select
+              required
+              className="w-full px-4 py-3 rounded-lg bg-white/20 border border-green-200/20 text-white placeholder-green-200 focus:outline-none focus:ring-2 focus:ring-green-400"
+              value={semester}
+              onChange={(e) => setSemester(e.target.value)}
+            >
+              <option value="" className="text-gray-800">
+                Select Semester
+              </option>
+              <option value="Mid" className="text-gray-800">
+                Mid Semester
+              </option>
+              <option value="End" className="text-gray-800">
+                End Semester
+              </option>
+            </select>
+          </div>
+
+          <div>
+            <label className="block font-medium text-green-100 mb-2">
+              Course Code:
+            </label>
+            <input
+              required
+              type="text"
+              className="w-full px-4 py-3 rounded-lg bg-white/20 border border-green-200/20 text-white placeholder-green-200 focus:outline-none focus:ring-2 focus:ring-green-400"
+              value={courseCode}
+              onChange={(e) => setCourseCode(e.target.value)}
+              placeholder="Enter course code"
+            />
+          </div>
+
+          <div className="md:col-span-2">
+            <label className="block font-medium text-green-100 mb-2">
+              File:
+            </label>
+            <div className="relative">
+              <input
+                required
+                type="file"
+                accept=".pdf"
+                className="w-full px-4 py-3 rounded-lg bg-white/20 border border-green-200/20 text-white file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-green-50 file:text-green-700 hover:file:bg-green-100"
+                onChange={(e) => setFile(e.target.files[0])}
+              />
+            </div>
+          </div>
+
+          <motion.button
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            type="submit"
+            className="md:col-span-2 w-full bg-white text-green-600 font-semibold px-6 py-3 rounded-lg shadow-lg hover:bg-green-50 transition-colors mt-4"
+          >
+            Upload Paper
+          </motion.button>
+        </form>
+
+        {message && (
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className={`mt-8 text-center font-medium rounded-lg py-3 ${
+              message.includes("failed")
+                ? "text-red-200 bg-red-500"
+                : "text-green-200 bg-green-500"
+            }`}
+          >
+            {message}
+          </motion.p>
+        )}
+      </motion.div>
     </div>
   );
 };
