@@ -25,3 +25,5 @@
 
 /question-paper-backend/node_modules
 /question-paper-backend/.env
+
+/build
