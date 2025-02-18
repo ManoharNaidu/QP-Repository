@@ -86,8 +86,8 @@ const UploadPage = () => {
           <select
             required
             className="w-full px-4 py-3 rounded-lg bg-white/20 border border-green-200/20 text-gray-100 placeholder-green-200 focus:outline-none focus:ring-2 focus:ring-green-400"
-            value={academicYear}
-            onChange={(e) => setAcademicYear(e.target.value)}
+            value={year}
+            onChange={(e) => setYear(e.target.value)}
           >
             <option value="" className="text-gray-800">
               Select Year
@@ -116,8 +116,8 @@ const UploadPage = () => {
           <select
             required
             className="w-full px-4 py-3 rounded-lg bg-white/20 border border-green-200/20 text-gray-100 placeholder-green-200 focus:outline-none focus:ring-2 focus:ring-green-400"
-            value={year}
-            onChange={(e) => setYear(e.target.value)}
+            value={academicYear}
+            onChange={(e) => setAcademicYear(e.target.value)}
           >
             <option value="" className="text-gray-800">
               Select Academic Year

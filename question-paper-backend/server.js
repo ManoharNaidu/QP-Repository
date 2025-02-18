@@ -52,15 +52,13 @@ app.post("/api/upload", upload.single("file"), async (req, res) => {
     fs.unlinkSync(filePath);
 
     // Save metadata to MongoDB
-    const newQPaper = await QuestionPapers.findOneAndUpdate(
+    await QuestionPapers.findOneAndUpdate(
       { branch, academicYear, year, cycle, semester, courseCode },
       { fileUrl: data.Location }, // S3 file URL
       { upsert: true, new: true }
     );
 
-    res
-      .status(201)
-      .json({ message: "File uploaded successfully", paper: newQPaper });
+    res.status(201).json({ message: "File uploaded successfully" });
   } catch (error) {
     console.error("Error uploading to S3:", error);
     res.status(500).json({ error: "Server error" });

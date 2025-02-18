@@ -15,23 +15,24 @@ const DownloadPage = () => {
   const [currentPage, setCurrentPage] = useState(1); // Track current page
   const [totalPages, setTotalPages] = useState(1); // Track total number of pages
 
-  const papersPerPage = 6; // Number of results per page
+  const papersPerPage = 10; // Number of results per page
 
   // Dropdown options
   const branchOptions = ["CSE", "ECE", "ME", "CE", "EEE"];
   const currentYear = new Date().getFullYear();
-  const academicYearOptions = Array.from(
+  const YearOptions = Array.from(
     { length: new Date().getFullYear() - 2014 },
     (_, i) => `${currentYear - i}`
   );
-  const yearOptions = ["1st Year", "2nd Year", "3rd Year", "4th Year"];
-  const semesterOptions = ["Mid Sem", "End Sem"];
-  const cycleOptions = ["Jan-Jun", "July-Dec"];
+  const AcademicYearOptions = ["1st Year", "2nd Year", "3rd Year", "4th Year"];
+  const semesterOptions = ["Mid", "End"];
+  const cycleOptions = ["Jan-Jun", "Jul-Dec"];
 
   const fetchPapers = async () => {
     try {
       const response = await axios.get(
-        "https://qp-repository.onrender.com/api/download",
+        // "https://qp-repository.onrender.com/api/download",
+        "http://localhost:5000/api/download",
         {
           params: filters,
         }
@@ -105,27 +106,13 @@ const DownloadPage = () => {
             </select>
 
             <select
-              name="academicYear"
-              value={filters.academicYear}
-              onChange={handleInputChange}
-              className="w-full p-2.5 border border-gray-300 rounded-md text-gray-700"
-            >
-              <option value="">Select Academic Year</option>
-              {academicYearOptions.map((year, index) => (
-                <option key={index} value={year}>
-                  {year}
-                </option>
-              ))}
-            </select>
-
-            <select
               name="year"
               value={filters.year}
               onChange={handleInputChange}
               className="w-full p-2.5 border border-gray-300 rounded-md text-gray-700"
             >
               <option value="">Select Year</option>
-              {yearOptions.map((year, index) => (
+              {YearOptions.map((year, index) => (
                 <option key={index} value={year}>
                   {year}
                 </option>
@@ -133,15 +120,15 @@ const DownloadPage = () => {
             </select>
 
             <select
-              name="semester"
-              value={filters.semester}
+              name="academicYear"
+              value={filters.academicYear}
               onChange={handleInputChange}
               className="w-full p-2.5 border border-gray-300 rounded-md text-gray-700"
             >
-              <option value="">Select Semester</option>
-              {semesterOptions.map((semester, index) => (
-                <option key={index} value={semester}>
-                  {semester}
+              <option value="">Select Academic Year</option>
+              {AcademicYearOptions.map((year, index) => (
+                <option key={index} value={year}>
+                  {year}
                 </option>
               ))}
             </select>
@@ -156,6 +143,20 @@ const DownloadPage = () => {
               {cycleOptions.map((cycle, index) => (
                 <option key={index} value={cycle}>
                   {cycle}
+                </option>
+              ))}
+            </select>
+
+            <select
+              name="semester"
+              value={filters.semester}
+              onChange={handleInputChange}
+              className="w-full p-2.5 border border-gray-300 rounded-md text-gray-700"
+            >
+              <option value="">Select Semester</option>
+              {semesterOptions.map((semester, index) => (
+                <option key={index} value={semester}>
+                  {semester}
                 </option>
               ))}
             </select>
@@ -180,7 +181,7 @@ const DownloadPage = () => {
 
         {/* Results Section */}
         <div className="flex-1">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
             {paginateResults().length === 0 ? (
               <p className="text-center  text-gray-500">
                 No question papers found.
@@ -196,10 +197,10 @@ const DownloadPage = () => {
                       <strong>Branch:</strong> {paper.branch}
                     </p>
                     <p>
-                      <strong>Academic Year:</strong> {paper.academicYear}
+                      <strong>Year:</strong> {paper.year}
                     </p>
                     <p>
-                      <strong>Year:</strong> {paper.year}
+                      <strong>Academic Year:</strong> {paper.academicYear}
                     </p>
                     <p>
                       <strong>Semester:</strong> {paper.semester}
