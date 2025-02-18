@@ -26,7 +26,7 @@ const Header = () => {
 
   return (
     <header className="bg-gray-900 text-gray-200 py-4 shadow-lg">
-      <div className="container mx-auto flex justify-between items-center px-4">
+      <div className="container mx-auto flex flex-col md:flex-row justify-between items-center px-4">
         <h1 className="text-2xl font-extrabold flex items-center gap-3">
           <img
             src="/logo.png"
@@ -37,7 +37,7 @@ const Header = () => {
             QP Repository
           </Link>
         </h1>
-        <nav>
+        <nav className="hidden md:flex">
           <ul className="flex gap-4 text-lg font-semibold">
             {navItems.map((item) => (
               <li key={item.path}>
@@ -58,6 +58,24 @@ const Header = () => {
           </ul>
         </nav>
       </div>
+      <nav className="flex md:hidden justify-around mt-4">
+        <ul className="flex gap-4 text-lg font-semibold">
+          {navItems.slice(1).map((item) => (
+            <li key={item.path}>
+              <Link
+                to={item.path}
+                className={cn(
+                  item.color,
+                  "transition-all",
+                  location.pathname === item.path ? "underline" : "no-underline"
+                )}
+              >
+                {item.label}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </nav>
     </header>
   );
 };

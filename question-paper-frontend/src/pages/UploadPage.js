@@ -41,7 +41,7 @@ const UploadPage = () => {
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8 }}
-      className="container mx-auto max-w-4xl bg-gradient-to-br from from-green-700 via-green-600 to-green-500 backdrop-blur-lg rounded-xl p-8 shadow-xl"
+      className="container mx-auto max-w-4xl bg-gradient-to-br from-green-700 via-green-600 to-green-500 backdrop-blur-lg rounded-xl p-8 shadow-xl"
     >
       <h1 className="text-4xl font-bold mb-12 text-gray-100 text-center">
         Upload Question Papers
