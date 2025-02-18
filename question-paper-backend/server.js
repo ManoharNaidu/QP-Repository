@@ -1,15 +1,26 @@
-const express = require("express");
-const multer = require("multer");
-const cors = require("cors");
-const AWS = require("aws-sdk");
-const fs = require("fs");
-const path = require("path");
-const QuestionPapers = require("./models/QuestionPaper");
-const Feedback = require("./models/Feedback");
+import express from "express";
+import multer from "multer";
+import cors from "cors";
+import AWS from "aws-sdk";
+import fs from "fs";
+import path from "path";
+import dotenv from "dotenv";
 
-require("./config/AWS.config")();
-require("./config/MongoDB")();
-require("dotenv").config();
+// Import models
+import QuestionPaper from "./models/QuestionPaper.js";
+import Feedback from "./models/Feedback.js";
+
+// Import configurations
+import AWSconfig from "./config/AWS.config.js";
+import mongoDB from "./config/mongodb.config.js";
+
+// Import middleware
+import arcjetMiddleware from "./middlewares/arcject.middleware.js";
+import errorMiddleware from "./middlewares/error.middleware.js";
+
+dotenv.config();
+AWSconfig();
+mongoDB();
 
 const app = express();
 
@@ -17,6 +28,8 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(errorMiddleware);
+app.use(arcjetMiddleware);
 
 // Multer upload and S3 setup
 const upload = multer({ dest: "uploads/" });
@@ -24,7 +37,7 @@ const s3 = new AWS.S3();
 
 // Upload route
 app.post("/api/upload", upload.single("file"), async (req, res) => {
-  const { branch, academicYear, year, semester, cycle, courseCode } = req.body;
+  const { branch, year, academicYear, cycle, semester, courseCode } = req.body;
 
   if (!req.file) {
     return res.status(400).json({ error: "File Not Uploaded" });
@@ -52,7 +65,7 @@ app.post("/api/upload", upload.single("file"), async (req, res) => {
     fs.unlinkSync(filePath);
 
     // Save metadata to MongoDB
-    await QuestionPapers.findOneAndUpdate(
+    await QuestionPaper.findOneAndUpdate(
       { branch, academicYear, year, cycle, semester, courseCode },
       { fileUrl: data.Location }, // S3 file URL
       { upsert: true, new: true }
@@ -80,7 +93,7 @@ app.get("/api/download", async (req, res) => {
     if (cycle) query.cycle = cycle;
     if (courseCode) query.courseCode = courseCode;
 
-    const papers = await QuestionPapers.find(query);
+    const papers = await QuestionPaper.find(query);
 
     if (papers.length === 0) {
       return res.status(404).json({ message: "No question papers found." });
@@ -113,7 +126,7 @@ app.post("/api/feedback", async (req, res) => {
 });
 
 // Start the server
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });

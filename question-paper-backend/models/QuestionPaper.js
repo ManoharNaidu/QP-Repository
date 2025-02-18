@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const QPaperSchema = new mongoose.Schema({
   branch: { type: String, required: true },
@@ -10,4 +10,6 @@ const QPaperSchema = new mongoose.Schema({
   fileUrl: { type: String, required: true },
 });
 
-module.exports = mongoose.model("QPaper", QPaperSchema);
+const QuestionPaper = mongoose.model("QPaper", QPaperSchema);
+
+export default QuestionPaper;

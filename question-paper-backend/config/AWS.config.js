@@ -1,8 +1,9 @@
-// AWS Connection
-const AWS = require("aws-sdk");
-require("dotenv").config();
+import AWS from "aws-sdk";
+import dotenv from "dotenv";
 
-const awsconfig = () => {
+dotenv.config();
+
+const AWSconfig = () => {
   AWS.config.update({
     accessKeyId: process.env.AWS_ACCESS_KEY_ID,
     secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
@@ -10,4 +11,4 @@ const awsconfig = () => {
   });
 };
 
-module.exports = awsconfig;
+export default AWSconfig;
