@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { motion } from "framer-motion";
 
 const DownloadPage = () => {
   const [filters, setFilters] = useState({
@@ -45,7 +46,7 @@ const DownloadPage = () => {
 
   useEffect(() => {
     fetchPapers(); // Fetch papers on page load or filter change
-  }, [filters]);
+  }, []);
 
   // Handle input changes in the filters
   const handleInputChange = (e) => {
@@ -72,15 +73,21 @@ const DownloadPage = () => {
   };
 
   return (
-    <div className="bg-gradient-to-br from-blue-300 to-blue-500 p-6 flex-auto container mx-auto pt-8">
-      <h1 className="text-4xl font-bold text-center mb-8 text-gray-800">
+    <motion.div
+      initial={{ opacity: 0, y: -20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8 }}
+      // className="container mx-auto max-w-3xl bg-gradient-to-br from-purple-800 via-purple-700 to-purple-600  backdrop-blur-lg rounded-xl p-8 shadow-xl"
+    >
+      <h1 className="text-3xl font-bold text-center mb-8 text-gray-200">
         Download Question Papers
       </h1>
 
       {/* Main Layout */}
-      <div className="flex flex-wrap gap-8 px-4">
+      <div className="flex flex-wrap gap-6">
         {/* Filter Section - White Card */}
-        <div className="w-full sm:w-80 bg-gradient-to-br from-red-300 to-red-500 rounded-lg p-6 shadow-lg">
+
+        <div className="w-full sm:w-80 bg-gradient-to-br from-red-400 to-red-500 rounded-lg p-5 shadow-lg">
           <h2 className="text-xl font-semibold mb-4">Filters</h2>
           <form className="flex flex-col gap-4" onSubmit={handleFilterSubmit}>
             <select
@@ -164,7 +171,7 @@ const DownloadPage = () => {
 
             <button
               type="submit"
-              className="w-full bg-blue-500 text-black py-2.5 rounded-md hover:bg-blue-600 transition-colors"
+              className="w-full bg-blue-500 text-slate-950 py-2.5 rounded-md hover:bg-blue-600 transition-colors"
             >
               Apply Filters
             </button>
@@ -172,17 +179,17 @@ const DownloadPage = () => {
         </div>
 
         {/* Results Section */}
-        <div className="flex-initial">
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
+        <div className="flex-1">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {paginateResults().length === 0 ? (
-              <p className="text-center  text-gray-500 justify-center">
+              <p className="text-center  text-gray-500">
                 No question papers found.
               </p>
             ) : (
               paginateResults().map((paper, index) => (
                 <div
                   key={index}
-                  className="bg-gradient-to-br from-yellow-300 to-yellow-500 p-4 border-2 border-black rounded shadow-md flex flex-col h-full"
+                  className="bg-gradient-to-br from-yellow-300 to-yellow-500 p-4 border-2 border-slate-950 rounded-lg shadow-md flex flex-col h-full"
                 >
                   <div>
                     <p>
@@ -205,12 +212,12 @@ const DownloadPage = () => {
                     </p>
                   </div>
 
-                  <div className="flex justify-center mt-4 ">
+                  <div className="flex justify-center mt-4">
                     <a
                       href={paper.fileUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-full px-4 py-2 bg-gradient-to-br from-green-300 to-green-500  text-black rounded hover:bg-green-700 shadow-md text-center"
+                      className="w-full px-4 py-2 bg-gradient-to-br from-green-400 to-green-500 text-slate-950 rounded-md shadow-md text-center"
                     >
                       Download
                     </a>
@@ -223,28 +230,28 @@ const DownloadPage = () => {
       </div>
 
       {/* Fixed Pagination Controls at the Bottom */}
-      <div className="flex justify-center bottom-0 left-0 right-0 py-4 shadow-lg">
+      <div className="flex justify-center bottom-0 left-0 right-0 p-2 m-2">
         <div className="flex justify-center">
           <button
             onClick={() => changePage(currentPage - 1)}
             disabled={currentPage === 1}
-            className="px-4 py-2 bg-blue-500 text-black rounded hover:bg-blue-600 disabled:opacity-50"
+            className="px-4 py-2 bg-blue-500 text-slate-950 rounded hover:bg-blue-600 disabled:opacity-50"
           >
             Previous
           </button>
-          <span className="mx-4 text-xl">
+          <span className="mx-4 text-xl text-gray-200">
             Page {currentPage} of {totalPages}
           </span>
           <button
             onClick={() => changePage(currentPage + 1)}
             disabled={currentPage === totalPages}
-            className="px-4 py-2 bg-blue-500 text-black rounded hover:bg-blue-600 disabled:opacity-50"
+            className="px-4 py-2 bg-blue-500 text-slate-950 rounded hover:bg-blue-600 disabled:opacity-50"
           >
             Next
           </button>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
