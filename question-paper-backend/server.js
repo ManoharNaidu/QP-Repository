@@ -4,6 +4,7 @@ import cors from "cors";
 import AWS from "aws-sdk";
 import fs from "fs";
 import path from "path";
+import { fileURLToPath } from "url"; // Import fileURLToPath
 import dotenv from "dotenv";
 
 // Import models
@@ -18,7 +19,14 @@ import mongoDB from "./config/mongodb.config.js";
 import arcjetMiddleware from "./middlewares/arcject.middleware.js";
 import errorMiddleware from "./middlewares/error.middleware.js";
 
+// Configure dotenv
 dotenv.config();
+
+// Derive __dirname in ES modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Initialize AWS and MongoDB
 AWSconfig();
 mongoDB();
 
@@ -126,7 +134,7 @@ app.post("/api/feedback", async (req, res) => {
 });
 
 // Start the server
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
