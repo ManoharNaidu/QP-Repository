@@ -39,12 +39,25 @@ const FeedbackPage = () => {
 
   return (
     <>
+      {message && (
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className={`fixed top-16 mt-6 text-center font-medium rounded-lg p-3 m-5 ${
+            message.includes("Failed")
+              ? "text-red-200 bg-red-500/10"
+              : "text-purple-200 bg-purple-500/30"
+          }`}
+        >
+          {message}
+        </motion.p>
+      )}
       {/* <div className="bg-gradient-to-br from-purple-800 via-purple-600 to-purple-500 p-4 rounded-xl"> */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
-        className="container mx-auto max-w-3xl bg-gradient-to-br from-purple-800 via-purple-700 to-purple-600  backdrop-blur-lg rounded-xl p-8 shadow-xl"
+        className="relative container mx-auto max-w-3xl bg-gradient-to-br from-purple-800 via-purple-700 to-purple-600  backdrop-blur-lg rounded-xl p-8 shadow-xl"
       >
         <h1 className="text-4xl font-bold mb-8 text-gray-200 text-center">
           Share Your Feedback
@@ -82,19 +95,6 @@ const FeedbackPage = () => {
         </div>
       </motion.div>
       {/* </div> */}
-      {message && (
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          className={`mt-6 text-center font-medium rounded-lg p-3 m-5 ${
-            message.includes("Failed")
-              ? "text-red-200 bg-red-500/10"
-              : "text-green-200 bg-green-500/30"
-          }`}
-        >
-          {message}
-        </motion.p>
-      )}
 
       <footer className="fixed bottom-4 right-4">
         <a
