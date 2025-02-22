@@ -27,3 +27,7 @@
 /question-paper-backend/.env
 
 /build
+
+.vscode/
+
+Issues.txt

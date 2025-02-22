@@ -8,6 +8,4 @@ Move Front-end and Back-end to online hosting.
 
 Future:
 
-If the user sets the attribute wrong and uploads the pdf - Cant't for now, but will see. (feedback)
-
-Present:
+If the user sets the attribute wrong and uploads the pdf - Cant't for now, but will see. (feedback) => We can set a validator for the files that are uploaded and proceeds next.
