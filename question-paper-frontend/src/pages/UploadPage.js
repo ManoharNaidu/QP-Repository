@@ -27,7 +27,8 @@ const UploadPage = () => {
     try {
       setMessage("Uploading file...");
       const response = await axios.post(
-        "https://qp-repository.onrender.com/api/upload",
+        // "https://qp-repository.onrender.com/api/upload",
+        "https://qp-repository-8vor.onrender.com/api/upload",
         formData
       );
       setMessage(response.data.message);

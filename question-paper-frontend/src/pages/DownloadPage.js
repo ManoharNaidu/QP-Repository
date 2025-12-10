@@ -31,7 +31,8 @@ const DownloadPage = () => {
   const fetchPapers = async () => {
     try {
       const response = await axios.get(
-        "https://qp-repository.onrender.com/api/download",
+        // "https://qp-repository.onrender.com/api/download",
+        "https://qp-repository-8vor.onrender.com/api/download",
         {
           params: filters,
         }

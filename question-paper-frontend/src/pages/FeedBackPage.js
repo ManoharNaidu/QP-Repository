@@ -23,7 +23,8 @@ const FeedbackPage = () => {
 
     try {
       const response = await axios.post(
-        "https://qp-repository.onrender.com/api/feedback",
+        // "https://qp-repository.onrender.com/api/feedback",
+        "https://qp-repository-8vor.onrender.com/api/feedback",
         {
           content: feedback,
         }
