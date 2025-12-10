@@ -17,7 +17,7 @@ QP Repository is a web application for managing question papers. Users can uploa
 
 - **Express.js**: Framework for building RESTful APIs.
 - **MongoDB**: Metadata storage for uploaded question papers.
-- **AWS S3**: Storage for PDF files.
+- **Cloudinary**: Storage for PDF files.
 - **Multer**: Middleware for parsing multipart form data.
 - **AWS SDK**: Library for interacting with AWS services.
 
@@ -66,7 +66,9 @@ QP Repository is a web application for managing question papers. Users can uploa
 - Node.js
 - npm or yarn
 - MongoDB
-- AWS S3 bucket
+- Cloudinary
+- Streamifier
+- Arcjet
 
 ### Backend Setup
 
@@ -91,9 +93,14 @@ QP Repository is a web application for managing question papers. Users can uploa
 
    ```
    MONGODB_URI=your_mongodb_uri
-   AWS_ACCESS_KEY_ID=your_aws_access_key_id
-   AWS_SECRET_ACCESS_KEY=your_aws_secret_access_key
-   AWS_BUCKET_NAME=your_s3_bucket_name
+
+   CLOUDINARY_CLOUD_NAME = your_cloud_name
+   CLOUDINARY_API_KEY = your_cloudinary_api_key
+   CLOUDINARY_API_SECRET = your_cloudinary_api_secret
+
+   ARCJET_ENV= your_arcject_env
+   ARCJET_KEY= your_arcject_key
+
    ```
 
 4. Start the backend server:
