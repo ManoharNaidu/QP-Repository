@@ -1,13 +1,13 @@
 # Backend for Question Paper Upload and Download App
 
-This is the backend for a full-stack web application that enables users to upload and download question papers based on branch, academic year, semester, cycle, and course code. The backend is built using **Node.js** and **Express.js**, with MongoDB as the database. PDF files are stored and retrieved using **AWS S3** for scalable and reliable storage.
+This is the backend for a full-stack web application that enables users to upload and download question papers based on branch, academic year, semester, cycle, and course code. The backend is built using **Node.js** and **Express.js**, with MongoDB as the database. PDF files are stored and retrieved using **Cloudinary Platform** for scalable and reliable storage.
 
 ---
 
 ## Features
 
 1. **File Upload**  
-   Users can upload PDF files (question papers). Metadata such as branch, academic year, semester, cycle, and course code is stored in MongoDB, and the files are stored in AWS S3.
+   Users can upload PDF files (question papers). Metadata such as branch, academic year, semester, cycle, and course code is stored in MongoDB, and the files are stored in Cloudinary Platform.
 
 2. **Search and Download**  
    Users can search for question papers using filters like branch, academic year, semester, cycle, and course code. Matching results include metadata and a download link for the file.
@@ -19,10 +19,10 @@ This is the backend for a full-stack web application that enables users to uploa
    - **GET** `/api/papers`  
      Search for question papers using query parameters.
 
-4. **AWS S3 Integration**
+4. **Cloudinary Platform**
 
-   - Uploaded PDF files are stored in an S3 bucket.
-   - Files can be retrieved directly via a secure S3 URL.
+   - Uploaded PDF files are stored in cloudinary.
+   - Files can be retrieved directly via a public URL.
 
 5. **Validation**  
    Ensures uploaded files meet format and size requirements.
@@ -48,9 +48,9 @@ backend/
   - validateFile.js // Middleware for validating file uploads
   - errorHandler.js // Global error handler
 - utils/
-  - s3.js // AWS S3 integration utilities
   - app.js // Main application file
 - config/
+
   - db.js // MongoDB connection setup
 
 - package.json // Dependencies and scripts
@@ -69,14 +69,13 @@ backend/
 
 ### 3. **File Storage**
 
-- **AWS S3**:
-  - PDF files are uploaded to an S3 bucket.
-  - Files can be downloaded securely via a pre-signed URL.
+- **Cloudinary Platform**:
+  - PDF files are uploaded to Cloudinary Platform.
+  - Files can be downloaded securely via a public URL.
 
 ### 4. **Third-Party Integrations**
 
 - **Multer**: Middleware for parsing multipart form data (file uploads).
-- **AWS SDK**: Library for interacting with AWS services, including S3.
 
 ---
 
@@ -96,17 +95,17 @@ backend/
      - File (PDF format).
    - **Flow**:
      - The file is uploaded using **Multer**.
-     - File is uploaded to AWS S3, and the S3 object key is returned.
-     - Metadata (including the S3 key) is saved to MongoDB.
+     - File is uploaded to Cloudinary Platform, and an object key is returned.
+     - Metadata (including the file public url) is saved to MongoDB.
 
 2. **Validation**:
 
    - Ensures the file is in `.pdf` format and below the size limit (e.g., 5 MB).
    - Validates that all required metadata fields are provided.
 
-3. **AWS S3 Integration**:
-   - Files are uploaded to an S3 bucket.
-   - S3 object keys are stored in MongoDB for later retrieval.
+3. **Cloudinary Platform**:
+   - Files are uploaded to Cloudinary Platform.
+   - Public urls are stored in MongoDB for later retrieval.
 
 ---
 
@@ -126,8 +125,8 @@ backend/
        - MongoDB is queried based on the filters.
        - Returns metadata and an S3 pre-signed URL for each matching file.
 
-2. **AWS S3 File Retrieval**
-   - A pre-signed URL is generated for each file in S3, allowing secure temporary access to the file without exposing the bucket publicly.
+2. **Cloudinary File Retrieval**
+   - A public URL is generated for each file, allowing secure temporary access to the file without exposing publicly.
 
 ---
 
@@ -139,14 +138,13 @@ backend/
 - Requires the following environment variable:
   - `MONGO_URI` (MongoDB connection string).
 
-### 2. **AWS S3**
+### 2. **Cloudinary Platform**
 
-- Files are stored in an S3 bucket for scalability and reliability.
+- Files are stored in Cloudinary Platform for scalability and reliability.
 - Requires the following environment variables:
-  - `AWS_ACCESS_KEY_ID`
-  - `AWS_SECRET_ACCESS_KEY`
-  - `AWS_BUCKET_NAME`
-  - `AWS_REGION`.
+  - `CLOUDINARY_CLOUD_NAME`.
+  - `CLOUDINARY_API_KEY`.
+  - `CLOUDINARY_API_SECRET`.
 
 ### 3. **Multer**
 

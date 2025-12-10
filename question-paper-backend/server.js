@@ -64,7 +64,7 @@ app.post("/api/upload", upload.single("file"), async (req, res) => {
 
   try {
     // Upload buffer to Cloudinary as raw (for pdf)
-    const result = await new Promise((resolve, reject) => { 
+    const result = await new Promise((resolve, reject) => {
       const uploadStream = cloudinary.uploader.upload_stream(
         {
           folder: "question-papers",

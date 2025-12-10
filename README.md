@@ -19,7 +19,6 @@ QP Repository is a web application for managing question papers. Users can uploa
 - **MongoDB**: Metadata storage for uploaded question papers.
 - **Cloudinary**: Storage for PDF files.
 - **Multer**: Middleware for parsing multipart form data.
-- **AWS SDK**: Library for interacting with AWS services.
 
 ### Frontend
 
@@ -42,7 +41,6 @@ QP Repository is a web application for managing question papers. Users can uploa
   - `validateFile.js`: Middleware for validating file uploads.
   - `errorHandler.js`: Global error handler.
 - `utils/`
-  - `s3.js`: AWS S3 integration utilities.
   - `app.js`: Main application file.
 - `config/`
   - `db.js`: MongoDB connection setup.
