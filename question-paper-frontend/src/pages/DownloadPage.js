@@ -60,6 +60,48 @@ const DownloadPage = () => {
     fetchPapers();
   };
 
+  // New helper: build a sanitized filename from paper fields (adds timestamp to ensure uniqueness)
+  const buildFileName = (paper) => {
+    const parts = [
+      paper.branch,
+      paper.year,
+      paper.academicYear,
+      paper.cycle,
+      paper.semester,
+      paper.courseCode,
+    ].map((p) => (p ? String(p) : "unknown"));
+
+    // join with underscore and replace any non-word characters with underscore
+    const base = parts.join("_").replace(/[^\w.-]+/g, "_");
+
+    return `${base}.pdf`;
+  };
+
+  // New: download file directly instead of opening URL
+  const downloadPaper = async (paper) => {
+    try {
+      const response = await axios.get(paper.fileUrl, { responseType: "blob" });
+      const blob = new Blob([response.data], {
+        type: response.data.type || "application/pdf",
+      });
+      const url = window.URL.createObjectURL(blob);
+
+      // Use composed filename including branch, year, academicYear, cycle, semester, courseCode
+      const filename = buildFileName(paper);
+
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      window.URL.revokeObjectURL(url);
+    } catch (err) {
+      console.error("Download failed:", err);
+      // Optionally show user-facing error here
+    }
+  };
+
   // Paginate the papers based on the current page
   const paginateResults = () => {
     const startIndex = (currentPage - 1) * papersPerPage;
@@ -213,14 +255,12 @@ const DownloadPage = () => {
                   </div>
 
                   <div className="flex justify-center mt-4">
-                    <a
-                      href={paper.fileUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-full px-4 py-2 bg-gradient-to-br from-green-400 to-green-500 text-slate-950 rounded-md shadow-md text-center"
+                    <button
+                      onClick={() => downloadPaper(paper)}
+                      className="w-full px-4 py-2 bg-gradient-to-br from-green-400 to-green-500 text-slate-950 rounded-md shadow-md"
                     >
                       Download
-                    </a>
+                    </button>
                   </div>
                 </div>
               ))

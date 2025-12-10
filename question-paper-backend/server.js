@@ -1,9 +1,6 @@
 import express from "express";
 import multer from "multer";
 import cors from "cors";
-import AWS from "aws-sdk";
-import fs from "fs";
-import path from "path";
 import { fileURLToPath } from "url"; // Import fileURLToPath
 import dotenv from "dotenv";
 
@@ -12,22 +9,29 @@ import QuestionPaper from "./models/QuestionPaper.js";
 import Feedback from "./models/Feedback.js";
 
 // Import configurations
-import AWSconfig from "./config/AWS.config.js";
 import mongoDB from "./config/mongodb.config.js";
 
 // Import middleware
 import arcjetMiddleware from "./middlewares/arcject.middleware.js";
 import errorMiddleware from "./middlewares/error.middleware.js";
 
+// Add Cloudinary + streamifier
+import { v2 as cloudinary } from "cloudinary";
+import streamifier from "streamifier";
+
 // Configure dotenv
 dotenv.config();
 
 // Derive __dirname in ES modules
 const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const __dirname = undefined; // Not used now
 
-// Initialize AWS and MongoDB
-AWSconfig();
+// Initialize Cloudinary and MongoDB
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 mongoDB();
 
 const app = express();
@@ -39,11 +43,11 @@ app.use(express.urlencoded({ extended: true }));
 app.use(errorMiddleware);
 app.use(arcjetMiddleware);
 
-// Multer upload and S3 setup
-const upload = multer({ dest: "uploads/" });
-const s3 = new AWS.S3();
+// Multer: use memory storage so we can stream to Cloudinary
+const storage = multer.memoryStorage();
+const upload = multer({ storage });
 
-// Upload route
+// Upload route -> Cloudinary
 app.post("/api/upload", upload.single("file"), async (req, res) => {
   const { branch, year, academicYear, cycle, semester, courseCode } = req.body;
 
@@ -51,37 +55,44 @@ app.post("/api/upload", upload.single("file"), async (req, res) => {
     return res.status(400).json({ error: "File Not Uploaded" });
   }
 
-  const filePath = path.join(__dirname, req.file.path);
-  const fileName =
+  // Build a stable public id (no extension)
+  const publicId =
     `${branch}_${academicYear}_${year}_${cycle}_${semester}_${courseCode}.pdf`.replace(
       /[\s/]/g,
       "_"
     );
 
-  const params = {
-    Bucket: process.env.AWS_BUCKET_NAME,
-    Key: `question-papers/${fileName}`,
-    Body: fs.createReadStream(filePath),
-    ContentType: "application/pdf",
-  };
-
   try {
-    // Upload file to S3
-    const data = await s3.upload(params).promise();
+    // Upload buffer to Cloudinary as raw (for pdf)
+    const result = await new Promise((resolve, reject) => { 
+      const uploadStream = cloudinary.uploader.upload_stream(
+        {
+          folder: "question-papers",
+          resource_type: "raw",
+          public_id: publicId,
+          overwrite: true,
+        },
+        (error, uploadResult) => {
+          if (error) return reject(error);
+          resolve(uploadResult);
+        }
+      );
+      streamifier.createReadStream(req.file.buffer).pipe(uploadStream);
+    });
 
-    // Remove the file from local uploads folder
-    fs.unlinkSync(filePath);
-
-    // Save metadata to MongoDB
+    // Save metadata to MongoDB (use secure_url from Cloudinary)
     await QuestionPaper.findOneAndUpdate(
       { branch, academicYear, year, cycle, semester, courseCode },
-      { fileUrl: data.Location }, // S3 file URL
+      { fileUrl: result.secure_url },
       { upsert: true, new: true }
     );
 
-    res.status(201).json({ message: "File uploaded successfully" });
+    res.status(201).json({
+      message: "File uploaded successfully",
+      url: result.secure_url,
+    });
   } catch (error) {
-    console.error("Error uploading to S3:", error);
+    console.error("Error uploading to Cloudinary:", error);
     res.status(500).json({ error: "Server error" });
   }
 });
