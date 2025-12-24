@@ -1,153 +1,87 @@
 # Backend for Question Paper Upload and Download App
 
-This is the backend for a full-stack web application that enables users to upload and download question papers based on branch, academic year, semester, cycle, and course code. The backend is built using **Node.js** and **Express.js**, with MongoDB as the database. PDF files are stored and retrieved using **Cloudinary Platform** for scalable and reliable storage.
+Express backend that streams uploaded PDF question papers to Cloudinary and stores metadata in MongoDB.
 
----
+## Quick facts
 
-## Features
+- Language: Node.js (ES modules)
+- Framework: Express
+- Storage: Cloudinary (raw resource for PDFs)
+- Database: MongoDB (Mongoose)
 
-1. **File Upload**  
-   Users can upload PDF files (question papers). Metadata such as branch, academic year, semester, cycle, and course code is stored in MongoDB, and the files are stored in Cloudinary Platform.
+## Environment variables
 
-2. **Search and Download**  
-   Users can search for question papers using filters like branch, academic year, semester, cycle, and course code. Matching results include metadata and a download link for the file.
+Create a `.env` file in the backend folder with the following keys (examples):
 
-3. **API Endpoints**
+- `MONGO_URI` — MongoDB connection string used by `config/mongodb.config.js`.
+- `CLOUDINARY_CLOUD_NAME` — Cloudinary cloud name.
+- `CLOUDINARY_API_KEY` — Cloudinary API key.
+- `CLOUDINARY_API_SECRET` — Cloudinary API secret.
+- `ARCJET_KEY` — Arcjet site key (used by `config/arcject.config.js`) — optional but recommended for protection.
+- `PORT` — Server port (defaults to `5000`).
 
-   - **POST** `/api/upload`  
-     Upload a PDF question paper with associated metadata.
-   - **GET** `/api/papers`  
-     Search for question papers using query parameters.
+## Install & run
 
-4. **Cloudinary Platform**
+```bash
+cd question-paper-backend
+npm install
+# development (requires nodemon)
+npm run dev
+# production
+npm start
+```
 
-   - Uploaded PDF files are stored in cloudinary.
-   - Files can be retrieved directly via a public URL.
+## Main files
 
-5. **Validation**  
-   Ensures uploaded files meet format and size requirements.
+- `server.js` — Express app and routes (`/api/upload`, `/api/download`, `/api/feedback`).
+- `models/QuestionPaper.js` — Mongoose schema for question papers (includes `module` and `courseCode` validation).
+- `models/Feedback.js` — Simple feedback model.
+- `config/mongodb.config.js` — MongoDB connection (reads `MONGO_URI`).
+- `config/arcject.config.js` — Arcjet configuration (reads `ARCJET_KEY`).
 
-6. **Error Handling**  
-   Comprehensive error handling for input validation, database issues, and file storage/retrieval.
+## API
 
----
+### POST /api/upload
 
-## Project Structure
+- Content-Type: `multipart/form-data`
+- Required form fields:
+  - `file` — PDF file to upload
+  - `branch` — department/branch string
+  - `module` — one of `Base`, `Bachelor`, `Master`
+  - `academicYear` — e.g. `1st`, `2nd`, etc.
+  - `year` — numeric or label for the academic year
+  - `cycle` — exam cycle (e.g. `Midterm`, `Final`)
+  - `semester` — semester label
+  - `courseCode` — must match exactly 2 letters followed by 5 digits (example: `CS12345`)
 
-backend/
+Server behavior:
 
-- controllers/
-  - uploadController.js // Handles file upload logic
-  - searchController.js // Handles search and metadata retrieval
-- models/
-  - QuestionPaper.js // MongoDB schema for metadata
-- routes/
-  - uploadRoutes.js // Routes for upload operations
-  - searchRoutes.js // Routes for search operations
-- middleware/
-  - validateFile.js // Middleware for validating file uploads
-  - errorHandler.js // Global error handler
-- utils/
-  - app.js // Main application file
-- config/
+- Validates `module` against `['Base','Bachelor','Master']`.
+- Validates `courseCode` with `/^[A-Z]{2}\d{5}$/` on the server (model uses case-insensitive match as well).
+- Streams file buffer to Cloudinary with `resource_type: 'raw'` and a stable `public_id` composed of the provided fields; overwrites existing object with same id.
+- Upserts the metadata in MongoDB (so re-uploads replace previous entry with same keys).
 
-  - db.js // MongoDB connection setup
+### GET /api/download
 
-- package.json // Dependencies and scripts
+- Query parameters: `branch`, `module`, `academicYear`, `year`, `semester`, `cycle`, `courseCode` (all optional). Returns matching papers in JSON.
 
----
+### POST /api/feedback
 
-## Technologies Used
+- Body: `{ content: string }` — stores simple feedback documents.
 
-### 1. **Backend Framework**
+## Validation notes
 
-- **Express.js**: Framework for building RESTful APIs.
+- `module` is an enum: `Base`, `Bachelor`, `Master`.
+- `courseCode` must be 2 letters + 5 digits (no spaces). The server validates uppercase; frontend should normalize user input to uppercase to ensure consistent behavior.
 
-### 2. **Database**
+## Development tips
 
-- **MongoDB**: Metadata for uploaded question papers (branch, year, semester, cycle, course code) is stored in MongoDB.
+- Move `nodemon` to `devDependencies` if you prefer it not be included in production installs (currently listed under `dependencies`).
+- Use `npx depcheck` to surface potentially unused packages; double-check results before removing.
 
-### 3. **File Storage**
+## Troubleshooting
 
-- **Cloudinary Platform**:
-  - PDF files are uploaded to Cloudinary Platform.
-  - Files can be downloaded securely via a public URL.
+- If uploads fail, check Cloudinary credentials and network connectivity.
+- If MongoDB connection fails, verify `MONGO_URI` and that your MongoDB instance is reachable.
 
-### 4. **Third-Party Integrations**
-
-- **Multer**: Middleware for parsing multipart form data (file uploads).
-
----
-
-## How It Works
-
-### File Upload
-
-1. **Endpoint**: `/api/upload`
-
-   - Accepts a `POST` request with the following fields:
-     - `branch`
-     - `academicYear`
-     - `year`
-     - `cycle`
-     - `semester`
-     - `courseCode`
-     - File (PDF format).
-   - **Flow**:
-     - The file is uploaded using **Multer**.
-     - File is uploaded to Cloudinary Platform, and an object key is returned.
-     - Metadata (including the file public url) is saved to MongoDB.
-
-2. **Validation**:
-
-   - Ensures the file is in `.pdf` format and below the size limit (e.g., 5 MB).
-   - Validates that all required metadata fields are provided.
-
-3. **Cloudinary Platform**:
-   - Files are uploaded to Cloudinary Platform.
-   - Public urls are stored in MongoDB for later retrieval.
-
----
-
-### Search and Retrieve Files
-
-1. **Search Metadata**
-
-   - **Endpoint**: `/api/papers`
-     - Accepts a `GET` request with optional query parameters:
-       - `branch`
-       - `academicYear`
-       - `year`
-       - `cycle`
-       - `semester`
-       - `courseCode`.
-     - **Flow**:
-       - MongoDB is queried based on the filters.
-       - Returns metadata and an S3 pre-signed URL for each matching file.
-
-2. **Cloudinary File Retrieval**
-   - A public URL is generated for each file, allowing secure temporary access to the file without exposing publicly.
-
----
-
-## Third-Party Services
-
-### 1. **MongoDB Atlas**
-
-- Cloud-hosted MongoDB database for storing metadata.
-- Requires the following environment variable:
-  - `MONGO_URI` (MongoDB connection string).
-
-### 2. **Cloudinary Platform**
-
-- Files are stored in Cloudinary Platform for scalability and reliability.
-- Requires the following environment variables:
-  - `CLOUDINARY_CLOUD_NAME`.
-  - `CLOUDINARY_API_KEY`.
-  - `CLOUDINARY_API_SECRET`.
-
-### 3. **Multer**
-
-- Middleware for handling multipart form data, specifically for file uploads.
-
----
+If you want, I can help run the local verification steps and prepare a small checklist to test uploads/downloads end-to-end.

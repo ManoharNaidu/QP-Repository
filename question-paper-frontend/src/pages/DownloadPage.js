@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { motion } from "framer-motion";
 
 const DownloadPage = () => {
   const [filters, setFilters] = useState({
+    module: "",
     branch: "",
     academicYear: "",
     year: "",
@@ -19,12 +20,26 @@ const DownloadPage = () => {
 
   // Dropdown options
   const branchOptions = ["CSE", "ECE", "ME", "CE", "EEE"];
+  const moduleOptions = ["Base", "Bachelor", "Master"];
   const currentYear = new Date().getFullYear();
   const YearOptions = Array.from(
-    { length: new Date().getFullYear() - 2014 },
+    { length: new Date().getFullYear() - 2020 + 1 },
     (_, i) => `${currentYear - i}`
   );
   const AcademicYearOptions = ["1st Year", "2nd Year", "3rd Year", "4th Year"];
+  const academicOptions =
+    filters.module === "Base"
+      ? AcademicYearOptions.slice(0, 2)
+      : AcademicYearOptions;
+
+  useEffect(() => {
+    if (
+      filters.academicYear &&
+      !academicOptions.includes(filters.academicYear)
+    ) {
+      setFilters((prev) => ({ ...prev, academicYear: "" }));
+    }
+  }, [filters.module]);
   const semesterOptions = ["Mid", "End"];
   const cycleOptions = ["Jan-Jun", "Jul-Dec"];
 
@@ -32,7 +47,8 @@ const DownloadPage = () => {
     try {
       const response = await axios.get(
         // "https://qp-repository.onrender.com/api/download",
-        "https://qp-repository-8vor.onrender.com/api/download",
+        // "https://qp-repository-8vor.onrender.com/api/download",
+        "http://localhost:5000/api/download",
         {
           params: filters,
         }
@@ -64,6 +80,7 @@ const DownloadPage = () => {
   // New helper: build a sanitized filename from paper fields (adds timestamp to ensure uniqueness)
   const buildFileName = (paper) => {
     const parts = [
+      paper.module,
       paper.branch,
       paper.year,
       paper.academicYear,
@@ -122,10 +139,6 @@ const DownloadPage = () => {
       transition={{ duration: 0.8 }}
       // className="container mx-auto max-w-3xl bg-gradient-to-br from-purple-800 via-purple-700 to-purple-600  backdrop-blur-lg rounded-xl p-8 shadow-xl"
     >
-      <h1 className="text-3xl font-bold text-center mb-8 text-gray-200">
-        Download Question Papers
-      </h1>
-
       {/* Main Layout */}
       <div className="flex flex-wrap gap-6">
         {/* Filter Section - White Card */}
@@ -133,6 +146,20 @@ const DownloadPage = () => {
         <div className="w-full sm:w-80 bg-gradient-to-br from-red-400 to-red-500 rounded-lg p-5 shadow-lg">
           <h2 className="text-xl font-semibold mb-4">Filters</h2>
           <form className="flex flex-col gap-4" onSubmit={handleFilterSubmit}>
+            <select
+              name="module"
+              value={filters.module}
+              onChange={handleInputChange}
+              className="w-full p-2.5 border border-gray-300 rounded-md text-gray-700"
+            >
+              <option value="">Select Module</option>
+              {moduleOptions.map((m, idx) => (
+                <option key={idx} value={m}>
+                  {m}
+                </option>
+              ))}
+            </select>
+
             <select
               name="branch"
               value={filters.branch}
@@ -168,7 +195,7 @@ const DownloadPage = () => {
               className="w-full p-2.5 border border-gray-300 rounded-md text-gray-700"
             >
               <option value="">Select Academic Year</option>
-              {AcademicYearOptions.map((year, index) => (
+              {academicOptions.map((year, index) => (
                 <option key={index} value={year}>
                   {year}
                 </option>
@@ -206,7 +233,7 @@ const DownloadPage = () => {
             <input
               type="text"
               name="courseCode"
-              placeholder="Course Code"
+              placeholder="Course Code (e.g. AB12345)"
               value={filters.courseCode}
               onChange={handleInputChange}
               className="w-full p-2.5 border border-gray-300 rounded-md text-gray-700"
@@ -235,6 +262,9 @@ const DownloadPage = () => {
                   className="bg-gradient-to-br from-yellow-300 to-yellow-500 p-4 border-2 border-slate-950 rounded-lg shadow-md flex flex-col h-full"
                 >
                   <div>
+                    <p>
+                      <strong>Module:</strong> {paper.module}
+                    </p>
                     <p>
                       <strong>Branch:</strong> {paper.branch}
                     </p>

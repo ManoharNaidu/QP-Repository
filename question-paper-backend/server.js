@@ -49,7 +49,23 @@ const upload = multer({ storage });
 
 // Upload route -> Cloudinary
 app.post("/api/upload", upload.single("file"), async (req, res) => {
-  const { branch, year, academicYear, cycle, semester, courseCode } = req.body;
+  const { branch, module, year, academicYear, cycle, semester, courseCode } =
+    req.body;
+
+  // Validate module
+  const validModules = ["Base", "Bachelor", "Master"];
+  if (!module || !validModules.includes(module)) {
+    return res.status(400).json({ error: "Invalid or missing module" });
+  }
+
+  // Validate courseCode: exactly 2 letters followed by 5 digits, no spaces
+  const courseCodePattern = /^[A-Z]{2}\d{5}$/;
+  if (!courseCode || !courseCodePattern.test(courseCode)) {
+    return res.status(400).json({
+      error:
+        "Invalid courseCode. Expected 2 letters followed by 5 digits (e.g. AB12345).",
+    });
+  }
 
   if (!req.file) {
     return res.status(400).json({ error: "File Not Uploaded" });
@@ -57,7 +73,7 @@ app.post("/api/upload", upload.single("file"), async (req, res) => {
 
   // Build a stable public id (no extension)
   const publicId =
-    `${branch}_${academicYear}_${year}_${cycle}_${semester}_${courseCode}.pdf`.replace(
+    `${module}_${branch}_${academicYear}_${year}_${cycle}_${semester}_${courseCode}.pdf`.replace(
       /[\s/]/g,
       "_"
     );
@@ -82,8 +98,17 @@ app.post("/api/upload", upload.single("file"), async (req, res) => {
 
     // Save metadata to MongoDB (use secure_url from Cloudinary)
     await QuestionPaper.findOneAndUpdate(
-      { branch, academicYear, year, cycle, semester, courseCode },
-      { fileUrl: result.secure_url },
+      { branch, module, academicYear, year, cycle, semester, courseCode },
+      {
+        module,
+        branch,
+        academicYear,
+        year,
+        cycle,
+        semester,
+        courseCode,
+        fileUrl: result.secure_url,
+      },
       { upsert: true, new: true }
     );
 
@@ -100,12 +125,13 @@ app.post("/api/upload", upload.single("file"), async (req, res) => {
 // Download route
 app.get("/api/download", async (req, res) => {
   try {
-    const { branch, academicYear, year, semester, cycle, courseCode } =
+    const { branch, module, academicYear, year, semester, cycle, courseCode } =
       req.query;
 
     // Query MongoDB for matching question papers
     const query = {};
     if (branch) query.branch = branch;
+    if (module) query.module = module;
     if (academicYear) query.academicYear = academicYear;
     if (year) query.year = year;
     if (semester) query.semester = semester;
@@ -137,7 +163,32 @@ app.post("/api/feedback", async (req, res) => {
     const feedback = new Feedback({ content });
     await feedback.save();
 
-    res.status(201).json({ message: "Feedback submitted successfully" });
+    // Convert createdAt to IST (UTC+05:30) in an ISO-like format with offset
+    const toIstIso = (date) => {
+      const d = new Date(date);
+      // IST offset in minutes
+      const istOffsetMinutes = 5.5 * 60;
+      const ist = new Date(d.getTime() + istOffsetMinutes * 60 * 1000);
+      const pad = (n) => String(n).padStart(2, "0");
+      const ms = String(ist.getMilliseconds()).padStart(3, "0");
+      return (
+        `${ist.getFullYear()}-${pad(ist.getMonth() + 1)}-${pad(
+          ist.getDate()
+        )}` +
+        `T${pad(ist.getHours())}:${pad(ist.getMinutes())}:${pad(
+          ist.getSeconds()
+        )}.${ms}+05:30`
+      );
+    };
+
+    res.status(201).json({
+      message: "Feedback submitted successfully",
+      feedback: {
+        id: feedback._id,
+        createdAt: feedback.createdAt, // original stored date (UTC)
+        createdAtIST: toIstIso(feedback.createdAt), // ISO-like string in IST
+      },
+    });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Failed to submit feedback" });

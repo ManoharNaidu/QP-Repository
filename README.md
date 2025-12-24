@@ -1,6 +1,28 @@
-# QP Repository
+# QP-Repository
 
-## Overview
+Central workspace for the Question Paper repository (backend + frontend).
+
+This repo contains two main projects:
+
+- `question-paper-backend` — Express + MongoDB API that receives PDF uploads and stores them on Cloudinary; metadata is kept in MongoDB.
+- `question-paper-frontend` — React single-page app (Tailwind CSS) used to upload and search/download question papers.
+
+**Quick structure**
+
+- [question-paper-backend](question-paper-backend/README.md): server, models, config and endpoints.
+- [question-paper-frontend](question-paper-frontend/README.md): React app, pages, and styling.
+
+**Highlights / recent changes**
+
+- Added a `module` field (enum: `Base`, `Bachelor`, `Master`) across backend model, API and frontend UI.
+- Enforced course code format: exactly 2 letters followed by 5 digits (e.g. `CS12345`) — validated on model, server and client.
+- Uploads stream to Cloudinary (raw resource) and save metadata in MongoDB; uploads are upserted by a stable public id composed of key fields.
+- Frontend: year dropdowns are displayed in descending order; `Base` module restricts academic-year choices to 1st and 2nd; file input layout and theme updates applied.
+
+**Next steps / recommendations**
+
+- Run local verification after setting environment variables (see backend README) and starting both servers.
+- Optionally run `npx depcheck` in each project root to get suggestions for unused dependencies (manually verify before removing).
 
 QP Repository is a web application for managing question papers. Users can upload and download question papers easily.
 

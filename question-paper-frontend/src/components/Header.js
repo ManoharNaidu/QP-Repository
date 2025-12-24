@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import { cn } from "../lib/utils";
+import pkg from "../../package.json";
 
 const Header = () => {
   const location = useLocation();
@@ -14,7 +15,7 @@ const Header = () => {
     },
     {
       path: "/download",
-      label: "Download",
+      label: "Search",
       color: "text-red-400 hover:text-red-300",
     },
     {
@@ -34,7 +35,10 @@ const Header = () => {
             className="w-8 h-8 object-contain"
           />
           <Link to="/" className="hover:text-blue-300">
-            QP Repository
+            <div className="flex flex-col">
+              <span>QP Repository</span>
+              <small className="text-xs text-gray-400">v{pkg.version}</small>
+            </div>
           </Link>
         </h1>
         <nav className="hidden md:flex">

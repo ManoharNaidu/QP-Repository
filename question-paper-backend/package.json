@@ -1,6 +1,6 @@
 {
   "name": "question-paper-backend",
-  "version": "2.1.0",
+  "version": "5.1.0",
   "description": "Backend for QP Repository",
   "main": "server.js",
   "type": "module",

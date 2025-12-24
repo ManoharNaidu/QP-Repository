@@ -24,7 +24,8 @@ const FeedbackPage = () => {
     try {
       const response = await axios.post(
         // "https://qp-repository.onrender.com/api/feedback",
-        "https://qp-repository-8vor.onrender.com/api/feedback",
+        // "https://qp-repository-8vor.onrender.com/api/feedback",
+        "http://localhost:5000/api/feedback",
         {
           content: feedback,
         }
@@ -116,7 +117,7 @@ const FeedbackPage = () => {
               clipRule="evenodd"
             />
           </svg>
-          View Project
+          View Project on GitHub
         </a>
       </footer>
     </>
