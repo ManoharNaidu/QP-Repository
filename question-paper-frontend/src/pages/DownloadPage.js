@@ -19,7 +19,7 @@ const DownloadPage = () => {
   const papersPerPage = 10; // Number of results per page
 
   // Dropdown options
-  const branchOptions = ["CSE", "ECE", "ME", "CE", "EEE"];
+  const branchOptions = ["AE", "CE", "CSE", "ECE", "EEE", "ME"];
   const moduleOptions = ["Base", "Bachelor", "Master"];
   const currentYear = new Date().getFullYear();
   const YearOptions = Array.from(

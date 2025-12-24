@@ -152,7 +152,7 @@ const UploadPage = () => {
               <option value="" className="text-gray-800">
                 Select Branch
               </option>
-              <option value="Agri" className="text-gray-800">
+              <option value="AE" className="text-gray-800">
                 Agriculture Engineering
               </option>
               <option value="CE" className="text-gray-800">
