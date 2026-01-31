@@ -1,8 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
+import { useSearchParams } from "react-router-dom";
 import axios from "axios";
 import { motion } from "framer-motion";
 
 const DownloadPage = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
   const [filters, setFilters] = useState({
     module: "",
     branch: "",
@@ -32,6 +34,20 @@ const DownloadPage = () => {
       ? AcademicYearOptions.slice(0, 2)
       : AcademicYearOptions;
 
+  // Initialize filters from URL on component mount
+  useEffect(() => {
+    const urlFilters = {
+      module: searchParams.get("module") || "",
+      branch: searchParams.get("branch") || "",
+      academicYear: searchParams.get("academicYear") || "",
+      year: searchParams.get("year") || "",
+      semester: searchParams.get("semester") || "",
+      cycle: searchParams.get("cycle") || "",
+      courseCode: searchParams.get("courseCode") || "",
+    };
+    setFilters(urlFilters);
+  }, [searchParams]);
+
   useEffect(() => {
     if (
       filters.academicYear &&
@@ -39,11 +55,11 @@ const DownloadPage = () => {
     ) {
       setFilters((prev) => ({ ...prev, academicYear: "" }));
     }
-  }, [filters.module]);
+  }, [filters.module, filters.academicYear, academicOptions]);
   const semesterOptions = ["Mid", "End"];
   const cycleOptions = ["Jan-Jun", "Jul-Dec"];
 
-  const fetchPapers = async () => {
+  const fetchPapers = useCallback(async () => {
     try {
       const response = await axios.get(
         // "https://qp-repository.onrender.com/api/download",
@@ -59,22 +75,34 @@ const DownloadPage = () => {
       console.error("Error fetching papers:", error);
       setPapers([]);
     }
-  };
+  }, [filters, papersPerPage]);
 
   useEffect(() => {
     fetchPapers(); // Fetch papers on page load or filter change
-  }, []);
+  }, [fetchPapers]);
 
-  // Handle input changes in the filters
+  // Handle input changes in the filters (only updates local state, not URL)
   const handleInputChange = (e) => {
     setFilters({ ...filters, [e.target.name]: e.target.value });
+  };
+
+  // Update URL with current filters
+  const updateUrlWithFilters = (filtersToUpdate) => {
+    const params = new URLSearchParams();
+    Object.keys(filtersToUpdate).forEach((key) => {
+      if (filtersToUpdate[key]) {
+        params.set(key, filtersToUpdate[key]);
+      }
+    });
+    setSearchParams(params);
   };
 
   // Handle form submit to apply filters
   const handleFilterSubmit = async (e) => {
     e.preventDefault();
     setCurrentPage(1); // Reset to the first page on filter change
-    fetchPapers();
+    updateUrlWithFilters(filters);
+    // fetchPapers is called via useEffect when filters change
   };
 
   // New helper: build a sanitized filename from paper fields (adds timestamp to ensure uniqueness)
