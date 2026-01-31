@@ -14,6 +14,15 @@ const DownloadPage = () => {
     cycle: "",
     courseCode: "",
   });
+  const [appliedFilters, setAppliedFilters] = useState({
+    module: "",
+    branch: "",
+    academicYear: "",
+    year: "",
+    semester: "",
+    cycle: "",
+    courseCode: "",
+  });
   const [papers, setPapers] = useState([]);
   const [currentPage, setCurrentPage] = useState(1); // Track current page
   const [totalPages, setTotalPages] = useState(1); // Track total number of pages
@@ -46,7 +55,8 @@ const DownloadPage = () => {
       courseCode: searchParams.get("courseCode") || "",
     };
     setFilters(urlFilters);
-  }, [searchParams]);
+    setAppliedFilters(urlFilters);
+  }, []);
 
   useEffect(() => {
     if (
@@ -59,27 +69,33 @@ const DownloadPage = () => {
   const semesterOptions = ["Mid", "End"];
   const cycleOptions = ["Jan-Jun", "Jul-Dec"];
 
-  const fetchPapers = useCallback(async () => {
-    try {
-      const response = await axios.get(
-        // "https://qp-repository.onrender.com/api/download",
-        "https://qp-repository-8vor.onrender.com/api/download",
-        // "http://localhost:5000/api/download",
-        {
-          params: filters,
-        }
-      );
-      setPapers(response.data.papers);
-      setTotalPages(Math.ceil(response.data.papers.length / papersPerPage)); // Calculate total pages
-    } catch (error) {
-      console.error("Error fetching papers:", error);
-      setPapers([]);
-    }
-  }, [filters, papersPerPage]);
+  const fetchPapers = useCallback(
+    async (filtersToFetch) => {
+      try {
+        const response = await axios.get(
+          // "https://qp-repository.onrender.com/api/download",
+          // "https://qp-repository-8vor.onrender.com/api/download",
+          "http://localhost:5000/api/download",
+          {
+            params: filtersToFetch,
+          }
+        );
+        setPapers(response.data.papers);
+        setTotalPages(Math.ceil(response.data.papers.length / papersPerPage)); // Calculate total pages
+      } catch (error) {
+        console.error("Error fetching papers:", error);
+        setPapers([]);
+      }
+    },
+    [papersPerPage]
+  );
 
+  // Fetch papers on initial load or when URL has filters (shared link)
   useEffect(() => {
-    fetchPapers(); // Fetch papers on page load or filter change
-  }, [fetchPapers]);
+    const hasUrlParams = Object.values(appliedFilters).some((v) => v !== "");
+    // Always fetch - either with URL params (shared link) or empty filters (all papers)
+    fetchPapers(appliedFilters);
+  }, []);
 
   // Handle input changes in the filters (only updates local state, not URL)
   const handleInputChange = (e) => {
@@ -101,8 +117,28 @@ const DownloadPage = () => {
   const handleFilterSubmit = async (e) => {
     e.preventDefault();
     setCurrentPage(1); // Reset to the first page on filter change
+    setAppliedFilters(filters); // Set applied filters
     updateUrlWithFilters(filters);
-    // fetchPapers is called via useEffect when filters change
+    // Fetch with the current filters
+    fetchPapers(filters);
+  };
+
+  // Handle reset filters
+  const handleResetFilters = () => {
+    const defaultFilters = {
+      module: "",
+      branch: "",
+      academicYear: "",
+      year: "",
+      semester: "",
+      cycle: "",
+      courseCode: "",
+    };
+    setFilters(defaultFilters);
+    setAppliedFilters(defaultFilters);
+    setSearchParams(new URLSearchParams()); // Clear URL params
+    setCurrentPage(1);
+    fetchPapers(defaultFilters); // Fetch all papers
   };
 
   // New helper: build a sanitized filename from paper fields (adds timestamp to ensure uniqueness)
@@ -267,12 +303,22 @@ const DownloadPage = () => {
               className="w-full p-2.5 border border-gray-300 rounded-md text-gray-700"
             />
 
-            <button
-              type="submit"
-              className="w-full bg-blue-500 text-slate-950 py-2.5 rounded-md hover:bg-blue-600 transition-colors"
-            >
-              Apply Filters
-            </button>
+            <div className="flex gap-3">
+              <button
+                type="button"
+                onClick={handleResetFilters}
+                className="flex-1 bg-gray-400 text-slate-950 py-2.5 rounded-md hover:bg-gray-500 transition-colors"
+              >
+                Reset Filters
+              </button>
+
+              <button
+                type="submit"
+                className="flex-1 bg-blue-500 text-slate-950 py-2.5 rounded-md hover:bg-blue-600 transition-colors"
+              >
+                Apply Filters
+              </button>
+            </div>
           </form>
         </div>
 
