@@ -35,7 +35,7 @@ const DownloadPage = () => {
   const currentYear = new Date().getFullYear();
   const YearOptions = Array.from(
     { length: new Date().getFullYear() - 2020 + 1 },
-    (_, i) => `${currentYear - i}`
+    (_, i) => `${currentYear - i}`,
   );
   const AcademicYearOptions = ["1st Year", "2nd Year", "3rd Year", "4th Year"];
   const academicOptions =
@@ -56,6 +56,8 @@ const DownloadPage = () => {
     };
     setFilters(urlFilters);
     setAppliedFilters(urlFilters);
+    // Fetch immediately with the URL-derived filters so shared links work
+    fetchPapers(urlFilters);
   }, []);
 
   useEffect(() => {
@@ -78,7 +80,7 @@ const DownloadPage = () => {
           // "http://localhost:5000/api/download",
           {
             params: filtersToFetch,
-          }
+          },
         );
         setPapers(response.data.papers);
         setTotalPages(Math.ceil(response.data.papers.length / papersPerPage)); // Calculate total pages
@@ -87,14 +89,13 @@ const DownloadPage = () => {
         setPapers([]);
       }
     },
-    [papersPerPage]
+    [papersPerPage],
   );
 
   // Fetch papers on initial load or when URL has filters (shared link)
   useEffect(() => {
-    const hasUrlParams = Object.values(appliedFilters).some((v) => v !== "");
-    // Always fetch - either with URL params (shared link) or empty filters (all papers)
-    fetchPapers(appliedFilters);
+    // removed initial unconditional fetch; fetching is handled after initializing
+    // filters from the URL to ensure correct values are sent to the API.
   }, []);
 
   // Handle input changes in the filters (only updates local state, not URL)
