@@ -1,3 +1,97 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* ── CSS Variables ─────────────────────────────────── */
+:root {
+  /* Dark mode defaults */
+  --bg-base:        #060e20;
+  --bg-surface:     rgba(15, 25, 48, 0.4);
+  --bg-nav:         rgba(6, 14, 32, 0.85);
+  --text-primary:   #dee5ff;
+  --text-muted:     #a3aac4;
+  --border-subtle:  rgba(109, 117, 140, 0.2);
+  --glow-primary:   rgba(163, 166, 255, 0.4);
+  --card-bg:        rgba(15, 25, 48, 0.4);
+  --input-bg:       rgba(255, 255, 255, 0.05);
+}
+
+/* Light mode overrides when .light is on <html> */
+html.light {
+  --bg-base:        #f0f2ff;
+  --bg-surface:     rgba(255, 255, 255, 0.55);
+  --bg-nav:         rgba(240, 242, 255, 0.85);
+  --text-primary:   #1a1f42;
+  --text-muted:     #5a6282;
+  --border-subtle:  rgba(100, 110, 180, 0.2);
+  --glow-primary:   rgba(100, 100, 200, 0.2);
+  --card-bg:        rgba(255, 255, 255, 0.55);
+  --input-bg:       rgba(0, 0, 0, 0.04);
+}
+
+/* ── Base ───────────────────────────────────────────── */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    background-color: var(--bg-base);
+    background-image:
+      radial-gradient(at 0% 0%,   rgba(163, 166, 255, 0.15) 0px, transparent 50%),
+      radial-gradient(at 100% 0%, rgba(193, 128, 255, 0.15) 0px, transparent 50%),
+      radial-gradient(at 50% 100%, rgba(147, 150, 255, 0.1) 0px, transparent 50%);
+    color: var(--text-primary);
+    min-height: 100vh;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  html.light body {
+    background-image:
+      radial-gradient(at 0% 0%,   rgba(163, 166, 255, 0.08) 0px, transparent 50%),
+      radial-gradient(at 100% 0%, rgba(193, 128, 255, 0.08) 0px, transparent 50%),
+      radial-gradient(at 50% 100%, rgba(147, 150, 255, 0.05) 0px, transparent 50%);
+  }
+}
+
+/* ── Components ─────────────────────────────────────── */
+@layer components {
+  .material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  }
+
+  .glass-card {
+    background: var(--card-bg);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid var(--border-subtle);
+    transition: background 0.3s ease, border-color 0.3s ease;
+  }
+
+  .glass-nav {
+    background: var(--bg-nav);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border-subtle);
+    transition: background 0.3s ease;
+  }
+
+  .text-glow {
+    text-shadow: 0 0 30px var(--glow-primary);
+  }
+
+  .theme-input {
+    background: var(--input-bg);
+    color: var(--text-primary);
+    border-bottom: 2px solid var(--border-subtle);
+    transition: border-color 0.2s, background 0.3s;
+  }
+  .theme-input:focus {
+    outline: none;
+    border-color: #a3a6ff;
+    background: rgba(163, 166, 255, 0.05);
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: rgba(163, 166, 255, 0.3); border-radius: 3px; }
+}

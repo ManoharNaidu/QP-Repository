@@ -154,13 +154,18 @@ app.get("/api/download", async (req, res) => {
 // Feedback route
 app.post("/api/feedback", async (req, res) => {
   try {
-    const { content } = req.body;
+    const { content, name, email, category } = req.body;
 
     if (!content) {
       return res.status(400).json({ message: "Feedback content is required" });
     }
 
-    const feedback = new Feedback({ content });
+    const feedback = new Feedback({
+      content,
+      name: name || "Anonymous",
+      email: email || "",
+      category: category || "General",
+    });
     await feedback.save();
 
     // Convert createdAt to IST (UTC+05:30) in an ISO-like format with offset
@@ -185,8 +190,10 @@ app.post("/api/feedback", async (req, res) => {
       message: "Feedback submitted successfully",
       feedback: {
         id: feedback._id,
-        createdAt: feedback.createdAt, // original stored date (UTC)
-        createdAtIST: toIstIso(feedback.createdAt), // ISO-like string in IST
+        name: feedback.name,
+        category: feedback.category,
+        createdAt: feedback.createdAt,
+        createdAtIST: toIstIso(feedback.createdAt),
       },
     });
   } catch (error) {

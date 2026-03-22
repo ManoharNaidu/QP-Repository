@@ -2,10 +2,13 @@ import mongoose from "mongoose";
 
 const FeedbackSchema = new mongoose.Schema(
   {
-    content: { type: String, required: true },
+    name:     { type: String, default: "Anonymous" },
+    email:    { type: String, default: "" },
+    category: { type: String, default: "General" },
+    content:  { type: String, required: true },
     createdAt: { type: Date, default: Date.now },
   },
-  { collection: "feedback" } // Store in the "feedback" collection
+  { collection: "feedback" }
 );
 
 const Feedback = mongoose.model("Feedback", FeedbackSchema);
