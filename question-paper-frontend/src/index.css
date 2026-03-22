@@ -18,15 +18,15 @@
 
 /* Light mode overrides when .light is on <html> */
 html.light {
-  --bg-base:        #f0f2ff;
-  --bg-surface:     rgba(255, 255, 255, 0.55);
-  --bg-nav:         rgba(240, 242, 255, 0.85);
-  --text-primary:   #1a1f42;
-  --text-muted:     #5a6282;
-  --border-subtle:  rgba(100, 110, 180, 0.2);
-  --glow-primary:   rgba(100, 100, 200, 0.2);
-  --card-bg:        rgba(255, 255, 255, 0.55);
-  --input-bg:       rgba(0, 0, 0, 0.04);
+  --bg-base:        #eef2ff; /* Clear Pale Blue */
+  --bg-surface:     rgba(248, 250, 255, 0.65);
+  --bg-nav:         rgba(238, 242, 255, 0.85);
+  --text-primary:   #0f172a; /* Slate 900 - High Contrast */
+  --text-muted:     #475569; /* Slate 600 - Better Contrast */
+  --border-subtle:  rgba(148, 163, 184, 0.3);
+  --glow-primary:   rgba(99, 102, 241, 0.15);
+  --card-bg:        rgba(255, 255, 255, 0.7);
+  --input-bg:       rgba(226, 232, 240, 0.4);
 }
 
 /* ── Base ───────────────────────────────────────────── */
