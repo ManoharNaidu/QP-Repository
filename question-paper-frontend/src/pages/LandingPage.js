@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { GlowingEffect } from '../components/ui/GlowingEffect';
 
 const LandingPage = () => {
   return (
@@ -108,55 +109,75 @@ const LandingPage = () => {
 
         {/* Action Cards */}
         <section className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
-          <Link to="/upload" className="block h-full">
+          <Link to="/upload" className="block h-full relative">
             <motion.div
               whileHover={{ scale: 1.02, y: -4 }}
-              className="glass-card p-8 sm:p-10 rounded-[2rem] group hover:border-primary/30 transition-all duration-500 cursor-pointer relative overflow-hidden h-full"
+              className="relative h-full rounded-[2rem] border border-white/5"
             >
-              <div className="absolute -right-12 -top-12 w-48 h-48 bg-primary/10 rounded-full blur-3xl group-hover:bg-primary/20 transition-all" />
-              <div className="relative z-10">
-                <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center text-primary mb-6 shadow-lg border border-primary/20">
-                  <span className="material-symbols-outlined text-3xl">cloud_upload</span>
-                </div>
-                <h3 className="font-headline text-2xl lg:text-3xl font-bold mb-3 text-[var(--text-primary)]">
-                  Upload Papers
-                </h3>
-                <p className="font-body text-[var(--text-muted)] leading-relaxed text-sm lg:text-base mb-8">
-                  Contribute to the collective intelligence. Securely submit past examination
-                  papers and educational materials to our verified repository.
-                </p>
-                <div className="flex items-center gap-2 text-primary font-label font-bold tracking-tight">
-                  <span>Get Started</span>
-                  <span className="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">
-                    arrow_forward
-                  </span>
+              <GlowingEffect
+                spread={40}
+                glow={true}
+                disabled={false}
+                proximity={64}
+                inactiveZone={0.01}
+                borderWidth={2}
+              />
+              <div className="glass-card p-8 sm:p-10 rounded-[2rem] group hover:bg-[#192540]/60 hover:shadow-2xl transition-all duration-500 cursor-pointer h-full relative overflow-hidden">
+                <div className="absolute -right-12 -top-12 w-48 h-48 bg-primary/10 rounded-full blur-3xl group-hover:bg-primary/20 transition-all" />
+                <div className="relative z-10">
+                  <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center text-primary mb-6 shadow-lg border border-primary/20">
+                    <span className="material-symbols-outlined text-3xl">cloud_upload</span>
+                  </div>
+                  <h3 className="font-headline text-2xl lg:text-3xl font-bold mb-3 text-[var(--text-primary)]">
+                    Upload Papers
+                  </h3>
+                  <p className="font-body text-[var(--text-muted)] leading-relaxed text-sm lg:text-base mb-8">
+                    Contribute to the collective intelligence. Securely submit past examination
+                    papers and educational materials to our verified repository.
+                  </p>
+                  <div className="flex items-center gap-2 text-primary font-label font-bold tracking-tight">
+                    <span>Get Started</span>
+                    <span className="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">
+                      arrow_forward
+                    </span>
+                  </div>
                 </div>
               </div>
             </motion.div>
           </Link>
 
-          <Link to="/download" className="block h-full">
+          <Link to="/download" className="block h-full relative">
             <motion.div
               whileHover={{ scale: 1.02, y: -4 }}
-              className="glass-card p-8 sm:p-10 rounded-[2rem] group hover:border-secondary/30 transition-all duration-500 cursor-pointer relative overflow-hidden h-full"
+              className="relative h-full rounded-[2rem] border border-white/5"
             >
-              <div className="absolute -right-12 -top-12 w-48 h-48 bg-secondary/10 rounded-full blur-3xl group-hover:bg-secondary/20 transition-all" />
-              <div className="relative z-10">
-                <div className="w-14 h-14 rounded-2xl bg-secondary/10 flex items-center justify-center text-secondary mb-6 shadow-lg border border-secondary/20">
-                  <span className="material-symbols-outlined text-3xl">library_books</span>
-                </div>
-                <h3 className="font-headline text-2xl lg:text-3xl font-bold mb-3 text-[var(--text-primary)]">
-                  Download Papers
-                </h3>
-                <p className="font-body text-[var(--text-muted)] leading-relaxed text-sm lg:text-base mb-8">
-                  Access thousands of academic papers instantly. Search by subject code, year,
-                  or difficulty level with our precision indexing.
-                </p>
-                <div className="flex items-center gap-2 text-secondary font-label font-bold tracking-tight">
-                  <span>Browse Archive</span>
-                  <span className="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">
-                    arrow_forward
-                  </span>
+              <GlowingEffect
+                spread={40}
+                glow={true}
+                disabled={false}
+                proximity={64}
+                inactiveZone={0.01}
+                borderWidth={2}
+              />
+              <div className="glass-card p-8 sm:p-10 rounded-[2rem] group hover:bg-[#192540]/60 hover:shadow-2xl transition-all duration-500 cursor-pointer h-full relative overflow-hidden">
+                <div className="absolute -right-12 -top-12 w-48 h-48 bg-secondary/10 rounded-full blur-3xl group-hover:bg-secondary/20 transition-all" />
+                <div className="relative z-10">
+                  <div className="w-14 h-14 rounded-2xl bg-secondary/10 flex items-center justify-center text-secondary mb-6 shadow-lg border border-secondary/20">
+                    <span className="material-symbols-outlined text-3xl">library_books</span>
+                  </div>
+                  <h3 className="font-headline text-2xl lg:text-3xl font-bold mb-3 text-[var(--text-primary)]">
+                    Download Papers
+                  </h3>
+                  <p className="font-body text-[var(--text-muted)] leading-relaxed text-sm lg:text-base mb-8">
+                    Access thousands of academic papers instantly. Search by subject code, year,
+                    or difficulty level with our precision indexing.
+                  </p>
+                  <div className="flex items-center gap-2 text-secondary font-label font-bold tracking-tight">
+                    <span>Browse Archive</span>
+                    <span className="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">
+                      arrow_forward
+                    </span>
+                  </div>
                 </div>
               </div>
             </motion.div>

@@ -15,15 +15,6 @@ const DownloadPage = () => {
     cycle: "",
     courseCode: "",
   });
-  const [appliedFilters, setAppliedFilters] = useState({
-    module: "",
-    branch: "",
-    academicYear: "",
-    year: "",
-    semester: "",
-    cycle: "",
-    courseCode: "",
-  });
   const [papers, setPapers] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
@@ -56,7 +47,6 @@ const DownloadPage = () => {
       courseCode: searchParams.get("courseCode") || "",
     };
     setFilters(urlFilters);
-    setAppliedFilters(urlFilters);
     fetchPapers(urlFilters);
   }, []);
 
@@ -109,7 +99,6 @@ const DownloadPage = () => {
   const handleFilterSubmit = async (e) => {
     e.preventDefault();
     setCurrentPage(1);
-    setAppliedFilters(filters);
     updateUrlWithFilters(filters);
     fetchPapers(filters);
   };
@@ -125,7 +114,6 @@ const DownloadPage = () => {
       courseCode: "",
     };
     setFilters(defaultFilters);
-    setAppliedFilters(defaultFilters);
     setSearchParams(new URLSearchParams());
     setCurrentPage(1);
     fetchPapers(defaultFilters);
