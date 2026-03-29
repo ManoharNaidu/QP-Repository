@@ -28,7 +28,6 @@ const errorMiddleware = (err, req, res, next) => {
       error: error.message || "Server Error",
     });
   } catch (error) {
-    // If something goes wrong in the error middleware, pass it to the default error handler
     next(error);
   }
 };

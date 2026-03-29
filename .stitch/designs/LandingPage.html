@@ -1,14 +1,24 @@
-<!DOCTYPE html>
+<!doctype html>
 
-<html class="dark" lang="en"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>QP-Repository | The Luminous Archive</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;family=Manrope:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script id="tailwind-config">
+<html class="dark" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>QP-Repository | The Luminous Archive</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;family=Manrope:wght@500;600;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script id="tailwind-config">
       tailwind.config = {
         darkMode: "class",
         theme: {
@@ -21,8 +31,8 @@
               "on-primary": "#0f00a4",
               "surface-container-high": "#141f38",
               "on-background": "#dee5ff",
-              "secondary": "#c180ff",
-              "error": "#ff6e84",
+              secondary: "#c180ff",
+              error: "#ff6e84",
               "secondary-container": "#6f00be",
               "on-secondary-fixed": "#4f0089",
               "inverse-surface": "#faf8ff",
@@ -35,21 +45,21 @@
               "on-secondary-container": "#e9cdff",
               "on-secondary": "#33005b",
               "on-tertiary": "#4b002a",
-              "primary": "#a3a6ff",
+              primary: "#a3a6ff",
               "tertiary-fixed": "#ff8cbc",
               "surface-tint": "#a3a6ff",
               "primary-dim": "#6063ee",
               "on-primary-fixed-variant": "#0e009d",
               "on-secondary-fixed-variant": "#7511c3",
-              "outline": "#6d758c",
+              outline: "#6d758c",
               "secondary-fixed-dim": "#dbb4ff",
               "on-tertiary-fixed-variant": "#740044",
               "inverse-primary": "#494bd7",
-              "surface": "#060e20",
+              surface: "#060e20",
               "tertiary-fixed-dim": "#ff73b1",
               "on-surface-variant": "#a3aac4",
-              "background": "#060e20",
-              "tertiary": "#ff6daf",
+              background: "#060e20",
+              tertiary: "#ff6daf",
               "on-tertiary-fixed": "#37001d",
               "surface-container": "#0f1930",
               "on-primary-fixed": "#000000",
@@ -64,192 +74,371 @@
               "on-primary-container": "#0a0081",
               "on-error-container": "#ffb2b9",
               "tertiary-container": "#fa53a4",
-              "surface-variant": "#192540"
+              "surface-variant": "#192540",
             },
             fontFamily: {
-              "headline": ["Plus Jakarta Sans"],
-              "body": ["Inter"],
-              "label": ["Manrope"]
+              headline: ["Plus Jakarta Sans"],
+              body: ["Inter"],
+              label: ["Manrope"],
             },
-            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+            borderRadius: {
+              DEFAULT: "0.25rem",
+              lg: "0.5rem",
+              xl: "0.75rem",
+              full: "9999px",
+            },
           },
         },
-      }
+      };
     </script>
-<style>
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-        }
-        body {
-            background-color: #060e20;
-            background-image: 
-                radial-gradient(at 0% 0%, rgba(163, 166, 255, 0.15) 0px, transparent 50%),
-                radial-gradient(at 100% 0%, rgba(193, 128, 255, 0.15) 0px, transparent 50%),
-                radial-gradient(at 50% 100%, rgba(147, 150, 255, 0.1) 0px, transparent 50%);
-        }
-        .glass-card {
-            background: rgba(15, 25, 48, 0.4);
-            backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
-            border: 1px solid rgba(109, 117, 140, 0.2);
-        }
-        .text-glow {
-            text-shadow: 0 0 30px rgba(163, 166, 255, 0.4);
-        }
+    <style>
+      .material-symbols-outlined {
+        font-variation-settings:
+          "FILL" 0,
+          "wght" 400,
+          "GRAD" 0,
+          "opsz" 24;
+      }
+      body {
+        background-color: #060e20;
+        background-image:
+          radial-gradient(
+            at 0% 0%,
+            rgba(163, 166, 255, 0.15) 0px,
+            transparent 50%
+          ),
+          radial-gradient(
+            at 100% 0%,
+            rgba(193, 128, 255, 0.15) 0px,
+            transparent 50%
+          ),
+          radial-gradient(
+            at 50% 100%,
+            rgba(147, 150, 255, 0.1) 0px,
+            transparent 50%
+          );
+      }
+      .glass-card {
+        background: rgba(15, 25, 48, 0.4);
+        backdrop-filter: blur(24px);
+        -webkit-backdrop-filter: blur(24px);
+        border: 1px solid rgba(109, 117, 140, 0.2);
+      }
+      .text-glow {
+        text-shadow: 0 0 30px rgba(163, 166, 255, 0.4);
+      }
     </style>
-</head>
-<body class="font-body text-on-surface min-h-screen selection:bg-primary/30 selection:text-white">
-<!-- Top Navigation -->
-<nav class="fixed top-0 w-full z-50 bg-indigo-950/40 backdrop-blur-xl shadow-[0_40px_40px_rgba(222,229,255,0.08)]">
-<div class="flex justify-between items-center px-8 py-4 max-w-7xl mx-auto">
-<div class="text-2xl font-bold tracking-tighter text-indigo-100 dark:text-white font-headline">
-                QP-Repository
+  </head>
+  <body
+    class="font-body text-on-surface min-h-screen selection:bg-primary/30 selection:text-white"
+  >
+    <!-- Top Navigation -->
+    <nav
+      class="fixed top-0 w-full z-50 bg-indigo-950/40 backdrop-blur-xl shadow-[0_40px_40px_rgba(222,229,255,0.08)]"
+    >
+      <div
+        class="flex justify-between items-center px-8 py-4 max-w-7xl mx-auto"
+      >
+        <div
+          class="text-2xl font-bold tracking-tighter text-indigo-100 dark:text-white font-headline"
+        >
+          QP-Repository
+        </div>
+        <div class="hidden md:flex items-center gap-8">
+          <a
+            class="font-['Plus_Jakarta_Sans'] tracking-tight text-sm font-medium text-indigo-100 border-b-2 border-indigo-400 pb-1"
+            href="#"
+            >Repository</a
+          >
+          <a
+            class="font-['Plus_Jakarta_Sans'] tracking-tight text-sm font-medium text-indigo-300/80 hover:text-indigo-100 transition-colors"
+            href="#"
+            >Curations</a
+          >
+          <a
+            class="font-['Plus_Jakarta_Sans'] tracking-tight text-sm font-medium text-indigo-300/80 hover:text-indigo-100 transition-colors"
+            href="#"
+            >Guidelines</a
+          >
+          <a
+            class="font-['Plus_Jakarta_Sans'] tracking-tight text-sm font-medium text-indigo-300/80 hover:text-indigo-100 transition-colors"
+            href="#"
+            >Archive</a
+          >
+        </div>
+        <div class="flex items-center gap-4">
+          <button
+            class="hidden lg:block text-indigo-300/80 font-medium text-sm hover:text-white transition-colors"
+          >
+            Sign In
+          </button>
+          <button
+            class="bg-gradient-to-r from-primary to-primary-dim text-on-primary px-6 py-2.5 rounded-full font-headline font-bold text-sm hover:opacity-90 active:scale-95 transition-all shadow-lg shadow-primary/20"
+          >
+            Upload Papers
+          </button>
+        </div>
+      </div>
+    </nav>
+    <main class="pt-32 pb-24">
+      <!-- Hero Section -->
+      <section class="max-w-7xl mx-auto px-8 mb-24">
+        <div
+          class="flex flex-col md:flex-row gap-12 items-start justify-between"
+        >
+          <div class="md:w-3/5">
+            <div
+              class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary-container/15 border border-secondary/20 mb-6"
+            >
+              <span
+                class="material-symbols-outlined text-secondary text-sm"
+                style="font-variation-settings: &quot;FILL&quot; 1"
+                >auto_awesome</span
+              >
+              <span
+                class="font-label text-xs font-bold text-secondary tracking-widest uppercase"
+                >The Digital Vault</span
+              >
             </div>
-<div class="hidden md:flex items-center gap-8">
-<a class="font-['Plus_Jakarta_Sans'] tracking-tight text-sm font-medium text-indigo-100 border-b-2 border-indigo-400 pb-1" href="#">Repository</a>
-<a class="font-['Plus_Jakarta_Sans'] tracking-tight text-sm font-medium text-indigo-300/80 hover:text-indigo-100 transition-colors" href="#">Curations</a>
-<a class="font-['Plus_Jakarta_Sans'] tracking-tight text-sm font-medium text-indigo-300/80 hover:text-indigo-100 transition-colors" href="#">Guidelines</a>
-<a class="font-['Plus_Jakarta_Sans'] tracking-tight text-sm font-medium text-indigo-300/80 hover:text-indigo-100 transition-colors" href="#">Archive</a>
-</div>
-<div class="flex items-center gap-4">
-<button class="hidden lg:block text-indigo-300/80 font-medium text-sm hover:text-white transition-colors">Sign In</button>
-<button class="bg-gradient-to-r from-primary to-primary-dim text-on-primary px-6 py-2.5 rounded-full font-headline font-bold text-sm hover:opacity-90 active:scale-95 transition-all shadow-lg shadow-primary/20">
-                    Upload Papers
-                </button>
-</div>
-</div>
-</nav>
-<main class="pt-32 pb-24">
-<!-- Hero Section -->
-<section class="max-w-7xl mx-auto px-8 mb-24">
-<div class="flex flex-col md:flex-row gap-12 items-start justify-between">
-<div class="md:w-3/5">
-<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary-container/15 border border-secondary/20 mb-6">
-<span class="material-symbols-outlined text-secondary text-sm" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
-<span class="font-label text-xs font-bold text-secondary tracking-widest uppercase">The Digital Vault</span>
-</div>
-<h1 class="font-headline text-6xl md:text-8xl font-extrabold tracking-tighter leading-[0.9] text-on-surface mb-8">
-                        Welcome to <span class="text-transparent bg-clip-text bg-gradient-to-br from-primary via-secondary to-tertiary">QP-Repository</span>
-</h1>
-<p class="font-body text-xl md:text-2xl text-on-surface-variant max-w-xl leading-relaxed">
-                        The Luminous Archive of Academic Resources. Explore a curated collection of high-quality intellectual assets for modern learning.
-                    </p>
-</div>
-<!-- Abstract Decorative Element -->
-<div class="hidden lg:block relative md:w-1/3">
-<div class="absolute -top-20 -right-20 w-80 h-80 bg-primary/20 rounded-full blur-[100px]"></div>
-<div class="absolute top-10 right-10 w-64 h-64 bg-secondary/20 rounded-full blur-[80px]"></div>
-<div class="glass-card relative z-10 p-8 rounded-[2rem] border-white/5 overflow-hidden">
-<img class="w-full h-64 object-cover rounded-2xl mb-6 opacity-60 mix-blend-lighten" data-alt="Abstract academic books and glowing light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA3hKtjyMeHFWA8_WQ9MM0U4kST18-AAgt90pL2eOHiSnJtfnjPiBFT_1Gx9ugdzKCVmtsNbiElzH18jfANw92Hr9XjSUUQ81-grPOTqzK6R-I2jXbXLxrO4-0Ns6p2D7zrwRZQBAYNDw9pWlG-TplopXhUpmjV_13lZpeGk2VYmbdzrvEKSwuUhQRn1nC-5TJ5K-t8wlDxMkQ1w9CVspNFL-Vyl8MFP_1hF1fTEQUSDgCn7mwef85L5MfsckBoLnStPlJlk8K8HyY"/>
-<div class="space-y-4">
-<div class="h-2 w-1/2 bg-primary/20 rounded-full"></div>
-<div class="h-2 w-3/4 bg-white/10 rounded-full"></div>
-<div class="h-2 w-2/3 bg-white/10 rounded-full"></div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<!-- Glass Action Cards -->
-<section class="max-w-7xl mx-auto px-8 grid grid-cols-1 md:grid-cols-2 gap-8">
-<!-- Upload Card -->
-<div class="glass-card p-10 rounded-[2.5rem] group hover:bg-surface-bright/20 transition-all duration-500 cursor-pointer relative overflow-hidden">
-<div class="absolute -right-12 -top-12 w-48 h-48 bg-primary/10 rounded-full blur-3xl group-hover:bg-primary/20 transition-all"></div>
-<div class="mb-8">
-<div class="w-16 h-16 rounded-2xl bg-primary-container/20 flex items-center justify-center text-primary mb-6">
-<span class="material-symbols-outlined text-4xl" data-icon="cloud_upload">cloud_upload</span>
-</div>
-<h3 class="font-headline text-3xl font-bold mb-4">Upload Papers</h3>
-<p class="font-body text-on-surface-variant leading-relaxed mb-8">
-                        Contribute to the collective intelligence. Securely submit past examination papers and educational materials to our verified repository.
-                    </p>
-</div>
-<div class="flex items-center gap-2 text-primary font-label font-bold tracking-tight">
-<span>Get Started</span>
-<span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
-</div>
-</div>
-<!-- Download Card -->
-<div class="glass-card p-10 rounded-[2.5rem] group hover:bg-surface-bright/20 transition-all duration-500 cursor-pointer relative overflow-hidden">
-<div class="absolute -right-12 -top-12 w-48 h-48 bg-secondary/10 rounded-full blur-3xl group-hover:bg-secondary/20 transition-all"></div>
-<div class="mb-8">
-<div class="w-16 h-16 rounded-2xl bg-secondary-container/20 flex items-center justify-center text-secondary mb-6">
-<span class="material-symbols-outlined text-4xl" data-icon="library_books">library_books</span>
-</div>
-<h3 class="font-headline text-3xl font-bold mb-4">Download Papers</h3>
-<p class="font-body text-on-surface-variant leading-relaxed mb-8">
-                        Access thousands of academic papers instantly. Search by subject code, year, or difficulty level with our precision indexing.
-                    </p>
-</div>
-<div class="flex items-center gap-2 text-secondary font-label font-bold tracking-tight">
-<span>Browse Archive</span>
-<span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
-</div>
-</div>
-</section>
-<!-- Bento Grid Repository Highlight -->
-<section class="max-w-7xl mx-auto px-8 mt-32">
-<h2 class="font-headline text-4xl font-bold mb-12 text-center md:text-left">Global Repository Highlights</h2>
-<div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-<!-- Large Item -->
-<div class="md:col-span-2 md:row-span-2 glass-card p-8 rounded-3xl border-white/5 flex flex-col justify-between">
-<div>
-<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary-container/15 mb-6">
-<span class="font-label text-[10px] font-extrabold text-secondary uppercase tracking-[0.2em]">Live Stats</span>
-</div>
-<h4 class="font-headline text-2xl font-bold mb-2">Total Contributions</h4>
-<div class="text-6xl font-extrabold text-glow mb-4">124.8k</div>
-</div>
-<div class="h-32 w-full bg-surface-container rounded-xl overflow-hidden relative">
-<div class="absolute bottom-0 left-0 w-full h-2/3 bg-gradient-to-t from-primary/20 to-transparent"></div>
-<div class="flex items-end justify-between px-4 h-full gap-1">
-<div class="bg-primary/40 w-full rounded-t-sm h-[30%]"></div>
-<div class="bg-primary/40 w-full rounded-t-sm h-[45%]"></div>
-<div class="bg-primary/40 w-full rounded-t-sm h-[35%]"></div>
-<div class="bg-primary/40 w-full rounded-t-sm h-[60%]"></div>
-<div class="bg-primary/40 w-full rounded-t-sm h-[50%]"></div>
-<div class="bg-primary/60 w-full rounded-t-sm h-[80%]"></div>
-<div class="bg-primary/40 w-full rounded-t-sm h-[65%]"></div>
-</div>
-</div>
-</div>
-<!-- Small Items -->
-<div class="glass-card p-6 rounded-3xl border-white/5">
-<span class="material-symbols-outlined text-primary mb-4">school</span>
-<h5 class="font-bold mb-2">Institutional Access</h5>
-<p class="text-xs text-on-surface-variant">450+ Universities connected worldwide.</p>
-</div>
-<div class="glass-card p-6 rounded-3xl border-white/5">
-<span class="material-symbols-outlined text-secondary mb-4">verified</span>
-<h5 class="font-bold mb-2">Quality Assurance</h5>
-<p class="text-xs text-on-surface-variant">Every paper verified by academic experts.</p>
-</div>
-<div class="md:col-span-2 glass-card p-6 rounded-3xl border-white/5 flex items-center justify-between">
-<div class="space-y-1">
-<h5 class="font-bold">Latest Addition</h5>
-<p class="text-sm text-on-surface-variant italic">Quantum Physics II - 2024</p>
-<div class="inline-block mt-2 px-2 py-0.5 rounded bg-secondary-container/20 text-[10px] text-secondary font-label">PHY-204</div>
-</div>
-<button class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-white/10 transition-colors">
-<span class="material-symbols-outlined text-sm">download</span>
-</button>
-</div>
-</div>
-</section>
-</main>
-<!-- Footer -->
-<footer class="w-full border-t border-indigo-800/20 bg-indigo-950/60 backdrop-blur-md">
-<div class="flex flex-col md:flex-row justify-between items-center px-12 py-8 w-full max-w-7xl mx-auto">
-<div class="mb-6 md:mb-0">
-<span class="font-['Plus_Jakarta_Sans'] font-bold text-indigo-200">QP-Repository</span>
-<p class="font-['Inter'] text-xs tracking-wide text-indigo-400 mt-1">© 2024 QP-Repository. The Luminous Archive.</p>
-</div>
-<div class="flex flex-wrap justify-center gap-6">
-<a class="font-['Inter'] text-xs tracking-wide text-indigo-400 hover:text-white transition-colors" href="#">Privacy Policy</a>
-<a class="font-['Inter'] text-xs tracking-wide text-indigo-400 hover:text-white transition-colors underline" href="#">Terms of Service</a>
-<a class="font-['Inter'] text-xs tracking-wide text-indigo-400 hover:text-white transition-colors" href="#">Institutional Access</a>
-<a class="font-['Inter'] text-xs tracking-wide text-indigo-400 hover:text-white transition-colors" href="#">Contact Support</a>
-</div>
-</div>
-</footer>
-</body></html>
+            <h1
+              class="font-headline text-6xl md:text-8xl font-extrabold tracking-tighter leading-[0.9] text-on-surface mb-8"
+            >
+              Welcome to
+              <span
+                class="text-transparent bg-clip-text bg-gradient-to-br from-primary via-secondary to-tertiary"
+                >QP-Repository</span
+              >
+            </h1>
+            <p
+              class="font-body text-xl md:text-2xl text-on-surface-variant max-w-xl leading-relaxed"
+            >
+              The Luminous Archive of Academic Resources. Explore a curated
+              collection of high-quality intellectual assets for modern
+              learning.
+            </p>
+          </div>
+          <!-- Abstract Decorative Element -->
+          <div class="hidden lg:block relative md:w-1/3">
+            <div
+              class="absolute -top-20 -right-20 w-80 h-80 bg-primary/20 rounded-full blur-[100px]"
+            ></div>
+            <div
+              class="absolute top-10 right-10 w-64 h-64 bg-secondary/20 rounded-full blur-[80px]"
+            ></div>
+            <div
+              class="glass-card relative z-10 p-8 rounded-[2rem] border-white/5 overflow-hidden"
+            >
+              <img
+                class="w-full h-64 object-cover rounded-2xl mb-6 opacity-60 mix-blend-lighten"
+                data-alt="Abstract academic books and glowing light"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuA3hKtjyMeHFWA8_WQ9MM0U4kST18-AAgt90pL2eOHiSnJtfnjPiBFT_1Gx9ugdzKCVmtsNbiElzH18jfANw92Hr9XjSUUQ81-grPOTqzK6R-I2jXbXLxrO4-0Ns6p2D7zrwRZQBAYNDw9pWlG-TplopXhUpmjV_13lZpeGk2VYmbdzrvEKSwuUhQRn1nC-5TJ5K-t8wlDxMkQ1w9CVspNFL-Vyl8MFP_1hF1fTEQUSDgCn7mwef85L5MfsckBoLnStPlJlk8K8HyY"
+              />
+              <div class="space-y-4">
+                <div class="h-2 w-1/2 bg-primary/20 rounded-full"></div>
+                <div class="h-2 w-3/4 bg-white/10 rounded-full"></div>
+                <div class="h-2 w-2/3 bg-white/10 rounded-full"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Glass Action Cards -->
+      <section
+        class="max-w-7xl mx-auto px-8 grid grid-cols-1 md:grid-cols-2 gap-8"
+      >
+        <!-- Upload Card -->
+        <div
+          class="glass-card p-10 rounded-[2.5rem] group hover:bg-surface-bright/20 transition-all duration-500 cursor-pointer relative overflow-hidden"
+        >
+          <div
+            class="absolute -right-12 -top-12 w-48 h-48 bg-primary/10 rounded-full blur-3xl group-hover:bg-primary/20 transition-all"
+          ></div>
+          <div class="mb-8">
+            <div
+              class="w-16 h-16 rounded-2xl bg-primary-container/20 flex items-center justify-center text-primary mb-6"
+            >
+              <span
+                class="material-symbols-outlined text-4xl"
+                data-icon="cloud_upload"
+                >cloud_upload</span
+              >
+            </div>
+            <h3 class="font-headline text-3xl font-bold mb-4">Upload Papers</h3>
+            <p class="font-body text-on-surface-variant leading-relaxed mb-8">
+              Contribute to the collective intelligence. Securely submit past
+              examination papers and educational materials to our verified
+              repository.
+            </p>
+          </div>
+          <div
+            class="flex items-center gap-2 text-primary font-label font-bold tracking-tight"
+          >
+            <span>Get Started</span>
+            <span
+              class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform"
+              >arrow_forward</span
+            >
+          </div>
+        </div>
+        <!-- Download Card -->
+        <div
+          class="glass-card p-10 rounded-[2.5rem] group hover:bg-surface-bright/20 transition-all duration-500 cursor-pointer relative overflow-hidden"
+        >
+          <div
+            class="absolute -right-12 -top-12 w-48 h-48 bg-secondary/10 rounded-full blur-3xl group-hover:bg-secondary/20 transition-all"
+          ></div>
+          <div class="mb-8">
+            <div
+              class="w-16 h-16 rounded-2xl bg-secondary-container/20 flex items-center justify-center text-secondary mb-6"
+            >
+              <span
+                class="material-symbols-outlined text-4xl"
+                data-icon="library_books"
+                >library_books</span
+              >
+            </div>
+            <h3 class="font-headline text-3xl font-bold mb-4">
+              Download Papers
+            </h3>
+            <p class="font-body text-on-surface-variant leading-relaxed mb-8">
+              Access thousands of academic papers instantly. Search by subject
+              code, year, or difficulty level with our precision indexing.
+            </p>
+          </div>
+          <div
+            class="flex items-center gap-2 text-secondary font-label font-bold tracking-tight"
+          >
+            <span>Browse Archive</span>
+            <span
+              class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform"
+              >arrow_forward</span
+            >
+          </div>
+        </div>
+      </section>
+      <!-- Bento Grid Repository Highlight -->
+      <section class="max-w-7xl mx-auto px-8 mt-32">
+        <h2
+          class="font-headline text-4xl font-bold mb-12 text-center md:text-left"
+        >
+          Global Repository Highlights
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+          <!-- Large Item -->
+          <div
+            class="md:col-span-2 md:row-span-2 glass-card p-8 rounded-3xl border-white/5 flex flex-col justify-between"
+          >
+            <div>
+              <div
+                class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary-container/15 mb-6"
+              >
+                <span
+                  class="font-label text-[10px] font-extrabold text-secondary uppercase tracking-[0.2em]"
+                  >Live Stats</span
+                >
+              </div>
+              <h4 class="font-headline text-2xl font-bold mb-2">
+                Total Contributions
+              </h4>
+              <div class="text-6xl font-extrabold text-glow mb-4">124.8k</div>
+            </div>
+            <div
+              class="h-32 w-full bg-surface-container rounded-xl overflow-hidden relative"
+            >
+              <div
+                class="absolute bottom-0 left-0 w-full h-2/3 bg-gradient-to-t from-primary/20 to-transparent"
+              ></div>
+              <div class="flex items-end justify-between px-4 h-full gap-1">
+                <div class="bg-primary/40 w-full rounded-t-sm h-[30%]"></div>
+                <div class="bg-primary/40 w-full rounded-t-sm h-[45%]"></div>
+                <div class="bg-primary/40 w-full rounded-t-sm h-[35%]"></div>
+                <div class="bg-primary/40 w-full rounded-t-sm h-[60%]"></div>
+                <div class="bg-primary/40 w-full rounded-t-sm h-[50%]"></div>
+                <div class="bg-primary/60 w-full rounded-t-sm h-[80%]"></div>
+                <div class="bg-primary/40 w-full rounded-t-sm h-[65%]"></div>
+              </div>
+            </div>
+          </div>
+          <!-- Small Items -->
+          <div class="glass-card p-6 rounded-3xl border-white/5">
+            <span class="material-symbols-outlined text-primary mb-4"
+              >school</span
+            >
+            <h5 class="font-bold mb-2">Institutional Access</h5>
+            <p class="text-xs text-on-surface-variant">
+              450+ Universities connected worldwide.
+            </p>
+          </div>
+          <div class="glass-card p-6 rounded-3xl border-white/5">
+            <span class="material-symbols-outlined text-secondary mb-4"
+              >verified</span
+            >
+            <h5 class="font-bold mb-2">Quality Assurance</h5>
+            <p class="text-xs text-on-surface-variant">
+              Every paper verified by academic experts.
+            </p>
+          </div>
+          <div
+            class="md:col-span-2 glass-card p-6 rounded-3xl border-white/5 flex items-center justify-between"
+          >
+            <div class="space-y-1">
+              <h5 class="font-bold">Latest Addition</h5>
+              <p class="text-sm text-on-surface-variant italic">
+                Quantum Physics II - 2024
+              </p>
+              <div
+                class="inline-block mt-2 px-2 py-0.5 rounded bg-secondary-container/20 text-[10px] text-secondary font-label"
+              >
+                AB123465
+              </div>
+            </div>
+            <button
+              class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-white/10 transition-colors"
+            >
+              <span class="material-symbols-outlined text-sm">download</span>
+            </button>
+          </div>
+        </div>
+      </section>
+    </main>
+    <!-- Footer -->
+    <footer
+      class="w-full border-t border-indigo-800/20 bg-indigo-950/60 backdrop-blur-md"
+    >
+      <div
+        class="flex flex-col md:flex-row justify-between items-center px-12 py-8 w-full max-w-7xl mx-auto"
+      >
+        <div class="mb-6 md:mb-0">
+          <span class="font-['Plus_Jakarta_Sans'] font-bold text-indigo-200"
+            >QP-Repository</span
+          >
+          <p class="font-['Inter'] text-xs tracking-wide text-indigo-400 mt-1">
+            © 2024 QP-Repository. The Luminous Archive.
+          </p>
+        </div>
+        <div class="flex flex-wrap justify-center gap-6">
+          <a
+            class="font-['Inter'] text-xs tracking-wide text-indigo-400 hover:text-white transition-colors"
+            href="#"
+            >Privacy Policy</a
+          >
+          <a
+            class="font-['Inter'] text-xs tracking-wide text-indigo-400 hover:text-white transition-colors underline"
+            href="#"
+            >Terms of Service</a
+          >
+          <a
+            class="font-['Inter'] text-xs tracking-wide text-indigo-400 hover:text-white transition-colors"
+            href="#"
+            >Institutional Access</a
+          >
+          <a
+            class="font-['Inter'] text-xs tracking-wide text-indigo-400 hover:text-white transition-colors"
+            href="#"
+            >Contact Support</a
+          >
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

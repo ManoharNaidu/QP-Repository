@@ -1,87 +1,89 @@
-# Backend for Question Paper Upload and Download App
+# Question Paper Backend
 
-Express backend that streams uploaded PDF question papers to Cloudinary and stores metadata in MongoDB.
+Express API for uploading question papers, searching them with backend pagination, and collecting feedback.
 
-## Quick facts
+## Structure
 
-- Language: Node.js (ES modules)
-- Framework: Express
-- Storage: Cloudinary (raw resource for PDFs)
-- Database: MongoDB (Mongoose)
+- `app.js` — Express app setup and middleware registration.
+- `server.js` — environment bootstrap, MongoDB connection, and server startup.
+- `routes/` — API route definitions.
+- `controllers/` — request/response handling.
+- `services/` — upload, search, and feedback business logic.
+- `utils/` — Cloudinary upload helpers and question-paper normalization utilities.
+- `models/` — Mongoose models.
+- `middlewares/` — Arcjet protection, 404 handling, and error handling.
+- `tests/` — lightweight backend tests.
+
+## Scripts
+
+```bash
+npm run dev
+npm start
+npm test
+```
 
 ## Environment variables
 
-Create a `.env` file in the backend folder with the following keys (examples):
-
-- `MONGO_URI` — MongoDB connection string used by `config/mongodb.config.js`.
-- `CLOUDINARY_CLOUD_NAME` — Cloudinary cloud name.
-- `CLOUDINARY_API_KEY` — Cloudinary API key.
-- `CLOUDINARY_API_SECRET` — Cloudinary API secret.
-- `ARCJET_KEY` — Arcjet site key (used by `config/arcject.config.js`) — optional but recommended for protection.
-- `PORT` — Server port (defaults to `5000`).
-
-## Install & run
-
 ```bash
-cd question-paper-backend
-npm install
-# development (requires nodemon)
-npm run dev
-# production
-npm start
+MONGO_URI=your_mongodb_connection_string
+CLOUDINARY_CLOUD_NAME=your_cloud_name
+CLOUDINARY_API_KEY=your_api_key
+CLOUDINARY_API_SECRET=your_api_secret
+ARCJET_KEY=your_arcjet_key
+PORT=5000
 ```
-
-## Main files
-
-- `server.js` — Express app and routes (`/api/upload`, `/api/download`, `/api/feedback`).
-- `models/QuestionPaper.js` — Mongoose schema for question papers (includes `module` and `courseCode` validation).
-- `models/Feedback.js` — Simple feedback model.
-- `config/mongodb.config.js` — MongoDB connection (reads `MONGO_URI`).
-- `config/arcject.config.js` — Arcjet configuration (reads `ARCJET_KEY`).
 
 ## API
 
-### POST /api/upload
+### `POST /api/upload`
 
-- Content-Type: `multipart/form-data`
-- Required form fields:
-  - `file` — PDF file to upload
-  - `branch` — department/branch string
-  - `module` — one of `Base`, `Bachelor`, `Master`
-  - `academicYear` — e.g. `1st`, `2nd`, etc.
-  - `year` — numeric or label for the academic year
-  - `cycle` — exam cycle (e.g. `Midterm`, `Final`)
-  - `semester` — semester label
-  - `courseCode` — must match exactly 2 letters followed by 5 digits (example: `CS12345`)
+Multipart upload endpoint for PDFs plus metadata:
 
-Server behavior:
+- `file`
+- `module`
+- `branch`
+- `academicYear`
+- `year`
+- `cycle`
+- `semester`
+- `courseCode`
 
-- Validates `module` against `['Base','Bachelor','Master']`.
-- Validates `courseCode` with `/^[A-Z]{2}\d{5}$/` on the server (model uses case-insensitive match as well).
-- Streams file buffer to Cloudinary with `resource_type: 'raw'` and a stable `public_id` composed of the provided fields; overwrites existing object with same id.
-- Upserts the metadata in MongoDB (so re-uploads replace previous entry with same keys).
+Behavior:
 
-### GET /api/download
+- Validates module and course code.
+- Normalizes branch aliases (`EEE` is treated as `EE`).
+- Uploads the PDF to Cloudinary.
+- Upserts metadata in MongoDB.
 
-- Query parameters: `branch`, `module`, `academicYear`, `year`, `semester`, `cycle`, `courseCode` (all optional). Returns matching papers in JSON.
+### `GET /api/download`
 
-### POST /api/feedback
+Supports these optional query params:
 
-- Body: `{ content: string }` — stores simple feedback documents.
+- `module`
+- `branch`
+- `academicYear`
+- `year`
+- `semester`
+- `cycle`
+- `courseCode`
+- `page`
+- `pageSize`
 
-## Validation notes
+Returns:
 
-- `module` is an enum: `Base`, `Bachelor`, `Master`.
-- `courseCode` must be 2 letters + 5 digits (no spaces). The server validates uppercase; frontend should normalize user input to uppercase to ensure consistent behavior.
+- `papers`
+- `pagination`
+- `filters`
 
-## Development tips
+### `POST /api/feedback`
 
-- Move `nodemon` to `devDependencies` if you prefer it not be included in production installs (currently listed under `dependencies`).
-- Use `npx depcheck` to surface potentially unused packages; double-check results before removing.
+Accepts:
 
-## Troubleshooting
-
-- If uploads fail, check Cloudinary credentials and network connectivity.
-- If MongoDB connection fails, verify `MONGO_URI` and that your MongoDB instance is reachable.
-
-If you want, I can help run the local verification steps and prepare a small checklist to test uploads/downloads end-to-end.
+```json
+{
+  "content": "Feedback message",
+  "name": "Optional name",
+  "email": "Optional email",
+  "category": "Optional category"
+}
+```

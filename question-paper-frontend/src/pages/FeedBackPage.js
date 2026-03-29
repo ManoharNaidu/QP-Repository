@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
+import { api } from "../lib/api";
 
 const FeedbackPage = () => {
   const [feedback, setFeedback] = useState("");
@@ -24,16 +24,13 @@ const FeedbackPage = () => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Combine fields into content for the existing API
-    const fullContent = `Name: ${name || 'Anonymous'}\nEmail: ${email || 'N/A'}\nCategory: ${category}\n\nMessage:\n${feedback}`;
-
     try {
-      const response = await axios.post(
-        "https://qp-repository-8vor.onrender.com/api/feedback",
-        {
-          content: fullContent,
-        }
-      );
+      const response = await api.post("/api/feedback", {
+        content: feedback,
+        name,
+        email,
+        category,
+      });
 
       setMessage(response.data.message || "Feedback submitted successfully!");
       setFeedback("");

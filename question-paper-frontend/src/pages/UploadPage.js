@@ -1,7 +1,21 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
 import { motion, AnimatePresence } from "framer-motion";
+import { api } from "../lib/api";
+import {
+  BRANCH_OPTIONS,
+  CYCLE_OPTIONS,
+  MODULE_OPTIONS,
+  SEMESTER_OPTIONS,
+} from "../constants/questionPaper";
+
+const BASE_ACADEMIC_OPTIONS = ["1st Year", "2nd Year"];
+const BACHELOR_ACADEMIC_OPTIONS = [
+  "1st Year",
+  "2nd Year",
+  "3rd Year",
+  "4th Year",
+];
 
 const UploadPage = () => {
   const [module, setModule] = useState("");
@@ -27,15 +41,13 @@ const UploadPage = () => {
   );
 
   const academicOptions =
-    module === "Bachelor"
-      ? ["1st Year", "2nd Year", "3rd Year", "4th Year"]
-      : ["1st Year", "2nd Year"];
+    module === "Bachelor" ? BACHELOR_ACADEMIC_OPTIONS : BASE_ACADEMIC_OPTIONS;
 
   useEffect(() => {
     if (academicYear && !academicOptions.includes(academicYear)) {
       setAcademicYear("");
     }
-  }, [module]);
+  }, [academicOptions, academicYear]);
 
   const handleUpload = async (e) => {
     e.preventDefault();
@@ -65,10 +77,7 @@ const UploadPage = () => {
     try {
       setIsUploading(true);
       setMessage("Uploading file...");
-      const response = await axios.post(
-        "https://qp-repository-8vor.onrender.com/api/upload",
-        formData
-      );
+      const response = await api.post("/api/upload", formData);
       setMessage(response.data.message || "Upload successful!");
 
       setModule("");
@@ -129,14 +138,7 @@ const UploadPage = () => {
       setFile(null);
       return;
     }
-    
-    // Check file size (10MB max)
-    if (selectedFile.size > 10 * 1024 * 1024) {
-      setMessage("File size exceeds 10MB limit.");
-      setFile(null);
-      return;
-    }
-    
+
     setFile(selectedFile);
   };
   
@@ -183,16 +185,16 @@ const UploadPage = () => {
             className="fixed top-24 left-1/2 -translate-x-1/2 z-[100] w-auto max-w-md"
           >
             <div className={`glass-card px-6 py-4 rounded-xl shadow-2xl flex items-center gap-4 border ${
-              message.includes("failed") || message.includes("Invalid") || message.includes("exceeds") || message.includes("Only PDF") || message.includes("Please select")
+              message.includes("failed") || message.includes("Invalid") || message.includes("Only PDF") || message.includes("Please select")
                 ? "border-error/30 bg-error/10" 
                 : "border-[#00ffaa]/30 bg-[#00ffaa]/10"
             }`}>
               <span className={`material-symbols-outlined ${
-                message.includes("failed") || message.includes("Invalid") || message.includes("exceeds") || message.includes("Only PDF") || message.includes("Please select")
+                message.includes("failed") || message.includes("Invalid") || message.includes("Only PDF") || message.includes("Please select")
                   ? "text-error" 
                   : "text-[#00ffaa]"
               }`}>
-                {message.includes("failed") || message.includes("Invalid") || message.includes("exceeds") || message.includes("Only PDF") || message.includes("Please select") 
+                {message.includes("failed") || message.includes("Invalid") || message.includes("Only PDF") || message.includes("Please select") 
                   ? "error" 
                   : message.includes("Uploading") ? "cloud_upload" : "check_circle"}
               </span>
@@ -261,9 +263,11 @@ const UploadPage = () => {
                   className="w-full bg-white/5 border-0 border-b-2 border-white/10 focus:border-primary focus:bg-white/10 focus:ring-0 text-white py-3 px-3 transition-all appearance-none outline-none cursor-pointer rounded-t"
                 >
                   <option value="" disabled className="bg-[#0f1930]">Select Module</option>
-                  <option value="Base" className="bg-[#0f1930]">Base</option>
-                  <option value="Bachelor" className="bg-[#0f1930]">Bachelor</option>
-                  <option value="Master" className="bg-[#0f1930]">Master</option>
+                  {MODULE_OPTIONS.map((option) => (
+                    <option key={option} value={option} className="bg-[#0f1930]">
+                      {option}
+                    </option>
+                  ))}
                 </select>
               </div>
 
@@ -277,12 +281,11 @@ const UploadPage = () => {
                   className="w-full bg-white/5 border-0 border-b-2 border-white/10 focus:border-primary focus:bg-white/10 focus:ring-0 text-white py-3 px-3 transition-all appearance-none outline-none cursor-pointer rounded-t"
                 >
                   <option value="" disabled className="bg-[#0f1930]">Select Discipline</option>
-                  <option value="AE" className="bg-[#0f1930]">Agriculture Eng. (AE)</option>
-                  <option value="CE" className="bg-[#0f1930]">Civil Eng. (CE)</option>
-                  <option value="CSE" className="bg-[#0f1930]">Computer Science (CSE)</option>
-                  <option value="EE" className="bg-[#0f1930]">Electrical Eng. (EE)</option>
-                  <option value="ECE" className="bg-[#0f1930]">Electronics & Comm. (ECE)</option>
-                  <option value="ME" className="bg-[#0f1930]">Mechanical Eng. (ME)</option>
+                  {BRANCH_OPTIONS.map((option) => (
+                    <option key={option.value} value={option.value} className="bg-[#0f1930]">
+                      {option.label}
+                    </option>
+                  ))}
                 </select>
               </div>
 
@@ -328,8 +331,11 @@ const UploadPage = () => {
                   className="w-full bg-white/5 border-0 border-b-2 border-white/10 focus:border-primary focus:bg-white/10 focus:ring-0 text-white py-3 px-3 transition-all appearance-none outline-none cursor-pointer rounded-t"
                 >
                   <option value="" disabled className="bg-[#0f1930]">Select Cycle</option>
-                  <option value="Jan-Jun" className="bg-[#0f1930]">Jan-Jun (Even)</option>
-                  <option value="Jul-Dec" className="bg-[#0f1930]">Jul-Dec (Odd)</option>
+                  {CYCLE_OPTIONS.map((option) => (
+                    <option key={option} value={option} className="bg-[#0f1930]">
+                      {option} {option === "Jan-Jun" ? "(Even)" : "(Odd)"}
+                    </option>
+                  ))}
                 </select>
               </div>
 
@@ -343,8 +349,11 @@ const UploadPage = () => {
                   className="w-full bg-white/5 border-0 border-b-2 border-white/10 focus:border-primary focus:bg-white/10 focus:ring-0 text-white py-3 px-3 transition-all appearance-none outline-none cursor-pointer rounded-t"
                 >
                   <option value="" disabled className="bg-[#0f1930]">Select Term Phase</option>
-                  <option value="Mid" className="bg-[#0f1930]">Mid Semester</option>
-                  <option value="End" className="bg-[#0f1930]">End Semester</option>
+                  {SEMESTER_OPTIONS.map((option) => (
+                    <option key={option} value={option} className="bg-[#0f1930]">
+                      {option} Semester
+                    </option>
+                  ))}
                 </select>
               </div>
 
@@ -421,7 +430,6 @@ const UploadPage = () => {
                       <p className="text-slate-400 text-sm font-body">or click to browse local storage</p>
                       
                       <div className="mt-6 flex gap-3">
-                        <span className="px-4 py-1.5 bg-secondary/10 border border-secondary/20 text-secondary text-[10px] font-label font-bold uppercase tracking-widest rounded-full">Max 10MB</span>
                         <span className="px-4 py-1.5 bg-primary/10 border border-primary/20 text-primary text-[10px] font-label font-bold uppercase tracking-widest rounded-full">Secure Hash</span>
                       </div>
                     </motion.div>
