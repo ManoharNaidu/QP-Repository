@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Scholarly - Your Feedback Matters</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-dim": "#9f9da1",
+                    "surface-variant": "#252626",
+                    "on-secondary-container": "#c1bec3",
+                    "on-error": "#490013",
+                    "background": "#0e0e0e",
+                    "surface-container-highest": "#252626",
+                    "outline-variant": "#484848",
+                    "on-secondary": "#202023",
+                    "on-tertiary": "#4d546e",
+                    "surface-container-high": "#1f2020",
+                    "primary-container": "#3323cc",
+                    "secondary-fixed-dim": "#d7d3d8",
+                    "tertiary-container": "#d2d9f8",
+                    "on-background": "#e7e5e5",
+                    "outline": "#767575",
+                    "primary": "#c3c0ff",
+                    "tertiary": "#e3e7ff",
+                    "surface-tint": "#c3c0ff",
+                    "on-secondary-fixed-variant": "#5c5b5f",
+                    "surface-container-low": "#131313",
+                    "secondary-fixed": "#e5e1e6",
+                    "surface-bright": "#2b2c2c",
+                    "on-primary-fixed": "#2a13c5",
+                    "secondary-container": "#3c3b3f",
+                    "surface-container-lowest": "#000000",
+                    "inverse-on-surface": "#565555",
+                    "tertiary-dim": "#c4cbe9",
+                    "on-primary-container": "#cecbff",
+                    "tertiary-fixed": "#d2d9f8",
+                    "on-tertiary-container": "#444c65",
+                    "primary-fixed-dim": "#d2d0ff",
+                    "on-surface": "#e7e5e5",
+                    "on-error-container": "#ff97a3",
+                    "primary-dim": "#b3b1ff",
+                    "error-dim": "#b95463",
+                    "on-secondary-fixed": "#403f43",
+                    "surface": "#0e0e0e",
+                    "on-primary-fixed-variant": "#4a40e0",
+                    "inverse-primary": "#4e45e4",
+                    "primary-fixed": "#e2dfff",
+                    "surface-dim": "#0e0e0e",
+                    "error": "#ec7c8a",
+                    "on-tertiary-fixed": "#323951",
+                    "on-primary": "#2b15c6",
+                    "tertiary-fixed-dim": "#c4cbe9",
+                    "on-tertiary-fixed-variant": "#4e556f",
+                    "error-container": "#7f2737",
+                    "secondary": "#9f9da1",
+                    "inverse-surface": "#fcf9f8",
+                    "on-surface-variant": "#acabaa",
+                    "surface-container": "#191a1a"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Inter"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0e0e0e;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #252626;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #484848;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body selection:bg-primary-container selection:text-on-primary-container min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-[#0E0E0E] flex items-center justify-between px-8 py-4 max-w-full font-['Inter'] antialiased tracking-tight">
+<div class="flex items-center gap-12">
+<a class="text-xl font-semibold tracking-tighter text-[#4F46E5]" href="#">Scholarly</a>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-gray-400 font-normal hover:text-gray-200 transition-colors" href="#">Home</a>
+<a class="text-gray-400 font-normal hover:text-gray-200 transition-colors" href="#">Browse</a>
+<a class="text-gray-400 font-normal hover:text-gray-200 transition-colors" href="#">Upload</a>
+<a class="text-[#4F46E5] font-medium border-b-2 border-[#4F46E5] pb-1" href="#">Feedback</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-gray-400 hover:bg-[#1A1A1A] transition-all duration-200 scale-95 active:scale-100 transition-transform">
+<span class="material-symbols-outlined" data-icon="dark_mode">dark_mode</span>
+</button>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="pt-32 pb-24 px-6 md:px-12 flex-grow max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-12">
+<!-- Header Section -->
+<div class="lg:col-span-5 flex flex-col justify-start">
+<span class="text-primary tracking-widest font-semibold text-xs uppercase mb-4">Community Voices</span>
+<h1 class="text-5xl md:text-7xl font-bold tracking-tighter text-on-surface leading-tight mb-8">
+                Your Feedback <br/><span class="text-on-surface-variant">Matters</span>
+</h1>
+<p class="text-on-surface-variant text-lg leading-relaxed max-w-md">
+                Help us refine the digital archive. Whether it's a bug report or a suggestion for a new feature, your input shapes the future of academic research.
+            </p>
+<div class="mt-12 space-y-6">
+<div class="flex items-start gap-4">
+<div class="mt-1 w-10 h-10 rounded bg-surface-container-high flex items-center justify-center border border-outline-variant/30">
+<span class="material-symbols-outlined text-primary scale-75" data-icon="lightbulb">lightbulb</span>
+</div>
+<div>
+<h4 class="font-medium text-on-surface">Feature Suggestions</h4>
+<p class="text-sm text-on-surface-variant">Tell us what tools you need for better studying.</p>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<div class="mt-1 w-10 h-10 rounded bg-surface-container-high flex items-center justify-center border border-outline-variant/30">
+<span class="material-symbols-outlined text-primary scale-75" data-icon="bug_report">bug_report</span>
+</div>
+<div>
+<h4 class="font-medium text-on-surface">Bug Reporting</h4>
+<p class="text-sm text-on-surface-variant">Found a broken link or a typo? Let us know immediately.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Form Section -->
+<div class="lg:col-span-7">
+<div class="bg-surface-container-low p-8 md:p-12 border border-outline-variant/30 rounded-lg">
+<form action="#" class="space-y-8" method="POST">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<!-- Name Input -->
+<div class="flex flex-col gap-2">
+<label class="text-xs font-semibold tracking-wide text-on-surface-variant uppercase" for="name">Name (Optional)</label>
+<input class="bg-transparent border border-outline-variant/30 text-on-surface px-4 py-3 focus:outline-none focus:border-primary focus:ring-0 transition-all placeholder:text-outline" id="name" name="name" placeholder="John Doe" type="text"/>
+</div>
+<!-- Email Input -->
+<div class="flex flex-col gap-2">
+<label class="text-xs font-semibold tracking-wide text-on-surface-variant uppercase" for="email">Email (Optional)</label>
+<input class="bg-transparent border border-outline-variant/30 text-on-surface px-4 py-3 focus:outline-none focus:border-primary focus:ring-0 transition-all placeholder:text-outline" id="email" name="email" placeholder="john@example.com" type="email"/>
+</div>
+</div>
+<!-- Category Select -->
+<div class="flex flex-col gap-2">
+<label class="text-xs font-semibold tracking-wide text-on-surface-variant uppercase" for="category">Category</label>
+<div class="relative">
+<select class="w-full bg-transparent border border-outline-variant/30 text-on-surface px-4 py-3 focus:outline-none focus:border-primary focus:ring-0 transition-all appearance-none" id="category" name="category">
+<option class="bg-surface-container" value="suggestion">Suggestion</option>
+<option class="bg-surface-container" value="bug">Bug</option>
+<option class="bg-surface-container" value="other">Other</option>
+</select>
+<div class="absolute inset-y-0 right-0 flex items-center pr-4 pointer-events-none">
+<span class="material-symbols-outlined text-outline-variant" data-icon="expand_more">expand_more</span>
+</div>
+</div>
+</div>
+<!-- Message Textarea -->
+<div class="flex flex-col gap-2">
+<label class="text-xs font-semibold tracking-wide text-on-surface-variant uppercase" for="message">Your Message</label>
+<textarea class="bg-transparent border border-outline-variant/30 text-on-surface px-4 py-3 focus:outline-none focus:border-primary focus:ring-0 transition-all placeholder:text-outline resize-none" id="message" name="message" placeholder="Describe your experience or share your ideas..." rows="6"></textarea>
+</div>
+<!-- Submit Button -->
+<div class="pt-4 flex justify-end">
+<button class="group relative inline-flex items-center gap-3 bg-gradient-to-b from-inverse-primary to-primary-container text-on-primary font-semibold px-10 py-4 rounded-lg shadow-xl hover:translate-y-[-2px] transition-all active:translate-y-[0px]" type="submit">
+<span>Submit Feedback</span>
+<span class="material-symbols-outlined group-hover:translate-x-1 transition-transform" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</form>
+</div>
+<!-- Subtle Social Proof / Info -->
+<div class="mt-8 flex flex-wrap gap-12 justify-center lg:justify-start opacity-40">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="security">security</span>
+<span class="text-xs uppercase tracking-widest font-medium">Encrypted Protocol</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="history">history</span>
+<span class="text-xs uppercase tracking-widest font-medium">Response in 48h</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="verified_user">verified_user</span>
+<span class="text-xs uppercase tracking-widest font-medium">Institutional Authority</span>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full py-12 mt-auto border-t border-[#1A1A1A] bg-[#0E0E0E]">
+<div class="flex flex-col md:flex-row justify-between items-center px-12 max-w-7xl mx-auto">
+<div class="text-sm font-['Inter'] text-gray-500 mb-6 md:mb-0">
+                © 2024 Scholarly Repository. Institutional Authority.
+            </div>
+<div class="flex gap-8">
+<a class="text-sm font-['Inter'] text-gray-500 hover:text-gray-300 hover:underline transition-all" href="#">Terms</a>
+<a class="text-sm font-['Inter'] text-gray-500 hover:text-gray-300 hover:underline transition-all" href="#">Privacy</a>
+<a class="text-sm font-['Inter'] text-gray-500 hover:text-gray-300 hover:underline transition-all" href="#">Archive Rules</a>
+</div>
+</div>
+</footer>
+</body></html>

@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Scholarly | Search Repository</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-dim": "#9f9da1",
+                    "surface-variant": "#252626",
+                    "on-secondary-container": "#c1bec3",
+                    "on-error": "#490013",
+                    "background": "#0e0e0e",
+                    "surface-container-highest": "#252626",
+                    "outline-variant": "#484848",
+                    "on-secondary": "#202023",
+                    "on-tertiary": "#4d546e",
+                    "surface-container-high": "#1f2020",
+                    "primary-container": "#3323cc",
+                    "secondary-fixed-dim": "#d7d3d8",
+                    "tertiary-container": "#d2d9f8",
+                    "on-background": "#e7e5e5",
+                    "outline": "#767575",
+                    "primary": "#c3c0ff",
+                    "tertiary": "#e3e7ff",
+                    "surface-tint": "#c3c0ff",
+                    "on-secondary-fixed-variant": "#5c5b5f",
+                    "surface-container-low": "#131313",
+                    "secondary-fixed": "#e5e1e6",
+                    "surface-bright": "#2b2c2c",
+                    "on-primary-fixed": "#2a13c5",
+                    "secondary-container": "#3c3b3f",
+                    "surface-container-lowest": "#000000",
+                    "inverse-on-surface": "#565555",
+                    "tertiary-dim": "#c4cbe9",
+                    "on-primary-container": "#cecbff",
+                    "tertiary-fixed": "#d2d9f8",
+                    "on-tertiary-container": "#444c65",
+                    "primary-fixed-dim": "#d2d0ff",
+                    "on-surface": "#e7e5e5",
+                    "on-error-container": "#ff97a3",
+                    "primary-dim": "#b3b1ff",
+                    "error-dim": "#b95463",
+                    "on-secondary-fixed": "#403f43",
+                    "surface": "#0e0e0e",
+                    "on-primary-fixed-variant": "#4a40e0",
+                    "inverse-primary": "#4e45e4",
+                    "primary-fixed": "#e2dfff",
+                    "surface-dim": "#0e0e0e",
+                    "error": "#ec7c8a",
+                    "on-tertiary-fixed": "#323951",
+                    "on-primary": "#2b15c6",
+                    "tertiary-fixed-dim": "#c4cbe9",
+                    "on-tertiary-fixed-variant": "#4e556f",
+                    "error-container": "#7f2737",
+                    "secondary": "#9f9da1",
+                    "inverse-surface": "#fcf9f8",
+                    "on-surface-variant": "#acabaa",
+                    "surface-container": "#191a1a"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Inter"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23767575'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 0.75rem center;
+            background-size: 1rem;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface flex flex-col min-h-screen antialiased">
+<!-- TopNavBar Component -->
+<nav class="fixed top-0 w-full z-50 bg-[#0E0E0E] flex items-center justify-between px-8 py-4 max-w-full font-['Inter'] antialiased tracking-tight">
+<div class="flex items-center gap-12">
+<span class="text-xl font-semibold tracking-tighter text-[#4F46E5]">Scholarly</span>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-gray-400 font-normal hover:text-gray-200 transition-colors" href="#">Home</a>
+<a class="text-[#4F46E5] font-medium border-b-2 border-[#4F46E5] pb-1" href="#">Browse</a>
+<a class="text-gray-400 font-normal hover:text-gray-200 transition-colors" href="#">Upload</a>
+<a class="text-gray-400 font-normal hover:text-gray-200 transition-colors" href="#">Feedback</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 rounded-lg hover:bg-[#1A1A1A] transition-all duration-200 scale-95 active:scale-100 text-gray-400">
+<span class="material-symbols-outlined">dark_mode</span>
+</button>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="flex-grow pt-24 pb-12 px-8 max-w-7xl mx-auto w-full">
+<!-- Header Section -->
+<header class="mb-12">
+<h1 class="text-4xl font-bold tracking-tight text-on-surface mb-2">Browse &amp; Search Repository</h1>
+<p class="text-on-surface-variant max-w-2xl leading-relaxed">Access the institutional archive of examination papers. Filter by academic module, branch, and period to find specific materials.</p>
+</header>
+<!-- Search and Filter Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-4 gap-8 items-start">
+<!-- Filters Sidebar -->
+<aside class="lg:col-span-1 space-y-8 bg-surface-container-low p-6 rounded-lg border border-outline-variant/30">
+<div class="space-y-6">
+<div>
+<label class="block text-xs font-semibold uppercase tracking-wider text-on-surface-variant mb-3">Module</label>
+<select class="w-full bg-surface border border-outline-variant/30 text-on-surface px-4 py-2.5 rounded text-sm focus:border-primary focus:ring-0 transition-colors">
+<option>Base</option>
+<option>Bachelor</option>
+<option>Master</option>
+</select>
+</div>
+<div>
+<label class="block text-xs font-semibold uppercase tracking-wider text-on-surface-variant mb-3">Branch</label>
+<select class="w-full bg-surface border border-outline-variant/30 text-on-surface px-4 py-2.5 rounded text-sm focus:border-primary focus:ring-0 transition-colors">
+<option>CSE - Computer Science</option>
+<option>AE - Aerospace</option>
+<option>CE - Civil Engineering</option>
+<option>ME - Mechanical</option>
+<option>EE - Electrical</option>
+</select>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div>
+<label class="block text-xs font-semibold uppercase tracking-wider text-on-surface-variant mb-3">Semester</label>
+<select class="w-full bg-surface border border-outline-variant/30 text-on-surface px-4 py-2.5 rounded text-sm focus:border-primary focus:ring-0 transition-colors">
+<option>Mid</option>
+<option>End</option>
+</select>
+</div>
+<div>
+<label class="block text-xs font-semibold uppercase tracking-wider text-on-surface-variant mb-3">Cycle</label>
+<select class="w-full bg-surface border border-outline-variant/30 text-on-surface px-4 py-2.5 rounded text-sm focus:border-primary focus:ring-0 transition-colors">
+<option>Jan-Jun</option>
+<option>Jul-Dec</option>
+</select>
+</div>
+</div>
+<div>
+<label class="block text-xs font-semibold uppercase tracking-wider text-on-surface-variant mb-3">Academic Year</label>
+<select class="w-full bg-surface border border-outline-variant/30 text-on-surface px-4 py-2.5 rounded text-sm focus:border-primary focus:ring-0 transition-colors">
+<option>2024</option>
+<option>2023</option>
+<option>2022</option>
+<option>2021</option>
+</select>
+</div>
+</div>
+<button class="w-full py-3 bg-primary-container text-on-primary-container font-medium rounded hover:bg-opacity-90 transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm">filter_alt</span>
+                    Apply Filters
+                </button>
+</aside>
+<!-- Results Section -->
+<section class="lg:col-span-3 space-y-6">
+<!-- Search Bar -->
+<div class="relative group">
+<div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-on-surface-variant">search</span>
+</div>
+<input class="w-full bg-surface-container-high border border-outline-variant/30 text-on-surface pl-12 pr-4 py-4 rounded-lg focus:border-primary focus:ring-0 transition-all placeholder:text-outline" placeholder="Search by course code (e.g. CS101)..." type="text"/>
+</div>
+<!-- Papers List Table-style -->
+<div class="overflow-hidden bg-surface-container-low rounded-lg border border-outline-variant/30">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-high border-b border-outline-variant/30">
+<th class="px-6 py-4 text-xs font-semibold uppercase tracking-wider text-on-surface-variant">Course Code</th>
+<th class="px-6 py-4 text-xs font-semibold uppercase tracking-wider text-on-surface-variant">Year</th>
+<th class="px-6 py-4 text-xs font-semibold uppercase tracking-wider text-on-surface-variant">Cycle</th>
+<th class="px-6 py-4 text-xs font-semibold uppercase tracking-wider text-on-surface-variant">Semester</th>
+<th class="px-6 py-4 text-right text-xs font-semibold uppercase tracking-wider text-on-surface-variant">Action</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/10">
+<!-- Paper Row 1 -->
+<tr class="hover:bg-surface-bright transition-colors group">
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="w-8 h-10 bg-surface-container-highest flex items-center justify-center rounded border border-outline-variant/20">
+<span class="material-symbols-outlined text-sm text-primary">description</span>
+</div>
+<span class="font-medium text-on-surface">CS302 - Algorithms</span>
+</div>
+</td>
+<td class="px-6 py-5 text-on-surface-variant font-mono text-sm">2023</td>
+<td class="px-6 py-5 text-on-surface-variant text-sm">Jan-Jun</td>
+<td class="px-6 py-5 text-on-surface-variant text-sm">End</td>
+<td class="px-6 py-5 text-right">
+<button class="inline-flex items-center gap-2 px-4 py-2 border border-primary text-primary text-xs font-medium rounded hover:bg-primary hover:text-on-primary transition-all">
+<span class="material-symbols-outlined text-sm">download</span>
+                                        Download
+                                    </button>
+</td>
+</tr>
+<!-- Paper Row 2 -->
+<tr class="hover:bg-surface-bright transition-colors group">
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="w-8 h-10 bg-surface-container-highest flex items-center justify-center rounded border border-outline-variant/20">
+<span class="material-symbols-outlined text-sm text-primary">description</span>
+</div>
+<span class="font-medium text-on-surface">AE415 - Aerodynamics</span>
+</div>
+</td>
+<td class="px-6 py-5 text-on-surface-variant font-mono text-sm">2023</td>
+<td class="px-6 py-5 text-on-surface-variant text-sm">Jul-Dec</td>
+<td class="px-6 py-5 text-on-surface-variant text-sm">Mid</td>
+<td class="px-6 py-5 text-right">
+<button class="inline-flex items-center gap-2 px-4 py-2 border border-primary text-primary text-xs font-medium rounded hover:bg-primary hover:text-on-primary transition-all">
+<span class="material-symbols-outlined text-sm">download</span>
+                                        Download
+                                    </button>
+</td>
+</tr>
+<!-- Paper Row 3 -->
+<tr class="hover:bg-surface-bright transition-colors group">
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="w-8 h-10 bg-surface-container-highest flex items-center justify-center rounded border border-outline-variant/20">
+<span class="material-symbols-outlined text-sm text-primary">description</span>
+</div>
+<span class="font-medium text-on-surface">CSE201 - Data Structs</span>
+</div>
+</td>
+<td class="px-6 py-5 text-on-surface-variant font-mono text-sm">2022</td>
+<td class="px-6 py-5 text-on-surface-variant text-sm">Jan-Jun</td>
+<td class="px-6 py-5 text-on-surface-variant text-sm">End</td>
+<td class="px-6 py-5 text-right">
+<button class="inline-flex items-center gap-2 px-4 py-2 border border-primary text-primary text-xs font-medium rounded hover:bg-primary hover:text-on-primary transition-all">
+<span class="material-symbols-outlined text-sm">download</span>
+                                        Download
+                                    </button>
+</td>
+</tr>
+<!-- Paper Row 4 -->
+<tr class="hover:bg-surface-bright transition-colors group">
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="w-8 h-10 bg-surface-container-highest flex items-center justify-center rounded border border-outline-variant/20">
+<span class="material-symbols-outlined text-sm text-primary">description</span>
+</div>
+<span class="font-medium text-on-surface">MA102 - Calculus II</span>
+</div>
+</td>
+<td class="px-6 py-5 text-on-surface-variant font-mono text-sm">2022</td>
+<td class="px-6 py-5 text-on-surface-variant text-sm">Jul-Dec</td>
+<td class="px-6 py-5 text-on-surface-variant text-sm">End</td>
+<td class="px-6 py-5 text-right">
+<button class="inline-flex items-center gap-2 px-4 py-2 border border-primary text-primary text-xs font-medium rounded hover:bg-primary hover:text-on-primary transition-all">
+<span class="material-symbols-outlined text-sm">download</span>
+                                        Download
+                                    </button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination -->
+<nav class="flex items-center justify-between border-t border-outline-variant/20 pt-8">
+<button class="inline-flex items-center gap-2 px-5 py-2.5 border border-outline-variant text-on-surface text-sm font-medium rounded hover:bg-surface-container-high transition-colors disabled:opacity-50">
+<span class="material-symbols-outlined text-sm">arrow_back</span>
+                        Previous
+                    </button>
+<div class="flex items-center gap-2">
+<span class="w-8 h-8 flex items-center justify-center rounded bg-primary text-on-primary text-sm font-medium">1</span>
+<span class="w-8 h-8 flex items-center justify-center rounded text-on-surface-variant text-sm hover:bg-surface-container-high cursor-pointer">2</span>
+<span class="w-8 h-8 flex items-center justify-center rounded text-on-surface-variant text-sm hover:bg-surface-container-high cursor-pointer">3</span>
+</div>
+<button class="inline-flex items-center gap-2 px-5 py-2.5 border border-outline-variant text-on-surface text-sm font-medium rounded hover:bg-surface-container-high transition-colors">
+                        Next
+                        <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</nav>
+</section>
+</div>
+</main>
+<!-- Footer Component -->
+<footer class="w-full py-12 mt-auto border-t border-[#1A1A1A] bg-[#0E0E0E]">
+<div class="flex flex-col md:flex-row justify-between items-center px-12 max-w-7xl mx-auto gap-6 md:gap-0">
+<span class="text-sm font-['Inter'] text-gray-500">© 2024 Scholarly Repository. Institutional Authority.</span>
+<div class="flex items-center gap-8">
+<a class="text-sm font-['Inter'] text-gray-500 hover:text-gray-300 hover:underline transition-all" href="#">Terms</a>
+<a class="text-sm font-['Inter'] text-gray-500 hover:text-gray-300 hover:underline transition-all" href="#">Privacy</a>
+<a class="text-sm font-['Inter'] text-gray-500 hover:text-gray-300 hover:underline transition-all" href="#">Archive Rules</a>
+</div>
+</div>
+</footer>
+</body></html>

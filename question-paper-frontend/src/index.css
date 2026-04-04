@@ -4,29 +4,113 @@
 
 /* ── CSS Variables ─────────────────────────────────── */
 :root {
-  /* Dark mode defaults */
-  --bg-base:        #060e20;
-  --bg-surface:     rgba(15, 25, 48, 0.4);
-  --bg-nav:         rgba(6, 14, 32, 0.85);
-  --text-primary:   #dee5ff;
-  --text-muted:     #a3aac4;
-  --border-subtle:  rgba(109, 117, 140, 0.2);
-  --glow-primary:   rgba(163, 166, 255, 0.4);
-  --card-bg:        rgba(15, 25, 48, 0.4);
-  --input-bg:       rgba(255, 255, 255, 0.05);
+  /* The QP Repository Minimalist - Dark Mode (Default) */
+  --background: #0e0e0e;
+  --error: #ec7c8a;
+  --error-container: #7f2737;
+  --error-dim: #b95463;
+  --inverse-on-surface: #565555;
+  --inverse-primary: #4e45e4;
+  --inverse-surface: #fcf9f8;
+  --on-background: #e7e5e5;
+  --on-error: #490013;
+  --on-error-container: #ff97a3;
+  --on-primary: #2b15c6;
+  --on-primary-container: #cecbff;
+  --on-primary-fixed: #2a13c5;
+  --on-primary-fixed-variant: #4a40e0;
+  --on-secondary: #202023;
+  --on-secondary-container: #c1bec3;
+  --on-secondary-fixed: #403f43;
+  --on-secondary-fixed-variant: #5c5b5f;
+  --on-surface: #e7e5e5;
+  --on-surface-variant: #acabaa;
+  --on-tertiary: #4d546e;
+  --on-tertiary-container: #444c65;
+  --on-tertiary-fixed: #323951;
+  --on-tertiary-fixed-variant: #4e556f;
+  --outline: #767575;
+  --outline-variant: #484848;
+  --primary: #c3c0ff;
+  --primary-container: #3323cc;
+  --primary-dim: #b3b1ff;
+  --primary-fixed: #e2dfff;
+  --primary-fixed-dim: #d2d0ff;
+  --secondary: #9f9da1;
+  --secondary-container: #3c3b3f;
+  --secondary-dim: #9f9da1;
+  --secondary-fixed: #e5e1e6;
+  --secondary-fixed-dim: #d7d3d8;
+  --surface: #0e0e0e;
+  --surface-bright: #2b2c2c;
+  --surface-container: #191a1a;
+  --surface-container-high: #1f2020;
+  --surface-container-highest: #252626;
+  --surface-container-low: #131313;
+  --surface-container-lowest: #000000;
+  --surface-dim: #0e0e0e;
+  --surface-tint: #c3c0ff;
+  --surface-variant: #252626;
+  --tertiary: #e3e7ff;
+  --tertiary-container: #d2d9f8;
+  --tertiary-dim: #c4cbe9;
+  --tertiary-fixed: #d2d9f8;
+  --tertiary-fixed-dim: #c4cbe9;
 }
 
-/* Light mode overrides when .light is on <html> */
+/* Light mode overrides map loosely based on original values but using new token structure */
 html.light {
-  --bg-base:        #eef2ff; /* Clear Pale Blue */
-  --bg-surface:     rgba(248, 250, 255, 0.65);
-  --bg-nav:         rgba(238, 242, 255, 0.85);
-  --text-primary:   #0f172a; /* Slate 900 - High Contrast */
-  --text-muted:     #475569; /* Slate 600 - Better Contrast */
-  --border-subtle:  rgba(148, 163, 184, 0.3);
-  --glow-primary:   rgba(99, 102, 241, 0.15);
-  --card-bg:        rgba(255, 255, 255, 0.7);
-  --input-bg:       rgba(226, 232, 240, 0.4);
+  --background: #f1f5f9;
+  --error: #ef4444;
+  --error-container: #fee2e2;
+  --error-dim: #dc2626;
+  --inverse-on-surface: #e2e8f0;
+  --inverse-primary: #a5b4fc;
+  --inverse-surface: #0f172a;
+  --on-background: #0f172a;
+  --on-error: #ffffff;
+  --on-error-container: #7f1d1d;
+  --on-primary: #ffffff;
+  --on-primary-container: #312e81;
+  --on-primary-fixed: #ffffff;
+  --on-primary-fixed-variant: #e0e7ff;
+  --on-secondary: #ffffff;
+  --on-secondary-container: #1e293b;
+  --on-secondary-fixed: #ffffff;
+  --on-secondary-fixed-variant: #cbd5e1;
+  --on-surface: #0f172a;
+  --on-surface-variant: #475569;
+  --on-tertiary: #ffffff;
+  --on-tertiary-container: #334155;
+  --on-tertiary-fixed: #ffffff;
+  --on-tertiary-fixed-variant: #94a3b8;
+  --outline: #94a3b8;
+  --outline-variant: #cbd5e1;
+  --primary: #4f46e5;
+  --primary-container: #e0e7ff;
+  --primary-dim: #4338ca;
+  --primary-fixed: #6366f1;
+  --primary-fixed-dim: #818cf8;
+  --secondary: #64748b;
+  --secondary-container: #e2e8f0;
+  --secondary-dim: #475569;
+  --secondary-fixed: #94a3b8;
+  --secondary-fixed-dim: #cbd5e1;
+  --surface: #f1f5f9;
+  --surface-bright: #ffffff;
+  --surface-container: #e2e8f0;
+  --surface-container-high: #cbd5e1;
+  --surface-container-highest: #94a3b8;
+  --surface-container-low: #f8fafc;
+  --surface-container-lowest: #ffffff;
+  --surface-dim: #e2e8f0;
+  --surface-tint: #4f46e5;
+  --surface-variant: #cbd5e1;
+  --tertiary: #475569;
+  --tertiary-container: #e2e8f0;
+  --tertiary-dim: #334155;
+  --tertiary-fixed: #64748b;
+  --tertiary-fixed-dim: #94a3b8;
 }
 
 /* ── Base ───────────────────────────────────────────── */
@@ -35,20 +119,10 @@ html.light {
     scroll-behavior: smooth;
   }
   body {
-    background-color: var(--bg-base);
-    background-image:
-      radial-gradient(at 0% 0%,   rgba(163, 166, 255, 0.15) 0px, transparent 50%),
-      radial-gradient(at 100% 0%, rgba(193, 128, 255, 0.15) 0px, transparent 50%),
-      radial-gradient(at 50% 100%, rgba(147, 150, 255, 0.1) 0px, transparent 50%);
-    color: var(--text-primary);
+    background-color: var(--background);
+    color: var(--on-surface);
     min-height: 100vh;
     transition: background-color 0.3s ease, color 0.3s ease;
-  }
-  html.light body {
-    background-image:
-      radial-gradient(at 0% 0%,   rgba(163, 166, 255, 0.08) 0px, transparent 50%),
-      radial-gradient(at 100% 0%, rgba(193, 128, 255, 0.08) 0px, transparent 50%),
-      radial-gradient(at 50% 100%, rgba(147, 150, 255, 0.05) 0px, transparent 50%);
   }
 }
 
@@ -59,39 +133,54 @@ html.light {
   }
 
   .glass-card {
-    background: var(--card-bg);
-    backdrop-filter: blur(24px);
-    -webkit-backdrop-filter: blur(24px);
-    border: 1px solid var(--border-subtle);
+    background: var(--surface-container-lowest);
+    border: 1px solid color-mix(in srgb, var(--outline-variant) 30%, transparent);
     transition: background 0.3s ease, border-color 0.3s ease;
   }
 
   .glass-nav {
-    background: var(--bg-nav);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border-bottom: 1px solid var(--border-subtle);
+    background: var(--surface-container-low);
+    border-bottom: 1px solid color-mix(in srgb, var(--outline-variant) 30%, transparent);
     transition: background 0.3s ease;
   }
 
-  .text-glow {
-    text-shadow: 0 0 30px var(--glow-primary);
-  }
 
   .theme-input {
-    background: var(--input-bg);
-    color: var(--text-primary);
-    border-bottom: 2px solid var(--border-subtle);
-    transition: border-color 0.2s, background 0.3s;
+    background: transparent;
+    color: var(--on-surface);
+    border: 1px solid var(--outline);
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+    transition: border-color 0.2s, border-width 0.2s;
   }
   .theme-input:focus {
     outline: none;
-    border-color: #a3a6ff;
-    background: rgba(163, 166, 255, 0.05);
+    border-color: var(--primary);
+    border-width: 2px;
+  }
+
+  .btn-primary {
+    background: linear-gradient(180deg, var(--primary), var(--primary-container));
+    color: var(--on-primary);
+    border: none;
+    transition: filter 0.2s ease;
+  }
+  .btn-primary:active {
+    filter: brightness(0.9);
+  }
+  
+  .btn-secondary {
+    background: transparent;
+    border: 1.5px solid var(--primary);
+    color: var(--primary);
+  }
+
+  .shadow-ambient {
+    box-shadow: 0 4px 24px color-mix(in srgb, var(--on-surface) 4%, transparent);
   }
 
   /* Scrollbar */
   ::-webkit-scrollbar { width: 6px; }
   ::-webkit-scrollbar-track { background: transparent; }
-  ::-webkit-scrollbar-thumb { background: rgba(163, 166, 255, 0.3); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb { background: color-mix(in srgb, var(--primary) 30%, transparent); border-radius: 3px; }
 }
