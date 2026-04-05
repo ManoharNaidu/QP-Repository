@@ -1,6 +1,8 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { Link, useSearchParams } from "react-router-dom";
+import { AnimatePresence, motion } from "framer-motion";
+import { useSearchParams } from "react-router-dom";
 import Footer from "../components/Footer";
+import { DownloadResultsLoading } from "../components/loading/PageLoadingVariants";
 
 import { api } from "../lib/api";
 import {
@@ -19,6 +21,13 @@ const defaultFilters = {
   semester: "",
   cycle: "",
   courseCode: "",
+};
+
+const fadeTransition = {
+  initial: { opacity: 0, y: 8 },
+  animate: { opacity: 1, y: 0 },
+  exit: { opacity: 0, y: -8 },
+  transition: { duration: 0.24, ease: "easeOut" },
 };
 
 const DownloadPage = () => {
@@ -363,143 +372,165 @@ const DownloadPage = () => {
           </aside>
 
           {/* Results Section */}
-          <section className="lg:col-span-3 space-y-6">
-            {/* Search Bar */}
-            <div className="relative group">
-              <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                <span className="material-symbols-outlined text-on-surface-variant">
-                  search
-                </span>
-              </div>
-              <input
-                type="text"
-                name="courseCode"
-                value={filters.courseCode}
-                onChange={handleInputChange}
-                onKeyDown={handleSearchKeyPress}
-                className="w-full bg-surface-container-high border border-outline-variant/30 text-on-surface pl-12 pr-4 py-4 rounded-lg focus:border-primary focus:ring-1 focus:outline-none transition-all placeholder:text-outline"
-                placeholder="Search by course code (e.g. CS101)..."
-              />
-            </div>
-            
-            <div className="text-sm text-on-surface-variant">Showing <span className="font-semibold text-primary">{totalItems}</span> results</div>
+          <section
+            className="lg:col-span-3"
+            aria-busy={isLoading}
+            aria-live="polite"
+          >
+            <AnimatePresence mode="wait" initial={false}>
+              {isLoading ? (
+                <motion.div
+                  key="download-loading"
+                  className="content-fade"
+                  {...fadeTransition}
+                >
+                  <DownloadResultsLoading />
+                </motion.div>
+              ) : (
+                <motion.div
+                  key="download-results"
+                  className="space-y-6 content-fade"
+                  {...fadeTransition}
+                >
+                  {/* Search Bar */}
+                  <div className="relative group">
+                    <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                      <span className="material-symbols-outlined text-on-surface-variant">
+                        search
+                      </span>
+                    </div>
+                    <input
+                      type="text"
+                      name="courseCode"
+                      value={filters.courseCode}
+                      onChange={handleInputChange}
+                      onKeyDown={handleSearchKeyPress}
+                      className="w-full bg-surface-container-high border border-outline-variant/30 text-on-surface pl-12 pr-4 py-4 rounded-lg focus:border-primary focus:ring-1 focus:outline-none transition-all placeholder:text-outline"
+                      placeholder="Search by course code (e.g. CS101)..."
+                    />
+                  </div>
 
-            {/* Papers List Table-style */}
-            <div className="overflow-x-auto bg-surface-container-low rounded-lg border border-outline-variant/30">
-              <table className="w-full text-left border-collapse whitespace-nowrap min-w-[600px]">
-                <thead>
-                  <tr className="bg-surface-container-high border-b border-outline-variant/30">
-                    <th className="px-6 py-4 text-xs font-semibold uppercase tracking-wider text-on-surface-variant">
-                      Course / Paper
-                    </th>
-                    <th className="px-6 py-4 text-xs font-semibold uppercase tracking-wider text-on-surface-variant">
-                      Year
-                    </th>
-                    <th className="px-6 py-4 text-xs font-semibold uppercase tracking-wider text-on-surface-variant">
-                      Cycle
-                    </th>
-                    <th className="px-6 py-4 text-xs font-semibold uppercase tracking-wider text-on-surface-variant">
-                      Semester
-                    </th>
-                    <th className="px-6 py-4 text-right text-xs font-semibold uppercase tracking-wider text-on-surface-variant">
-                      Action
-                    </th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-outline-variant/10">
-                  {papers.length === 0 && !isLoading && (
-                    <tr>
-                      <td colSpan="5" className="px-6 py-12 text-center">
-                        <div className="flex flex-col items-center justify-center">
-                          <span className="material-symbols-outlined text-4xl text-on-surface-variant mb-2">search_off</span>
-                          <span className="text-on-surface">No papers found</span>
-                        </div>
-                      </td>
-                    </tr>
+                  <div className="text-sm text-on-surface-variant">Showing <span className="font-semibold text-primary">{totalItems}</span> results</div>
+
+                  {/* Papers List Table-style */}
+                  <div className="overflow-x-auto bg-surface-container-low rounded-lg border border-outline-variant/30">
+                    <table className="w-full text-left border-collapse whitespace-nowrap min-w-[600px]">
+                      <thead>
+                        <tr className="bg-surface-container-high border-b border-outline-variant/30">
+                          <th className="px-6 py-4 text-xs font-semibold uppercase tracking-wider text-on-surface-variant">
+                            Course / Paper
+                          </th>
+                          <th className="px-6 py-4 text-xs font-semibold uppercase tracking-wider text-on-surface-variant">
+                            Year
+                          </th>
+                          <th className="px-6 py-4 text-xs font-semibold uppercase tracking-wider text-on-surface-variant">
+                            Cycle
+                          </th>
+                          <th className="px-6 py-4 text-xs font-semibold uppercase tracking-wider text-on-surface-variant">
+                            Semester
+                          </th>
+                          <th className="px-6 py-4 text-right text-xs font-semibold uppercase tracking-wider text-on-surface-variant">
+                            Action
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-outline-variant/10">
+                        {papers.length === 0 && (
+                          <tr>
+                            <td colSpan="5" className="px-6 py-12 text-center">
+                              <div className="flex flex-col items-center justify-center">
+                                <span className="material-symbols-outlined text-4xl text-on-surface-variant mb-2">search_off</span>
+                                <span className="text-on-surface">No papers found</span>
+                              </div>
+                            </td>
+                          </tr>
+                        )}
+                        {papers.map((paper, index) => (
+                          <tr
+                            key={paper._id || index}
+                            className="hover:bg-surface-bright transition-colors group"
+                          >
+                            <td className="px-6 py-5">
+                              <div className="flex items-center gap-3">
+                                <div className="w-8 h-10 shrink-0 bg-surface-container-highest flex items-center justify-center rounded border border-outline-variant/20">
+                                  <span className="material-symbols-outlined text-sm text-primary">
+                                    description
+                                  </span>
+                                </div>
+                                <span className="font-medium text-on-surface truncate max-w-[200px]" title={paper.courseCode || paper.branch || "Unknown"}>
+                                  {paper.courseCode || paper.branch || "Unknown"}
+                                </span>
+                              </div>
+                            </td>
+                            <td className="px-6 py-5 text-on-surface-variant font-mono text-sm">
+                              {paper.year}
+                            </td>
+                            <td className="px-6 py-5 text-on-surface-variant text-sm">
+                              {paper.cycle || "-"}
+                            </td>
+                            <td className="px-6 py-5 text-on-surface-variant text-sm">
+                              {paper.semester || "-"}
+                            </td>
+                            <td className="px-6 py-5 text-right">
+                              <button
+                                onClick={() => downloadPaper(paper)}
+                                className="inline-flex items-center gap-2 px-4 py-2 border border-primary text-primary text-xs font-medium rounded hover:bg-primary hover:text-on-primary transition-all"
+                              >
+                                <span className="material-symbols-outlined text-sm">
+                                  download
+                                </span>
+                                Download
+                              </button>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+
+                  {/* Pagination */}
+                  {totalPages > 1 && (
+                    <nav className="flex items-center justify-between border-t border-outline-variant/20 pt-8">
+                      <button
+                        onClick={() => changePage(currentPage - 1)}
+                        disabled={currentPage === 1}
+                        className="inline-flex items-center gap-2 px-5 py-2.5 border border-outline-variant text-on-surface text-sm font-medium rounded hover:bg-surface-container-high transition-colors disabled:opacity-50"
+                      >
+                        <span className="material-symbols-outlined text-sm">
+                          arrow_back
+                        </span>
+                        Previous
+                      </button>
+                      <div className="flex items-center gap-2">
+                        {getPageNumbers().map((pageNumber) => (
+                          <span
+                            key={pageNumber}
+                            onClick={() => changePage(pageNumber)}
+                            className={`w-8 h-8 flex items-center justify-center rounded text-sm cursor-pointer transition-colors ${
+                              currentPage === pageNumber
+                                ? "bg-primary text-on-primary font-medium"
+                                : "text-on-surface-variant hover:bg-surface-container-high"
+                            }`}
+                          >
+                            {pageNumber}
+                          </span>
+                        ))}
+                      </div>
+                      <button
+                        onClick={() => changePage(currentPage + 1)}
+                        disabled={currentPage === totalPages}
+                        className="inline-flex items-center gap-2 px-5 py-2.5 border border-outline-variant text-on-surface text-sm font-medium rounded hover:bg-surface-container-high transition-colors disabled:opacity-50"
+                      >
+                        Next
+                        <span className="material-symbols-outlined text-sm">
+                          arrow_forward
+                        </span>
+                      </button>
+                    </nav>
                   )}
-                  {papers.map((paper, index) => (
-                    <tr
-                      key={paper._id || index}
-                      className="hover:bg-surface-bright transition-colors group"
-                    >
-                      <td className="px-6 py-5">
-                        <div className="flex items-center gap-3">
-                          <div className="w-8 h-10 shrink-0 bg-surface-container-highest flex items-center justify-center rounded border border-outline-variant/20">
-                            <span className="material-symbols-outlined text-sm text-primary">
-                              description
-                            </span>
-                          </div>
-                          <span className="font-medium text-on-surface truncate max-w-[200px]" title={paper.courseCode || paper.branch || "Unknown"}>
-                            {paper.courseCode || paper.branch || "Unknown"}
-                          </span>
-                        </div>
-                      </td>
-                      <td className="px-6 py-5 text-on-surface-variant font-mono text-sm">
-                        {paper.year}
-                      </td>
-                      <td className="px-6 py-5 text-on-surface-variant text-sm">
-                        {paper.cycle || "-"}
-                      </td>
-                      <td className="px-6 py-5 text-on-surface-variant text-sm">
-                        {paper.semester || "-"}
-                      </td>
-                      <td className="px-6 py-5 text-right">
-                        <button
-                          onClick={() => downloadPaper(paper)}
-                          className="inline-flex items-center gap-2 px-4 py-2 border border-primary text-primary text-xs font-medium rounded hover:bg-primary hover:text-on-primary transition-all"
-                        >
-                          <span className="material-symbols-outlined text-sm">
-                            download
-                          </span>
-                          Download
-                        </button>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-
-            {/* Pagination */}
-            {totalPages > 1 && (
-              <nav className="flex items-center justify-between border-t border-outline-variant/20 pt-8">
-                <button
-                  onClick={() => changePage(currentPage - 1)}
-                  disabled={currentPage === 1}
-                  className="inline-flex items-center gap-2 px-5 py-2.5 border border-outline-variant text-on-surface text-sm font-medium rounded hover:bg-surface-container-high transition-colors disabled:opacity-50"
-                >
-                  <span className="material-symbols-outlined text-sm">
-                    arrow_back
-                  </span>
-                  Previous
-                </button>
-                <div className="flex items-center gap-2">
-                  {getPageNumbers().map((pageNumber) => (
-                    <span
-                      key={pageNumber}
-                      onClick={() => changePage(pageNumber)}
-                      className={`w-8 h-8 flex items-center justify-center rounded text-sm cursor-pointer transition-colors ${
-                        currentPage === pageNumber
-                          ? "bg-primary text-on-primary font-medium"
-                          : "text-on-surface-variant hover:bg-surface-container-high"
-                      }`}
-                    >
-                      {pageNumber}
-                    </span>
-                  ))}
-                </div>
-                <button
-                  onClick={() => changePage(currentPage + 1)}
-                  disabled={currentPage === totalPages}
-                  className="inline-flex items-center gap-2 px-5 py-2.5 border border-outline-variant text-on-surface text-sm font-medium rounded hover:bg-surface-container-high transition-colors disabled:opacity-50"
-                >
-                  Next
-                  <span className="material-symbols-outlined text-sm">
-                    arrow_forward
-                  </span>
-                </button>
-              </nav>
-            )}
+                </motion.div>
+              )}
+            </AnimatePresence>
           </section>
         </div>
       </main>

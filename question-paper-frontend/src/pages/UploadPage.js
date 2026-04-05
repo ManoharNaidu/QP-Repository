@@ -1,5 +1,5 @@
-import React, { useEffect, useState, useRef } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useRef, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import { api } from "../lib/api";
 import {
   BRANCH_OPTIONS,
@@ -8,6 +8,7 @@ import {
   SEMESTER_OPTIONS,
 } from "../constants/questionPaper";
 import Footer from "../components/Footer";
+import { UploadPageLoading } from "../components/loading/PageLoadingVariants";
 
 const BASE_ACADEMIC_OPTIONS = ["1st Year", "2nd Year"];
 const BACHELOR_ACADEMIC_OPTIONS = [
@@ -16,6 +17,13 @@ const BACHELOR_ACADEMIC_OPTIONS = [
   "3rd Year",
   "4th Year",
 ];
+
+const fadeTransition = {
+  initial: { opacity: 0, y: 8 },
+  animate: { opacity: 1, y: 0 },
+  exit: { opacity: 0, y: -8 },
+  transition: { duration: 0.24, ease: "easeOut" },
+};
 
 const UploadPage = () => {
   const [module, setModule] = useState("");
@@ -166,8 +174,23 @@ const UploadPage = () => {
           <p className="text-on-surface-variant font-body leading-relaxed">Help expand the QP Repository by adding high-quality question papers for the student community.</p>
         </header>
 
-        <section className="space-y-8">
-          <form onSubmit={handleUpload} className="space-y-6">
+        <section aria-busy={isUploading} aria-live="polite">
+          <AnimatePresence mode="wait" initial={false}>
+            {isUploading ? (
+              <motion.div
+                key="upload-loading"
+                className="content-fade"
+                {...fadeTransition}
+              >
+                <UploadPageLoading />
+              </motion.div>
+            ) : (
+              <motion.form
+                key="upload-form"
+                onSubmit={handleUpload}
+                className="space-y-6 content-fade"
+                {...fadeTransition}
+              >
             {/* Course Code */}
             <div className="space-y-2">
               <label className="block text-sm font-medium tracking-tight text-on-surface-variant uppercase text-[10px]">Course Code</label>
@@ -321,19 +344,17 @@ const UploadPage = () => {
             {/* Submit Action */}
             <div className="pt-4">
               <button 
-                disabled={isUploading || !file}
-                className={`w-full py-4 rounded-DEFAULT text-on-primary font-semibold tracking-tight shadow-xl active:scale-[0.98] transition-all flex items-center justify-center gap-2 ${isUploading || !file ? 'bg-surface-container text-outline cursor-not-allowed opacity-50' : 'bg-gradient-to-b from-primary to-primary-container hover:brightness-110'}`} 
+                disabled={!file}
+                className={`w-full py-4 rounded-DEFAULT text-on-primary font-semibold tracking-tight shadow-xl active:scale-[0.98] transition-all flex items-center justify-center gap-2 ${!file ? 'bg-surface-container text-outline cursor-not-allowed opacity-50' : 'bg-gradient-to-b from-primary to-primary-container hover:brightness-110'}`} 
                 type="submit"
               >
-                {isUploading ? (
-                  <><span className="material-symbols-outlined text-xl animate-spin">progress_activity</span> Uploading...</>
-                ) : (
-                  <><span className="material-symbols-outlined text-xl">cloud_upload</span> Upload Paper</>
-                )}
+                <><span className="material-symbols-outlined text-xl">cloud_upload</span> Upload Paper</>
               </button>
               <p className="text-center text-[9px] text-on-surface-variant mt-6 uppercase tracking-[0.2em] font-bold">Digital Archive • Institutional Authority • QP Repository</p>
             </div>
-          </form>
+              </motion.form>
+            )}
+          </AnimatePresence>
         </section>
       </main>
 

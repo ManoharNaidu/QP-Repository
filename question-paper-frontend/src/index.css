@@ -126,10 +126,41 @@ html.light {
   }
 }
 
+@keyframes skeleton-shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
 /* ── Components ─────────────────────────────────────── */
 @layer components {
   .material-symbols-outlined {
     font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  }
+
+  .skeleton {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    background: color-mix(in srgb, var(--surface-container-high) 88%, transparent);
+  }
+
+  .skeleton::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    transform: translateX(-100%);
+    background: linear-gradient(
+      90deg,
+      transparent,
+      color-mix(in srgb, var(--primary) 18%, white 10%),
+      transparent
+    );
+    animation: skeleton-shimmer 1.5s ease-in-out infinite;
+  }
+
+  .content-fade {
+    will-change: opacity, transform;
   }
 
   .glass-card {
@@ -183,4 +214,14 @@ html.light {
   ::-webkit-scrollbar { width: 6px; }
   ::-webkit-scrollbar-track { background: transparent; }
   ::-webkit-scrollbar-thumb { background: color-mix(in srgb, var(--primary) 30%, transparent); border-radius: 3px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton::after {
+    animation-duration: 2.4s;
+  }
+
+  .content-fade {
+    transition: none;
+  }
 }
