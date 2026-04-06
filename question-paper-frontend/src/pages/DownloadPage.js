@@ -117,7 +117,10 @@ const DownloadPage = () => {
   }, [fetchPapers, searchParams]);
 
   useEffect(() => {
-    if (filters.academicYear && !filteredAcademicYears.includes(filters.academicYear)) {
+    if (
+      filters.academicYear &&
+      !filteredAcademicYears.includes(filters.academicYear)
+    ) {
       setFilters((previous) => ({
         ...previous,
         academicYear: "",
@@ -138,7 +141,7 @@ const DownloadPage = () => {
     event.preventDefault();
     updateUrlWithFilters(filters, 1);
   };
-  
+
   const handleResetFilters = () => {
     setFilters(defaultFilters);
     setCurrentPage(1);
@@ -147,7 +150,7 @@ const DownloadPage = () => {
   };
 
   const handleSearchKeyPress = (e) => {
-    if (e.key === 'Enter') {
+    if (e.key === "Enter") {
       e.preventDefault();
       updateUrlWithFilters(filters, 1);
     }
@@ -223,7 +226,8 @@ const DownloadPage = () => {
             Archive Explorer
           </h1>
           <p className="text-on-surface-variant text-lg md:text-xl font-medium max-w-2xl leading-relaxed">
-            Navigate the institutional repository of digital examination assets. Optimized for speed and precision.
+            Navigate the institutional repository of digital examination assets.
+            Optimized for speed and precision.
           </p>
         </header>
 
@@ -232,57 +236,130 @@ const DownloadPage = () => {
           {/* Filters Sidebar */}
           <aside className="lg:col-span-1 space-y-8 bg-surface-bright p-8 rounded-3xl border border-outline shadow-sm">
             <div className="flex items-center justify-between mb-2">
-              <h3 className="text-[11px] uppercase tracking-[0.2em] font-black text-primary">Refinement</h3>
-              <button onClick={handleResetFilters} className="text-[10px] uppercase tracking-widest font-bold text-on-surface-variant hover:text-primary transition-colors">Reset</button>
+              <h3 className="text-[11px] uppercase tracking-[0.2em] font-black text-primary">
+                Refinement
+              </h3>
+              <button
+                onClick={handleResetFilters}
+                className="text-[10px] uppercase tracking-widest font-bold text-on-surface-variant hover:text-primary transition-colors"
+              >
+                Reset
+              </button>
             </div>
-            
+
             <form onSubmit={handleFilterSubmit} className="space-y-6">
               <div className="space-y-1.5">
-                <label className="text-[10px] uppercase tracking-widest font-bold text-on-surface-variant ml-1">Stream</label>
-                <select name="module" value={filters.module} onChange={handleInputChange} className="theme-input w-full appearance-none pr-10 text-xs">
+                <label className="text-[10px] uppercase tracking-widest font-bold text-on-surface-variant ml-1">
+                  Stream
+                </label>
+                <select
+                  name="module"
+                  value={filters.module}
+                  onChange={handleInputChange}
+                  className="theme-input w-full appearance-none pr-10 text-xs"
+                >
                   <option value="">Any Module</option>
-                  {MODULE_OPTIONS.map((opt) => <option key={opt} value={opt}>{opt}</option>)}
+                  {MODULE_OPTIONS.map((opt) => (
+                    <option key={opt} value={opt}>
+                      {opt}
+                    </option>
+                  ))}
                 </select>
               </div>
 
               <div className="space-y-1.5">
-                <label className="text-[10px] uppercase tracking-widest font-bold text-on-surface-variant ml-1">Discipline</label>
-                <select name="branch" value={filters.branch} onChange={handleInputChange} className="theme-input w-full appearance-none pr-10 text-xs">
+                <label className="text-[10px] uppercase tracking-widest font-bold text-on-surface-variant ml-1">
+                  Discipline
+                </label>
+                <select
+                  name="branch"
+                  value={filters.branch}
+                  onChange={handleInputChange}
+                  className="theme-input w-full appearance-none pr-10 text-xs"
+                >
                   <option value="">Any Branch</option>
-                  {BRANCH_OPTIONS.map((opt) => <option key={opt.value} value={opt.value}>{opt.value}</option>)}
+                  {BRANCH_OPTIONS.map((opt) => (
+                    <option key={opt.value} value={opt.value}>
+                      {opt.value}
+                    </option>
+                  ))}
                 </select>
               </div>
 
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-1.5">
-                  <label className="text-[10px] uppercase tracking-widest font-bold text-on-surface-variant ml-1">Type</label>
-                  <select name="semester" value={filters.semester} onChange={handleInputChange} className="theme-input w-full text-xs">
+                  <label className="text-[10px] uppercase tracking-widest font-bold text-on-surface-variant ml-1">
+                    Type
+                  </label>
+                  <select
+                    name="semester"
+                    value={filters.semester}
+                    onChange={handleInputChange}
+                    className="theme-input w-full text-xs"
+                  >
                     <option value="">Any</option>
-                    {SEMESTER_OPTIONS.map((opt) => <option key={opt} value={opt}>{opt}</option>)}
+                    {SEMESTER_OPTIONS.map((opt) => (
+                      <option key={opt} value={opt}>
+                        {opt}
+                      </option>
+                    ))}
                   </select>
                 </div>
                 <div className="space-y-1.5">
-                  <label className="text-[10px] uppercase tracking-widest font-bold text-on-surface-variant ml-1">Session</label>
-                  <select name="cycle" value={filters.cycle} onChange={handleInputChange} className="theme-input w-full text-xs">
+                  <label className="text-[10px] uppercase tracking-widest font-bold text-on-surface-variant ml-1">
+                    Session
+                  </label>
+                  <select
+                    name="cycle"
+                    value={filters.cycle}
+                    onChange={handleInputChange}
+                    className="theme-input w-full text-xs"
+                  >
                     <option value="">Any</option>
-                    {CYCLE_OPTIONS.map((opt) => <option key={opt} value={opt}>{opt}</option>)}
+                    {CYCLE_OPTIONS.map((opt) => (
+                      <option key={opt} value={opt}>
+                        {opt}
+                      </option>
+                    ))}
                   </select>
                 </div>
               </div>
 
               <div className="space-y-1.5">
-                <label className="text-[10px] uppercase tracking-widest font-bold text-on-surface-variant ml-1">Base Year</label>
-                <select name="year" value={filters.year} onChange={handleInputChange} className="theme-input w-full text-xs">
+                <label className="text-[10px] uppercase tracking-widest font-bold text-on-surface-variant ml-1">
+                  Base Year
+                </label>
+                <select
+                  name="year"
+                  value={filters.year}
+                  onChange={handleInputChange}
+                  className="theme-input w-full text-xs"
+                >
                   <option value="">Any Year</option>
-                  {yearOptions.map((opt) => <option key={opt} value={opt}>{opt}</option>)}
+                  {yearOptions.map((opt) => (
+                    <option key={opt} value={opt}>
+                      {opt}
+                    </option>
+                  ))}
                 </select>
               </div>
-              
+
               <div className="space-y-1.5">
-                <label className="text-[10px] uppercase tracking-widest font-bold text-on-surface-variant ml-1">Study Year</label>
-                <select name="academicYear" value={filters.academicYear} onChange={handleInputChange} className="theme-input w-full text-xs">
+                <label className="text-[10px] uppercase tracking-widest font-bold text-on-surface-variant ml-1">
+                  Study Year
+                </label>
+                <select
+                  name="academicYear"
+                  value={filters.academicYear}
+                  onChange={handleInputChange}
+                  className="theme-input w-full text-xs"
+                >
                   <option value="">Any Study Year</option>
-                  {filteredAcademicYears.map((opt) => <option key={opt} value={opt}>{opt}</option>)}
+                  {filteredAcademicYears.map((opt) => (
+                    <option key={opt} value={opt}>
+                      {opt}
+                    </option>
+                  ))}
                 </select>
               </div>
 
@@ -302,7 +379,11 @@ const DownloadPage = () => {
           </aside>
 
           {/* Results Section */}
-          <section className="lg:col-span-3 space-y-8" aria-busy={isLoading} aria-live="polite">
+          <section
+            className="lg:col-span-3 space-y-8"
+            aria-busy={isLoading}
+            aria-live="polite"
+          >
             {/* Search Bar */}
             <div className="relative">
               <div className="absolute inset-y-0 left-0 pl-6 flex items-center pointer-events-none text-primary">
@@ -318,7 +399,12 @@ const DownloadPage = () => {
                 placeholder="Search Archive ID (e.g., CS101)..."
               />
               <div className="absolute inset-y-0 right-0 pr-6 flex items-center">
-                <button onClick={handleFilterSubmit} className="text-xs font-black uppercase tracking-widest text-primary hover:brightness-110">Execute</button>
+                <button
+                  onClick={handleFilterSubmit}
+                  className="text-xs font-black uppercase tracking-widest text-primary hover:brightness-110"
+                >
+                  Execute
+                </button>
               </div>
             </div>
 
@@ -328,10 +414,17 @@ const DownloadPage = () => {
                   <DownloadResultsLoading />
                 </motion.div>
               ) : (
-                <motion.div key="results" {...fadeTransition} className="space-y-6">
+                <motion.div
+                  key="results"
+                  {...fadeTransition}
+                  className="space-y-6"
+                >
                   <div className="flex items-center justify-between px-2">
                     <span className="text-sm font-bold text-on-surface-variant">
-                      Total Assets Identified: <span className="text-primary font-black ml-1">{totalItems}</span>
+                      Total Assets Identified:{" "}
+                      <span className="text-primary font-black ml-1">
+                        {totalItems}
+                      </span>
                     </span>
                   </div>
 
@@ -340,11 +433,21 @@ const DownloadPage = () => {
                     <table className="w-full text-left border-collapse whitespace-nowrap min-w-[700px]">
                       <thead>
                         <tr className="bg-surface border-b border-outline">
-                          <th className="px-8 py-5 text-[10px] font-black uppercase tracking-[0.2em] text-on-surface-variant">ID / Asset</th>
-                          <th className="px-8 py-5 text-[10px] font-black uppercase tracking-[0.2em] text-on-surface-variant">Base</th>
-                          <th className="px-8 py-5 text-[10px] font-black uppercase tracking-[0.2em] text-on-surface-variant">Session</th>
-                          <th className="px-8 py-5 text-[10px] font-black uppercase tracking-[0.2em] text-on-surface-variant">Classification</th>
-                          <th className="px-8 py-5 text-right text-[10px] font-black uppercase tracking-[0.2em] text-on-surface-variant">Retrieval</th>
+                          <th className="px-8 py-5 text-[10px] font-black uppercase tracking-[0.2em] text-on-surface-variant">
+                            Course Code
+                          </th>
+                          <th className="px-8 py-5 text-[10px] font-black uppercase tracking-[0.2em] text-on-surface-variant">
+                            Base Year
+                          </th>
+                          <th className="px-8 py-5 text-[10px] font-black uppercase tracking-[0.2em] text-on-surface-variant">
+                            Stream
+                          </th>
+                          <th className="px-8 py-5 text-[10px] font-black uppercase tracking-[0.2em] text-on-surface-variant">
+                            Classification
+                          </th>
+                          <th className="px-8 py-5 text-right text-[10px] font-black uppercase tracking-[0.2em] text-on-surface-variant">
+                            Retrieval
+                          </th>
                         </tr>
                       </thead>
                       <tbody className="divide-y divide-outline/50">
@@ -352,27 +455,44 @@ const DownloadPage = () => {
                           <tr>
                             <td colSpan="5" className="px-8 py-20 text-center">
                               <div className="flex flex-col items-center justify-center space-y-4 opacity-40">
-                                <span className="material-symbols-outlined text-6xl">database_off</span>
-                                <p className="text-xl font-bold tracking-tight">System state: No matching assets</p>
+                                <span className="material-symbols-outlined text-6xl">
+                                  database_off
+                                </span>
+                                <p className="text-xl font-bold tracking-tight">
+                                  System state: No matching assets
+                                </p>
                               </div>
                             </td>
                           </tr>
                         ) : (
                           papers.map((paper, index) => (
-                            <tr key={paper._id || index} className="hover:bg-primary/5 transition-colors group">
+                            <tr
+                              key={paper._id || index}
+                              className="hover:bg-primary/5 transition-colors group"
+                            >
                               <td className="px-8 py-6">
                                 <div className="flex items-center gap-4">
                                   <div className="w-10 h-10 shrink-0 bg-primary/5 text-primary flex items-center justify-center rounded-xl border border-primary/10">
-                                    <span className="material-symbols-outlined text-lg">description</span>
+                                    <span className="material-symbols-outlined text-lg">
+                                      description
+                                    </span>
                                   </div>
                                   <div>
-                                    <p className="font-black text-on-surface tracking-tight">{paper.courseCode || "UNKN-001"}</p>
-                                    <p className="text-[10px] font-bold text-on-surface-variant uppercase tracking-wider">{paper.branch || "General Academic"}</p>
+                                    <p className="font-black text-on-surface tracking-tight">
+                                      {paper.courseCode || "UNKN-001"}
+                                    </p>
+                                    <p className="text-[10px] font-bold text-on-surface-variant uppercase tracking-wider">
+                                      {paper.branch || "General Academic"}
+                                    </p>
                                   </div>
                                 </div>
                               </td>
-                              <td className="px-8 py-6 font-mono text-sm font-bold text-on-surface-variant">{paper.year}</td>
-                              <td className="px-8 py-6 text-sm font-bold text-on-surface-variant">{paper.cycle || paper.semester}</td>
+                              <td className="px-8 py-6 font-mono text-sm font-bold text-on-surface-variant">
+                                {paper.year}
+                              </td>
+                              <td className="px-8 py-6 text-sm font-bold text-on-surface-variant">
+                                {paper.cycle || paper.semester}
+                              </td>
                               <td className="px-8 py-6">
                                 <span className="px-3 py-1 bg-surface-container-low text-on-surface-variant border border-outline rounded-full text-[10px] font-black uppercase tracking-wider">
                                   {paper.module}
@@ -383,8 +503,10 @@ const DownloadPage = () => {
                                   onClick={() => downloadPaper(paper)}
                                   className="inline-flex items-center gap-2 px-6 py-2.5 bg-surface border border-outline text-on-surface text-xs font-black uppercase tracking-widest rounded-xl hover:bg-primary hover:text-white hover:border-primary transition-all shadow-sm"
                                 >
-                                  <span className="material-symbols-outlined text-base">download</span>
-                                  Fetch
+                                  <span className="material-symbols-outlined text-base">
+                                    download
+                                  </span>
+                                  Download
                                 </button>
                               </td>
                             </tr>
@@ -402,8 +524,12 @@ const DownloadPage = () => {
                         disabled={currentPage === 1}
                         className="btn-secondary flex items-center gap-2 h-12 px-6 disabled:opacity-30 disabled:pointer-events-none"
                       >
-                        <span className="material-symbols-outlined text-lg">arrow_back</span>
-                        <span className="text-xs uppercase tracking-widest font-black">Previous</span>
+                        <span className="material-symbols-outlined text-lg">
+                          arrow_back
+                        </span>
+                        <span className="text-xs uppercase tracking-widest font-black">
+                          Previous
+                        </span>
                       </button>
                       <div className="flex items-center gap-2">
                         {getPageNumbers().map((pageNumber) => (
@@ -425,8 +551,12 @@ const DownloadPage = () => {
                         disabled={currentPage === totalPages}
                         className="btn-secondary flex items-center gap-2 h-12 px-6 disabled:opacity-30 disabled:pointer-events-none"
                       >
-                        <span className="text-xs uppercase tracking-widest font-black">Next</span>
-                        <span className="material-symbols-outlined text-lg">arrow_forward</span>
+                        <span className="text-xs uppercase tracking-widest font-black">
+                          Next
+                        </span>
+                        <span className="material-symbols-outlined text-lg">
+                          arrow_forward
+                        </span>
                       </button>
                     </nav>
                   )}
