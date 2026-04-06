@@ -39,7 +39,7 @@ const LandingPage = () => {
             </div>
 
             {/* Decorative Stats/Trust elements */}
-            <div className="pt-12 flex flex-wrap justify-center gap-8 md:gap-16 opacity-50 grayscale hover:grayscale-0 transition-all">
+            {/* <div className="pt-12 flex flex-wrap justify-center gap-8 md:gap-16 opacity-50 grayscale hover:grayscale-0 transition-all">
               <div className="flex flex-col items-center">
                 <span className="text-3xl font-black">5.2K+</span>
                 <span className="text-[10px] uppercase tracking-[0.2em] font-bold">
@@ -58,7 +58,7 @@ const LandingPage = () => {
                   Student Users
                 </span>
               </div>
-            </div>
+            </div> */}
           </div>
         </section>
 
