@@ -5,8 +5,9 @@ const ThemeContext = createContext();
 export const ThemeProvider = ({ children }) => {
   const [isDark, setIsDark] = useState(() => {
     const saved = localStorage.getItem("qp-theme");
-    return saved !== null ? saved === "dark" : true; // default to dark
+    return saved !== null ? saved === "dark" : false; // default to light
   });
+
 
   useEffect(() => {
     const root = document.documentElement;

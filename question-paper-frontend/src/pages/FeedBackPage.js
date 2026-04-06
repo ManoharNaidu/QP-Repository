@@ -5,10 +5,10 @@ import Footer from "../components/Footer";
 import { FeedbackPageLoading } from "../components/loading/PageLoadingVariants";
 
 const fadeTransition = {
-  initial: { opacity: 0, y: 8 },
+  initial: { opacity: 0, y: 10 },
   animate: { opacity: 1, y: 0 },
-  exit: { opacity: 0, y: -8 },
-  transition: { duration: 0.24, ease: "easeOut" },
+  exit: { opacity: 0, y: -10 },
+  transition: { duration: 0.3, ease: "easeOut" },
 };
 
 const FeedBackPage = () => {
@@ -21,9 +21,7 @@ const FeedBackPage = () => {
 
   useEffect(() => {
     if (message) {
-      const timer = setTimeout(() => {
-        setMessage("");
-      }, 5000);
+      const timer = setTimeout(() => setMessage(""), 5000);
       return () => clearTimeout(timer);
     }
   }, [message]);
@@ -47,180 +45,157 @@ const FeedBackPage = () => {
       setCategory("suggestion");
     } catch (error) {
       console.error(error);
-      setMessage("Failed to submit feedback.");
+      setMessage("Failed to submit feedback. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
   };
 
   return (
-    <div className="bg-background text-on-surface font-body selection:bg-primary-container selection:text-on-primary-container min-h-screen flex flex-col antialiased">
+    <div className="bg-background text-on-surface font-body selection:bg-primary-container selection:text-on-primary-container min-h-screen flex flex-col pt-24">
       {message && (
-        <div className="fixed top-24 left-1/2 transform -translate-x-1/2 z-50">
-          <div className="bg-surface-container-high px-6 py-3 rounded shadow-lg border border-outline-variant/30 text-sm text-on-surface font-medium flex items-center gap-2">
-            <span className={`material-symbols-outlined text-sm ${message.includes("Failed") ? "text-error" : "text-primary"}`}>
-              {message.includes("Failed") ? "error" : "check_circle"}
+        <div className="fixed top-28 left-1/2 -translate-x-1/2 z-50 animate-in fade-in slide-in-from-top-4 duration-300">
+          <div className={`px-6 py-4 rounded-xl shadow-2xl border flex items-center gap-3 ${message.includes("Failed") ? "bg-error-container text-on-error-container border-error" : "bg-primary text-white border-primary/20"}`}>
+            <span className="material-symbols-outlined">
+              {message.includes("Failed") ? "error" : "verified"}
             </span>
-            <span>{message}</span>
+            <span className="font-bold text-sm uppercase tracking-wider">{message}</span>
           </div>
         </div>
       )}
 
-      {/* Main Content Area */}
-      <main className="pt-32 pb-24 px-6 md:px-12 flex-grow max-w-7xl mx-auto w-full" aria-busy={isSubmitting} aria-live="polite">
-        <AnimatePresence mode="wait" initial={false}>
-          {isSubmitting ? (
-            <motion.div
-              key="feedback-loading"
-              className="content-fade"
-              {...fadeTransition}
-            >
-              <FeedbackPageLoading />
-            </motion.div>
-          ) : (
-            <motion.div
-              key="feedback-content"
-              className="grid grid-cols-1 lg:grid-cols-12 gap-12 content-fade"
-              {...fadeTransition}
-            >
-              {/* Header Section */}
-              <div className="lg:col-span-5 flex flex-col justify-start">
-                <span className="text-primary tracking-widest font-semibold text-xs uppercase mb-4">Community Voices</span>
-                <h1 className="text-5xl md:text-7xl font-bold tracking-tighter text-on-surface leading-tight mb-8">
-                  Your Feedback <br/><span className="text-on-surface-variant">Matters</span>
-                </h1>
-                <p className="text-on-surface-variant text-lg leading-relaxed max-w-md">
-                  Help us refine the digital archive. Whether it's a bug report or a suggestion for a new feature, your input shapes the future of academic research.
-                </p>
-                
-                <div className="mt-12 space-y-6">
-                  <div className="flex items-start gap-4">
-                    <div className="mt-1 w-10 h-10 rounded bg-surface-container-high flex items-center justify-center border border-outline-variant/30">
-                      <span className="material-symbols-outlined text-primary scale-75">lightbulb</span>
+      <main className="flex-grow py-20 px-6 md:px-12">
+        <div className="max-w-4xl mx-auto w-full">
+          <div className="text-center space-y-4 mb-20">
+            <h1 className="text-4xl md:text-7xl font-black tracking-tight text-on-surface leading-none">
+              Your Feedback
+            </h1>
+            <p className="text-on-surface-variant font-medium text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
+              Help us refine the digital archive. Every insight drives our institutional progress.
+            </p>
+          </div>
+
+          <AnimatePresence mode="wait">
+            {isSubmitting ? (
+              <motion.div key="loading" {...fadeTransition} className="py-20 flex flex-col items-center justify-center">
+                <FeedbackPageLoading />
+                <p className="mt-8 text-primary font-black uppercase tracking-widest text-xs animate-pulse">Processing Insights...</p>
+              </motion.div>
+            ) : (
+              <motion.div key="content" {...fadeTransition} className="grid grid-cols-1 md:grid-cols-12 gap-16 items-start">
+                {/* Info Column */}
+                <div className="md:col-span-5 space-y-12">
+                  <div className="space-y-6">
+                    <h3 className="text-2xl font-bold tracking-tight text-on-surface">Community Voices</h3>
+                    <p className="text-on-surface-variant font-medium leading-relaxed">
+                      Whether it's a bug report or a suggestion for a new feature, your input shapes the future of academic research.
+                    </p>
+                  </div>
+
+                  <div className="space-y-8">
+                    <div className="flex gap-4">
+                      <div className="w-12 h-12 rounded-xl bg-primary/5 text-primary flex items-center justify-center flex-shrink-0">
+                        <span className="material-symbols-outlined">lightbulb</span>
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-on-surface text-sm uppercase tracking-wider">Feature Suggestions</h4>
+                        <p className="text-on-surface-variant text-sm mt-1">Tell us what tools you need for better studying.</p>
+                      </div>
                     </div>
-                    <div>
-                      <h4 className="font-medium text-on-surface">Feature Suggestions</h4>
-                      <p className="text-sm text-on-surface-variant">Tell us what tools you need for better studying.</p>
+                    <div className="flex gap-4">
+                      <div className="w-12 h-12 rounded-xl bg-primary/5 text-primary flex items-center justify-center flex-shrink-0">
+                        <span className="material-symbols-outlined">bug_report</span>
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-on-surface text-sm uppercase tracking-wider">Bug Reporting</h4>
+                        <p className="text-on-surface-variant text-sm mt-1">Found a broken link or a typo? Let us know immediately.</p>
+                      </div>
                     </div>
                   </div>
-                  <div className="flex items-start gap-4">
-                    <div className="mt-1 w-10 h-10 rounded bg-surface-container-high flex items-center justify-center border border-outline-variant/30">
-                      <span className="material-symbols-outlined text-primary scale-75">bug_report</span>
+
+                  <div className="pt-8 border-t border-outline flex gap-8 opacity-40 grayscale">
+                    <div className="flex flex-col items-center gap-1">
+                      <span className="material-symbols-outlined text-xl">security</span>
+                      <span className="text-[9px] font-black uppercase tracking-tighter">Secure</span>
                     </div>
-                    <div>
-                      <h4 className="font-medium text-on-surface">Bug Reporting</h4>
-                      <p className="text-sm text-on-surface-variant">Found a broken link or a typo? Let us know immediately.</p>
+                    <div className="flex flex-col items-center gap-1">
+                      <span className="material-symbols-outlined text-xl">history</span>
+                      <span className="text-[9px] font-black uppercase tracking-tighter">Fast Response</span>
+                    </div>
+                    <div className="flex flex-col items-center gap-1">
+                      <span className="material-symbols-outlined text-xl">verified_user</span>
+                      <span className="text-[9px] font-black uppercase tracking-tighter">Institutional</span>
                     </div>
                   </div>
                 </div>
-              </div>
 
-              {/* Form Section */}
-              <div className="lg:col-span-7">
-                <div className="bg-surface-container-low p-8 md:p-12 border border-outline-variant/30 rounded-lg">
-                  <form onSubmit={handleFeedbackSubmit} className="space-y-8">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                      {/* Name Input */}
-                      <div className="flex flex-col gap-2">
-                        <label className="text-xs font-semibold tracking-wide text-on-surface-variant uppercase" htmlFor="name">Name (Optional)</label>
-                        <input 
-                          className="bg-transparent border border-outline-variant/30 text-on-surface px-4 py-3 focus:outline-none focus:border-primary focus:ring-0 transition-all placeholder:text-outline" 
-                          id="name" 
-                          name="name" 
-                          placeholder="John Doe" 
-                          type="text" 
-                          value={name}
-                          onChange={(e) => setName(e.target.value)}
-                        />
-                      </div>
-                      {/* Email Input */}
-                      <div className="flex flex-col gap-2">
-                        <label className="text-xs font-semibold tracking-wide text-on-surface-variant uppercase" htmlFor="email">Email (Optional)</label>
-                        <input 
-                          className="bg-transparent border border-outline-variant/30 text-on-surface px-4 py-3 focus:outline-none focus:border-primary focus:ring-0 transition-all placeholder:text-outline" 
-                          id="email" 
-                          name="email" 
-                          placeholder="john@example.com" 
-                          type="email"
-                          value={email}
-                          onChange={(e) => setEmail(e.target.value)}
-                        />
-                      </div>
+                {/* Form Column */}
+                <form onSubmit={handleFeedbackSubmit} className="md:col-span-7 bg-surface-bright border border-outline rounded-3xl p-8 md:p-12 shadow-sm space-y-10">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <div className="space-y-1.5">
+                      <label className="text-[11px] uppercase tracking-[0.1em] font-black text-primary ml-1">Full Name</label>
+                      <input
+                        type="text"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        placeholder="e.g., John Doe"
+                        className="theme-input w-full"
+                      />
                     </div>
-
-                    {/* Category Select */}
-                    <div className="flex flex-col gap-2">
-                      <label className="text-xs font-semibold tracking-wide text-on-surface-variant uppercase" htmlFor="category">Category</label>
-                      <div className="relative">
-                        <select 
-                          className="w-full bg-transparent border border-outline-variant/30 text-on-surface px-4 py-3 focus:outline-none focus:border-primary focus:ring-0 transition-all appearance-none" 
-                          id="category" 
-                          name="category"
-                          value={category}
-                          onChange={(e) => setCategory(e.target.value)}
-                        >
-                          <option className="bg-surface-container" value="suggestion">Suggestion</option>
-                          <option className="bg-surface-container" value="bug">Bug</option>
-                          <option className="bg-surface-container" value="other">Other</option>
-                        </select>
-                        <div className="absolute inset-y-0 right-0 flex items-center pr-4 pointer-events-none">
-                          <span className="material-symbols-outlined text-outline-variant">expand_more</span>
-                        </div>
-                      </div>
+                    <div className="space-y-1.5">
+                      <label className="text-[11px] uppercase tracking-[0.1em] font-black text-primary ml-1">Email Address</label>
+                      <input
+                        type="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        placeholder="john@example.com"
+                        className="theme-input w-full"
+                      />
                     </div>
-
-                    {/* Message Textarea */}
-                    <div className="flex flex-col gap-2">
-                      <label className="text-xs font-semibold tracking-wide text-on-surface-variant uppercase" htmlFor="message">Your Message *</label>
-                      <textarea 
-                        className="bg-transparent border border-outline-variant/30 text-on-surface px-4 py-3 focus:outline-none focus:border-primary focus:ring-0 transition-all placeholder:text-outline resize-none" 
-                        id="message" 
-                        name="message" 
-                        placeholder="Describe your experience or share your ideas..." 
-                        rows="6"
-                        required
-                        value={feedback}
-                        onChange={(e) => setFeedback(e.target.value)}
-                      ></textarea>
-                    </div>
-
-                    {/* Submit Button */}
-                    <div className="pt-4 flex justify-end">
-                      <button 
-                        disabled={!feedback.trim()}
-                        className={`group relative inline-flex items-center gap-3 bg-gradient-to-b from-primary to-primary-container text-on-primary font-semibold px-10 py-4 rounded-lg shadow-xl hover:translate-y-[-2px] transition-all active:translate-y-[0px] ${!feedback.trim() ? "opacity-50 cursor-not-allowed grayscale" : ""}`} 
-                        type="submit"
-                      >
-                        <span>Submit Feedback</span>
-                        <span className="material-symbols-outlined group-hover:translate-x-1 transition-transform">
-                          arrow_forward
-                        </span>
-                      </button>
-                    </div>
-                  </form>
-                </div>
-
-                {/* Subtle Social Proof / Info */}
-                <div className="mt-8 flex flex-wrap gap-12 justify-center lg:justify-start opacity-40 uppercase tracking-widest font-bold text-[9px]">
-                  <div className="flex items-center gap-2">
-                    <span className="material-symbols-outlined text-sm">security</span>
-                    <span>Encrypted Protocol</span>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <span className="material-symbols-outlined text-sm">history</span>
-                    <span>Response in 48h</span>
+
+                  <div className="space-y-1.5">
+                    <label className="text-[11px] uppercase tracking-[0.1em] font-black text-primary ml-1">Classification</label>
+                    <select
+                      value={category}
+                      onChange={(e) => setCategory(e.target.value)}
+                      className="theme-input w-full appearance-none pr-10"
+                      required
+                    >
+                      <option value="suggestion">💡 General Suggestion</option>
+                      <option value="bug">🪲 Technical Bug</option>
+                      <option value="other">💬 Other Inquiry</option>
+                    </select>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <span className="material-symbols-outlined text-sm">verified_user</span>
-                    <span>Institutional Authority</span>
+
+                  <div className="space-y-1.5">
+                    <label className="text-[11px] uppercase tracking-[0.1em] font-black text-primary ml-1">Your Insights *</label>
+                    <textarea
+                      value={feedback}
+                      onChange={(e) => setFeedback(e.target.value)}
+                      placeholder="Describe your experience or share your ideas..."
+                      rows="5"
+                      className="theme-input w-full resize-none"
+                      required
+                    />
                   </div>
-                </div>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+
+                  <div className="pt-4">
+                    <button
+                      type="submit"
+                      disabled={isSubmitting || !feedback.trim()}
+                      className="w-full btn-primary h-16 text-lg flex items-center justify-center gap-3 shadow-xl shadow-primary/20 hover:scale-[1.02] active:scale-[0.98] transition-all disabled:opacity-50 disabled:grayscale"
+                    >
+                      <span className="material-symbols-outlined">send</span>
+                      <span className="font-black uppercase tracking-widest text-sm">Submit Insights</span>
+                    </button>
+                  </div>
+                </form>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
       </main>
-
       <Footer />
     </div>
   );

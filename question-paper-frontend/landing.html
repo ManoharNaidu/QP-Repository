@@ -1,259 +1,438 @@
-<!DOCTYPE html>
+<!doctype html>
 
-<html class="dark" lang="en"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Scholarly | Access Past Question Papers Effortlessly</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script id="tailwind-config">
+<html class="dark" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Scholarly | Access Past Question Papers Effortlessly</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script id="tailwind-config">
       tailwind.config = {
         darkMode: "class",
         theme: {
           extend: {
-            "colors": {
-                    "secondary-dim": "#9f9da1",
-                    "surface-variant": "#252626",
-                    "on-secondary-container": "#c1bec3",
-                    "on-error": "#490013",
-                    "background": "#0e0e0e",
-                    "surface-container-highest": "#252626",
-                    "outline-variant": "#484848",
-                    "on-secondary": "#202023",
-                    "on-tertiary": "#4d546e",
-                    "surface-container-high": "#1f2020",
-                    "primary-container": "#3323cc",
-                    "secondary-fixed-dim": "#d7d3d8",
-                    "tertiary-container": "#d2d9f8",
-                    "on-background": "#e7e5e5",
-                    "outline": "#767575",
-                    "primary": "#c3c0ff",
-                    "tertiary": "#e3e7ff",
-                    "surface-tint": "#c3c0ff",
-                    "on-secondary-fixed-variant": "#5c5b5f",
-                    "surface-container-low": "#131313",
-                    "secondary-fixed": "#e5e1e6",
-                    "surface-bright": "#2b2c2c",
-                    "on-primary-fixed": "#2a13c5",
-                    "secondary-container": "#3c3b3f",
-                    "surface-container-lowest": "#000000",
-                    "inverse-on-surface": "#565555",
-                    "tertiary-dim": "#c4cbe9",
-                    "on-primary-container": "#cecbff",
-                    "tertiary-fixed": "#d2d9f8",
-                    "on-tertiary-container": "#444c65",
-                    "primary-fixed-dim": "#d2d0ff",
-                    "on-surface": "#e7e5e5",
-                    "on-error-container": "#ff97a3",
-                    "primary-dim": "#b3b1ff",
-                    "error-dim": "#b95463",
-                    "on-secondary-fixed": "#403f43",
-                    "surface": "#0e0e0e",
-                    "on-primary-fixed-variant": "#4a40e0",
-                    "inverse-primary": "#4e45e4",
-                    "primary-fixed": "#e2dfff",
-                    "surface-dim": "#0e0e0e",
-                    "error": "#ec7c8a",
-                    "on-tertiary-fixed": "#323951",
-                    "on-primary": "#2b15c6",
-                    "tertiary-fixed-dim": "#c4cbe9",
-                    "on-tertiary-fixed-variant": "#4e556f",
-                    "error-container": "#7f2737",
-                    "secondary": "#9f9da1",
-                    "inverse-surface": "#fcf9f8",
-                    "on-surface-variant": "#acabaa",
-                    "surface-container": "#191a1a"
+            colors: {
+              "secondary-dim": "#9f9da1",
+              "surface-variant": "#252626",
+              "on-secondary-container": "#c1bec3",
+              "on-error": "#490013",
+              background: "#0e0e0e",
+              "surface-container-highest": "#252626",
+              "outline-variant": "#484848",
+              "on-secondary": "#202023",
+              "on-tertiary": "#4d546e",
+              "surface-container-high": "#1f2020",
+              "primary-container": "#3323cc",
+              "secondary-fixed-dim": "#d7d3d8",
+              "tertiary-container": "#d2d9f8",
+              "on-background": "#e7e5e5",
+              outline: "#767575",
+              primary: "#c3c0ff",
+              tertiary: "#e3e7ff",
+              "surface-tint": "#c3c0ff",
+              "on-secondary-fixed-variant": "#5c5b5f",
+              "surface-container-low": "#131313",
+              "secondary-fixed": "#e5e1e6",
+              "surface-bright": "#2b2c2c",
+              "on-primary-fixed": "#2a13c5",
+              "secondary-container": "#3c3b3f",
+              "surface-container-lowest": "#000000",
+              "inverse-on-surface": "#565555",
+              "tertiary-dim": "#c4cbe9",
+              "on-primary-container": "#cecbff",
+              "tertiary-fixed": "#d2d9f8",
+              "on-tertiary-container": "#444c65",
+              "primary-fixed-dim": "#d2d0ff",
+              "on-surface": "#e7e5e5",
+              "on-error-container": "#ff97a3",
+              "primary-dim": "#b3b1ff",
+              "error-dim": "#b95463",
+              "on-secondary-fixed": "#403f43",
+              surface: "#0e0e0e",
+              "on-primary-fixed-variant": "#4a40e0",
+              "inverse-primary": "#4e45e4",
+              "primary-fixed": "#e2dfff",
+              "surface-dim": "#0e0e0e",
+              error: "#ec7c8a",
+              "on-tertiary-fixed": "#323951",
+              "on-primary": "#2b15c6",
+              "tertiary-fixed-dim": "#c4cbe9",
+              "on-tertiary-fixed-variant": "#4e556f",
+              "error-container": "#7f2737",
+              secondary: "#9f9da1",
+              "inverse-surface": "#fcf9f8",
+              "on-surface-variant": "#acabaa",
+              "surface-container": "#191a1a",
             },
-            "borderRadius": {
-                    "DEFAULT": "0.125rem",
-                    "lg": "0.25rem",
-                    "xl": "0.5rem",
-                    "full": "0.75rem"
+            borderRadius: {
+              DEFAULT: "0.125rem",
+              lg: "0.25rem",
+              xl: "0.5rem",
+              full: "0.75rem",
             },
-            "fontFamily": {
-                    "headline": ["Inter"],
-                    "body": ["Inter"],
-                    "label": ["Inter"]
-            }
+            fontFamily: {
+              headline: ["Inter"],
+              body: ["Inter"],
+              label: ["Inter"],
+            },
           },
         },
-      }
+      };
     </script>
-<style>
-        body { font-family: 'Inter', sans-serif; background-color: #0e0e0e; color: #e7e5e5; }
-        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
-        .ghost-border { border: 1px solid rgba(72, 72, 72, 0.3); }
-        .primary-gradient { background: linear-gradient(180deg, #4F46E5 0%, #3323cc 100%); }
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: #0e0e0e;
+        color: #e7e5e5;
+      }
+      .material-symbols-outlined {
+        font-variation-settings:
+          "FILL" 0,
+          "wght" 300,
+          "GRAD" 0,
+          "opsz" 24;
+      }
+      .ghost-border {
+        border: 1px solid rgba(72, 72, 72, 0.3);
+      }
+      .primary-gradient {
+        background: linear-gradient(180deg, #4f46e5 0%, #3323cc 100%);
+      }
     </style>
-</head>
-<body class="bg-surface selection:bg-primary-container selection:text-on-primary-container">
-<!-- TopNavBar -->
-<nav class="fixed top-0 w-full z-50 bg-[#0E0E0E] flex items-center justify-between px-8 py-4 max-w-full font-['Inter'] antialiased tracking-tight">
-<div class="flex items-center gap-8">
-<a class="text-xl font-semibold tracking-tighter text-[#4F46E5]" href="#">Scholarly</a>
-<div class="hidden md:flex items-center space-x-6">
-<a class="text-[#4F46E5] font-medium border-b-2 border-[#4F46E5] pb-1" href="#">Home</a>
-<a class="text-gray-400 font-normal hover:text-gray-200 transition-colors" href="#">Browse</a>
-<a class="text-gray-400 font-normal hover:text-gray-200 transition-colors" href="#">Upload</a>
-<a class="text-gray-400 font-normal hover:text-gray-200 transition-colors" href="#">Feedback</a>
-</div>
-</div>
-<div class="flex items-center gap-4">
-<button class="p-2 text-gray-400 hover:bg-[#1A1A1A] transition-all duration-200 scale-95 active:scale-100">
-<span class="material-symbols-outlined" data-icon="dark_mode">dark_mode</span>
-</button>
-<button class="p-2 md:hidden text-gray-400">
-<span class="material-symbols-outlined" data-icon="menu">menu</span>
-</button>
-</div>
-</nav>
-<main class="pt-24 min-h-screen flex flex-col">
-<!-- Hero Section -->
-<section class="px-8 pt-20 pb-32 max-w-7xl mx-auto w-full">
-<div class="flex flex-col md:flex-row items-start gap-12 lg:gap-24">
-<div class="flex-1 space-y-8">
-<h1 class="text-5xl md:text-7xl font-bold tracking-tighter leading-[1.1] text-on-surface">
-                        Access Past Question Papers Effortlessly.
-                    </h1>
-<p class="text-xl md:text-2xl text-on-surface-variant font-light max-w-2xl leading-relaxed">
-                        A focused, minimalist archive for students to find, download, and contribute question papers.
-                    </p>
-<div class="flex flex-wrap gap-4 pt-4">
-<button class="primary-gradient px-8 py-4 rounded-lg font-semibold text-on-primary shadow-lg hover:brightness-110 transition-all scale-95 active:scale-100">
-                            Browse Papers
-                        </button>
-<button class="px-8 py-4 rounded-lg font-semibold border-2 border-inverse-primary text-inverse-primary hover:bg-surface-container-high transition-all scale-95 active:scale-100">
-                            Upload Paper
-                        </button>
-</div>
-</div>
-<!-- Asymmetric Decorative Element -->
-<div class="hidden lg:block w-1/3 relative">
-<div class="aspect-[3/4] bg-surface-container-low ghost-border p-8 flex flex-col justify-between">
-<div class="space-y-4">
-<div class="w-12 h-1 bg-primary"></div>
-<div class="space-y-2">
-<div class="h-2 w-full bg-surface-container-highest rounded-full"></div>
-<div class="h-2 w-3/4 bg-surface-container-highest rounded-full"></div>
-<div class="h-2 w-5/6 bg-surface-container-highest rounded-full"></div>
-</div>
-</div>
-<div class="text-right">
-<span class="text-4xl font-headline font-extrabold text-surface-container-highest">01</span>
-</div>
-</div>
-<div class="absolute -bottom-6 -left-6 aspect-square w-32 bg-primary-container flex items-center justify-center">
-<span class="material-symbols-outlined text-on-primary-container text-4xl" data-icon="history_edu">history_edu</span>
-</div>
-</div>
-</div>
-</section>
-<!-- Features Grid -->
-<section class="bg-surface-container-low py-24 border-y border-outline-variant/20">
-<div class="px-8 max-w-7xl mx-auto w-full">
-<div class="grid grid-cols-1 md:grid-cols-3 gap-0 border-l border-outline-variant/30">
-<!-- Feature 1 -->
-<div class="p-12 border-r border-b md:border-b-0 border-outline-variant/30 space-y-6 hover:bg-surface-container transition-colors group">
-<div class="text-primary">
-<span class="material-symbols-outlined text-4xl" data-icon="search">search</span>
-</div>
-<h3 class="text-2xl font-bold tracking-tight text-on-surface">Fast Search</h3>
-<p class="text-on-surface-variant font-light leading-relaxed">
-                            Find exact papers in seconds with advanced filters for board, year, and subject expertise.
-                        </p>
-</div>
-<!-- Feature 2 -->
-<div class="p-12 border-r border-b md:border-b-0 border-outline-variant/30 space-y-6 hover:bg-surface-container transition-colors">
-<div class="text-primary">
-<span class="material-symbols-outlined text-4xl" data-icon="cloud_upload">cloud_upload</span>
-</div>
-<h3 class="text-2xl font-bold tracking-tight text-on-surface">Secure Uploads</h3>
-<p class="text-on-surface-variant font-light leading-relaxed">
-                            Anonymously contribute papers to the repository through a verified, secure peer-review process.
-                        </p>
-</div>
-<!-- Feature 3 -->
-<div class="p-12 border-r border-outline-variant/30 space-y-6 hover:bg-surface-container transition-colors">
-<div class="text-primary">
-<span class="material-symbols-outlined text-4xl" data-icon="picture_as_pdf">picture_as_pdf</span>
-</div>
-<h3 class="text-2xl font-bold tracking-tight text-on-surface">PDF Archive</h3>
-<p class="text-on-surface-variant font-light leading-relaxed">
-                            Access high-fidelity digital scans optimized for mobile reading and rapid printing.
-                        </p>
-</div>
-</div>
-</div>
-</section>
-<!-- Preview Showcase (Bento Style) -->
-<section class="py-32 px-8 max-w-7xl mx-auto w-full">
-<div class="mb-16">
-<h2 class="text-3xl font-bold tracking-tighter text-on-surface">Featured Collections</h2>
-<div class="w-16 h-1 bg-primary mt-4"></div>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-12 gap-6 h-auto md:h-[600px]">
-<div class="md:col-span-8 ghost-border bg-surface-container-high p-8 flex flex-col justify-between group overflow-hidden relative">
-<div class="relative z-10">
-<span class="text-xs font-bold tracking-widest text-primary mb-2 block">POPULAR</span>
-<h3 class="text-4xl font-bold tracking-tighter text-on-surface max-w-md">2023 Board Examinations Archive</h3>
-</div>
-<div class="absolute right-0 bottom-0 w-2/3 h-2/3 opacity-20 transform translate-x-1/4 translate-y-1/4 group-hover:scale-105 transition-transform duration-700">
-<img class="w-full h-full object-cover" data-alt="close-up of stacked library books with focus on paper texture and scholarly atmosphere" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBG-JntQ0F2eNGL1OO-TdTm_qy50iYHDhmOiYCYoukgiYFmyukDwBgseAq9tXZWh7KIsmXAGIFKW1OySZgtLnDuJ-rS_YBGVvpNwBbpJeZewBb79Lg7QSRK3CVL4rh1aBkJ7IkV4vP4HWpD524QMFpxGOw4jQJpXxtdMUgSgqhVxzOCZ8QaL2fvOz7B-z-g-V6WpexXWmJemUq-372GOYZKVizIWtU8emHcVMNSvDNH4Yh3KAbYMweIFq7GH1LtxKFKxfZZUnQ9y8Iy"/>
-</div>
-<button class="relative z-10 self-start text-primary font-bold flex items-center gap-2 group">
-                        Explore Collection <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform" data-icon="arrow_forward">arrow_forward</span>
-</button>
-</div>
-<div class="md:col-span-4 grid grid-rows-2 gap-6">
-<div class="ghost-border bg-surface-container-low p-6 flex flex-col justify-between">
-<h4 class="text-xl font-bold text-on-surface">STEM Focus</h4>
-<p class="text-sm text-on-surface-variant">Mathematics, Physics &amp; Advanced Chemistry.</p>
-<div class="flex justify-end">
-<span class="material-symbols-outlined text-outline" data-icon="science">science</span>
-</div>
-</div>
-<div class="ghost-border bg-[#1A1A1A] p-6 flex flex-col justify-between">
-<h4 class="text-xl font-bold text-on-surface">Humanities</h4>
-<p class="text-sm text-on-surface-variant">History, Literature &amp; Political Science papers.</p>
-<div class="flex justify-end">
-<span class="material-symbols-outlined text-outline" data-icon="auto_stories">auto_stories</span>
-</div>
-</div>
-</div>
-</div>
-</section>
-<!-- Institutional CTA -->
-<section class="mb-32 px-8">
-<div class="max-w-4xl mx-auto ghost-border bg-surface-container-low py-20 px-8 text-center space-y-8">
-<h2 class="text-4xl font-bold tracking-tighter text-on-surface">Help Build the Repository</h2>
-<p class="text-on-surface-variant text-lg max-w-xl mx-auto font-light">
-                    Scholarly is powered by students. Your contributions ensure that high-quality study materials remain free and accessible to everyone.
-                </p>
-<div class="flex justify-center">
-<button class="px-12 py-4 border-2 border-primary text-primary font-bold hover:bg-primary hover:text-on-primary transition-all">
-                        Upload Your Papers
-                    </button>
-</div>
-</div>
-</section>
-</main>
-<!-- Footer -->
-<footer class="w-full py-12 mt-auto border-t border-[#1A1A1A] bg-[#0E0E0E]">
-<div class="flex flex-col md:flex-row justify-between items-center px-12 max-w-7xl mx-auto gap-8">
-<div class="text-sm font-['Inter'] text-gray-500">
-                © 2024 Scholarly Repository. Institutional Authority.
+  </head>
+  <body
+    class="bg-surface selection:bg-primary-container selection:text-on-primary-container"
+  >
+    <!-- TopNavBar -->
+    <nav
+      class="fixed top-0 w-full z-50 bg-[#0E0E0E] flex items-center justify-between px-8 py-4 max-w-full font-['Inter'] antialiased tracking-tight"
+    >
+      <div class="flex items-center gap-8">
+        <a
+          class="text-xl font-semibold tracking-tighter text-[#4F46E5]"
+          href="#"
+          >Scholarly</a
+        >
+        <div class="hidden md:flex items-center space-x-6">
+          <a
+            class="text-[#4F46E5] font-medium border-b-2 border-[#4F46E5] pb-1"
+            href="#"
+            >Home</a
+          >
+          <a
+            class="text-gray-400 font-normal hover:text-gray-200 transition-colors"
+            href="#"
+            >Browse</a
+          >
+          <a
+            class="text-gray-400 font-normal hover:text-gray-200 transition-colors"
+            href="#"
+            >Upload</a
+          >
+          <a
+            class="text-gray-400 font-normal hover:text-gray-200 transition-colors"
+            href="#"
+            >Feedback</a
+          >
+        </div>
+      </div>
+      <div class="flex items-center gap-4">
+        <button
+          class="p-2 text-gray-400 hover:bg-[#1A1A1A] transition-all duration-200 scale-95 active:scale-100"
+        >
+          <span class="material-symbols-outlined" data-icon="dark_mode"
+            >dark_mode</span
+          >
+        </button>
+        <button class="p-2 md:hidden text-gray-400">
+          <span class="material-symbols-outlined" data-icon="menu">menu</span>
+        </button>
+      </div>
+    </nav>
+    <main class="pt-24 min-h-screen flex flex-col">
+      <!-- Hero Section -->
+      <section class="px-8 pt-20 pb-32 max-w-7xl mx-auto w-full">
+        <div class="flex flex-col md:flex-row items-start gap-12 lg:gap-24">
+          <div class="flex-1 space-y-8">
+            <h1
+              class="text-5xl md:text-7xl font-bold tracking-tighter leading-[1.1] text-on-surface"
+            >
+              Access Past Question Papers Effortlessly.
+            </h1>
+            <p
+              class="text-xl md:text-2xl text-on-surface-variant font-light max-w-2xl leading-relaxed"
+            >
+              A focused, minimalist archive for students to find, download, and
+              contribute question papers.
+            </p>
+            <div class="flex flex-wrap gap-4 pt-4">
+              <button
+                class="primary-gradient px-8 py-4 rounded-lg font-semibold text-on-primary shadow-lg hover:brightness-110 transition-all scale-95 active:scale-100"
+              >
+                Browse Papers
+              </button>
+              <button
+                class="px-8 py-4 rounded-lg font-semibold border-2 border-inverse-primary text-inverse-primary hover:bg-surface-container-high transition-all scale-95 active:scale-100"
+              >
+                Upload Paper
+              </button>
             </div>
-<div class="flex gap-8 text-sm font-['Inter']">
-<a class="text-gray-500 hover:text-gray-300 hover:underline transition-all" href="#">Terms</a>
-<a class="text-gray-500 hover:text-gray-300 hover:underline transition-all" href="#">Privacy</a>
-<a class="text-gray-500 hover:text-gray-300 hover:underline transition-all" href="#">Archive Rules</a>
-</div>
-<div class="flex items-center gap-4">
-<span class="material-symbols-outlined text-gray-500" data-icon="school">school</span>
-<span class="text-gray-500 text-xs font-bold tracking-widest">SCHOLARLY.ARCHIVE</span>
-</div>
-</div>
-</footer>
-</body></html>
+          </div>
+          <!-- Asymmetric Decorative Element -->
+          <div class="hidden lg:block w-1/3 relative">
+            <div
+              class="aspect-[3/4] bg-surface-container-low ghost-border p-8 flex flex-col justify-between"
+            >
+              <div class="space-y-4">
+                <div class="w-12 h-1 bg-primary"></div>
+                <div class="space-y-2">
+                  <div
+                    class="h-2 w-full bg-surface-container-highest rounded-full"
+                  ></div>
+                  <div
+                    class="h-2 w-3/4 bg-surface-container-highest rounded-full"
+                  ></div>
+                  <div
+                    class="h-2 w-5/6 bg-surface-container-highest rounded-full"
+                  ></div>
+                </div>
+              </div>
+              <div class="text-right">
+                <span
+                  class="text-4xl font-headline font-extrabold text-surface-container-highest"
+                  >01</span
+                >
+              </div>
+            </div>
+            <div
+              class="absolute -bottom-6 -left-6 aspect-square w-32 bg-primary-container flex items-center justify-center"
+            >
+              <span
+                class="material-symbols-outlined text-on-primary-container text-4xl"
+                data-icon="history_edu"
+                >history_edu</span
+              >
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Features Grid -->
+      <section
+        class="bg-surface-container-low py-24 border-y border-outline-variant/20"
+      >
+        <div class="px-8 max-w-7xl mx-auto w-full">
+          <div
+            class="grid grid-cols-1 md:grid-cols-3 gap-0 border-l border-outline-variant/30"
+          >
+            <!-- Feature 1 -->
+            <div
+              class="p-12 border-r border-b md:border-b-0 border-outline-variant/30 space-y-6 hover:bg-surface-container transition-colors group"
+            >
+              <div class="text-primary">
+                <span
+                  class="material-symbols-outlined text-4xl"
+                  data-icon="search"
+                  >search</span
+                >
+              </div>
+              <h3 class="text-2xl font-bold tracking-tight text-on-surface">
+                Fast Search
+              </h3>
+              <p class="text-on-surface-variant font-light leading-relaxed">
+                Find exact papers in seconds with advanced filters for board,
+                year, and subject expertise.
+              </p>
+            </div>
+            <!-- Feature 2 -->
+            <div
+              class="p-12 border-r border-b md:border-b-0 border-outline-variant/30 space-y-6 hover:bg-surface-container transition-colors"
+            >
+              <div class="text-primary">
+                <span
+                  class="material-symbols-outlined text-4xl"
+                  data-icon="cloud_upload"
+                  >cloud_upload</span
+                >
+              </div>
+              <h3 class="text-2xl font-bold tracking-tight text-on-surface">
+                Secure Uploads
+              </h3>
+              <p class="text-on-surface-variant font-light leading-relaxed">
+                Anonymously contribute papers to the repository through a
+                verified, secure peer-review process.
+              </p>
+            </div>
+            <!-- Feature 3 -->
+            <div
+              class="p-12 border-r border-outline-variant/30 space-y-6 hover:bg-surface-container transition-colors"
+            >
+              <div class="text-primary">
+                <span
+                  class="material-symbols-outlined text-4xl"
+                  data-icon="picture_as_pdf"
+                  >picture_as_pdf</span
+                >
+              </div>
+              <h3 class="text-2xl font-bold tracking-tight text-on-surface">
+                PDF Archive
+              </h3>
+              <p class="text-on-surface-variant font-light leading-relaxed">
+                Access high-fidelity digital scans optimized for mobile reading
+                and rapid printing.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Preview Showcase (Bento Style) -->
+      <section class="py-32 px-8 max-w-7xl mx-auto w-full">
+        <div class="mb-16">
+          <h2 class="text-3xl font-bold tracking-tighter text-on-surface">
+            Featured Collections
+          </h2>
+          <div class="w-16 h-1 bg-primary mt-4"></div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-6 h-auto md:h-[600px]">
+          <div
+            class="md:col-span-8 ghost-border bg-surface-container-high p-8 flex flex-col justify-between group overflow-hidden relative"
+          >
+            <div class="relative z-10">
+              <span
+                class="text-xs font-bold tracking-widest text-primary mb-2 block"
+                >POPULAR</span
+              >
+              <h3
+                class="text-4xl font-bold tracking-tighter text-on-surface max-w-md"
+              >
+                2023 Board Examinations Archive
+              </h3>
+            </div>
+            <div
+              class="absolute right-0 bottom-0 w-2/3 h-2/3 opacity-20 transform translate-x-1/4 translate-y-1/4 group-hover:scale-105 transition-transform duration-700"
+            >
+              <img
+                class="w-full h-full object-cover"
+                data-alt="close-up of stacked library books with focus on paper texture and scholarly atmosphere"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBG-JntQ0F2eNGL1OO-TdTm_qy50iYHDhmOiYCYoukgiYFmyukDwBgseAq9tXZWh7KIsmXAGIFKW1OySZgtLnDuJ-rS_YBGVvpNwBbpJeZewBb79Lg7QSRK3CVL4rh1aBkJ7IkV4vP4HWpD524QMFpxGOw4jQJpXxtdMUgSgqhVxzOCZ8QaL2fvOz7B-z-g-V6WpexXWmJemUq-372GOYZKVizIWtU8emHcVMNSvDNH4Yh3KAbYMweIFq7GH1LtxKFKxfZZUnQ9y8Iy"
+              />
+            </div>
+            <button
+              class="relative z-10 self-start text-primary font-bold flex items-center gap-2 group"
+            >
+              Explore Collection
+              <span
+                class="material-symbols-outlined group-hover:translate-x-1 transition-transform"
+                data-icon="arrow_forward"
+                >arrow_forward</span
+              >
+            </button>
+          </div>
+          <div class="md:col-span-4 grid grid-rows-2 gap-6">
+            <div
+              class="ghost-border bg-surface-container-low p-6 flex flex-col justify-between"
+            >
+              <h4 class="text-xl font-bold text-on-surface">STEM Focus</h4>
+              <p class="text-sm text-on-surface-variant">
+                Mathematics, Physics &amp; Advanced Chemistry.
+              </p>
+              <div class="flex justify-end">
+                <span
+                  class="material-symbols-outlined text-outline"
+                  data-icon="science"
+                  >science</span
+                >
+              </div>
+            </div>
+            <div
+              class="ghost-border bg-[#1A1A1A] p-6 flex flex-col justify-between"
+            >
+              <h4 class="text-xl font-bold text-on-surface">Humanities</h4>
+              <p class="text-sm text-on-surface-variant">
+                History, Literature &amp; Political Science papers.
+              </p>
+              <div class="flex justify-end">
+                <span
+                  class="material-symbols-outlined text-outline"
+                  data-icon="auto_stories"
+                  >auto_stories</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Institutional CTA -->
+      <section class="mb-32 px-8">
+        <div
+          class="max-w-4xl mx-auto ghost-border bg-surface-container-low py-20 px-8 text-center space-y-8"
+        >
+          <h2 class="text-4xl font-bold tracking-tighter text-on-surface">
+            Help Build the Repository
+          </h2>
+          <p
+            class="text-on-surface-variant text-lg max-w-xl mx-auto font-light"
+          >
+            Your contributions ensure that high-quality study materials remain
+            free and accessible to everyone.
+          </p>
+          <div class="flex justify-center">
+            <button
+              class="px-12 py-4 border-2 border-primary text-primary font-bold hover:bg-primary hover:text-on-primary transition-all"
+            >
+              Upload Your Papers
+            </button>
+          </div>
+        </div>
+      </section>
+    </main>
+    <!-- Footer -->
+    <footer class="w-full py-12 mt-auto border-t border-[#1A1A1A] bg-[#0E0E0E]">
+      <div
+        class="flex flex-col md:flex-row justify-between items-center px-12 max-w-7xl mx-auto gap-8"
+      >
+        <div class="text-sm font-['Inter'] text-gray-500">
+          © 2024 Scholarly Repository. Institutional Authority.
+        </div>
+        <div class="flex gap-8 text-sm font-['Inter']">
+          <a
+            class="text-gray-500 hover:text-gray-300 hover:underline transition-all"
+            href="#"
+            >Terms</a
+          >
+          <a
+            class="text-gray-500 hover:text-gray-300 hover:underline transition-all"
+            href="#"
+            >Privacy</a
+          >
+          <a
+            class="text-gray-500 hover:text-gray-300 hover:underline transition-all"
+            href="#"
+            >Archive Rules</a
+          >
+        </div>
+        <div class="flex items-center gap-4">
+          <span
+            class="material-symbols-outlined text-gray-500"
+            data-icon="school"
+            >school</span
+          >
+          <span class="text-gray-500 text-xs font-bold tracking-widest"
+            >SCHOLARLY.ARCHIVE</span
+          >
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -4,114 +4,61 @@
 
 /* ── CSS Variables ─────────────────────────────────── */
 :root {
-  /* The QP Repository Minimalist - Dark Mode (Default) */
-  --background: #0e0e0e;
-  --error: #ec7c8a;
-  --error-container: #7f2737;
-  --error-dim: #b95463;
-  --inverse-on-surface: #565555;
-  --inverse-primary: #4e45e4;
-  --inverse-surface: #fcf9f8;
-  --on-background: #e7e5e5;
-  --on-error: #490013;
-  --on-error-container: #ff97a3;
-  --on-primary: #2b15c6;
-  --on-primary-container: #cecbff;
-  --on-primary-fixed: #2a13c5;
-  --on-primary-fixed-variant: #4a40e0;
-  --on-secondary: #202023;
-  --on-secondary-container: #c1bec3;
-  --on-secondary-fixed: #403f43;
-  --on-secondary-fixed-variant: #5c5b5f;
-  --on-surface: #e7e5e5;
-  --on-surface-variant: #acabaa;
-  --on-tertiary: #4d546e;
-  --on-tertiary-container: #444c65;
-  --on-tertiary-fixed: #323951;
-  --on-tertiary-fixed-variant: #4e556f;
-  --outline: #767575;
-  --outline-variant: #484848;
-  --primary: #c3c0ff;
-  --primary-container: #3323cc;
-  --primary-dim: #b3b1ff;
-  --primary-fixed: #e2dfff;
-  --primary-fixed-dim: #d2d0ff;
-  --secondary: #9f9da1;
-  --secondary-container: #3c3b3f;
-  --secondary-dim: #9f9da1;
-  --secondary-fixed: #e5e1e6;
-  --secondary-fixed-dim: #d7d3d8;
-  --surface: #0e0e0e;
-  --surface-bright: #2b2c2c;
-  --surface-container: #191a1a;
-  --surface-container-high: #1f2020;
-  --surface-container-highest: #252626;
-  --surface-container-low: #131313;
-  --surface-container-lowest: #000000;
-  --surface-dim: #0e0e0e;
-  --surface-tint: #c3c0ff;
-  --surface-variant: #252626;
-  --tertiary: #e3e7ff;
-  --tertiary-container: #d2d9f8;
-  --tertiary-dim: #c4cbe9;
-  --tertiary-fixed: #d2d9f8;
-  --tertiary-fixed-dim: #c4cbe9;
+  /* Figma - Consumer SaaS - Light Mode (Default) */
+  --background: #ffffff;
+  --surface: #ffffff;
+  --surface-bright: #f8f9fa;
+  --surface-container-lowest: #ffffff;
+  --surface-container-low: #f3f4f6;
+  --surface-container: #e5e7eb;
+  --surface-container-high: #d1d5db;
+  --surface-container-highest: #9ca3af;
+  
+  --primary: #0066FF;
+  --primary-container: #e0ebff;
+  --on-primary: #ffffff;
+  --on-primary-container: #0044aa;
+  
+  --secondary: #4b5563;
+  --secondary-container: #f3f4f6;
+  --on-secondary: #ffffff;
+  --on-secondary-container: #1f2937;
+  
+  --on-background: #111827;
+  --on-surface: #111827;
+  --on-surface-variant: #4b5563;
+  
+  --outline: #e5e7eb;
+  --outline-variant: #d1d5db;
+  
+  --error: #ef4444;
+  --on-error: #ffffff;
 }
 
-/* Light mode overrides map loosely based on original values but using new token structure */
-html.light {
-  --background: #f1f5f9;
-  --error: #ef4444;
-  --error-container: #fee2e2;
-  --error-dim: #dc2626;
-  --inverse-on-surface: #e2e8f0;
-  --inverse-primary: #a5b4fc;
-  --inverse-surface: #0f172a;
-  --on-background: #0f172a;
-  --on-error: #ffffff;
-  --on-error-container: #7f1d1d;
+/* Dark mode overrides aligned with Figma high-contrast style */
+html.dark {
+  --background: #0f172a;
+  --surface: #0f172a;
+  --surface-bright: #1e293b;
+  --surface-container-lowest: #020617;
+  --surface-container-low: #1e293b;
+  --surface-container: #334155;
+  --surface-container-high: #475569;
+  --surface-container-highest: #64748b;
+  
+  --primary: #3b82f6;
+  --primary-container: #1e3a8a;
   --on-primary: #ffffff;
-  --on-primary-container: #312e81;
-  --on-primary-fixed: #ffffff;
-  --on-primary-fixed-variant: #e0e7ff;
-  --on-secondary: #ffffff;
-  --on-secondary-container: #1e293b;
-  --on-secondary-fixed: #ffffff;
-  --on-secondary-fixed-variant: #cbd5e1;
-  --on-surface: #0f172a;
-  --on-surface-variant: #475569;
-  --on-tertiary: #ffffff;
-  --on-tertiary-container: #334155;
-  --on-tertiary-fixed: #ffffff;
-  --on-tertiary-fixed-variant: #94a3b8;
-  --outline: #94a3b8;
-  --outline-variant: #cbd5e1;
-  --primary: #4f46e5;
-  --primary-container: #e0e7ff;
-  --primary-dim: #4338ca;
-  --primary-fixed: #6366f1;
-  --primary-fixed-dim: #818cf8;
-  --secondary: #64748b;
-  --secondary-container: #e2e8f0;
-  --secondary-dim: #475569;
-  --secondary-fixed: #94a3b8;
-  --secondary-fixed-dim: #cbd5e1;
-  --surface: #f1f5f9;
-  --surface-bright: #ffffff;
-  --surface-container: #e2e8f0;
-  --surface-container-high: #cbd5e1;
-  --surface-container-highest: #94a3b8;
-  --surface-container-low: #f8fafc;
-  --surface-container-lowest: #ffffff;
-  --surface-dim: #e2e8f0;
-  --surface-tint: #4f46e5;
-  --surface-variant: #cbd5e1;
-  --tertiary: #475569;
-  --tertiary-container: #e2e8f0;
-  --tertiary-dim: #334155;
-  --tertiary-fixed: #64748b;
-  --tertiary-fixed-dim: #94a3b8;
+  --on-primary-container: #bfdbfe;
+  
+  --on-background: #f8fafc;
+  --on-surface: #f8fafc;
+  --on-surface-variant: #94a3b8;
+  
+  --outline: #334155;
+  --outline-variant: #475569;
 }
+
 
 /* ── Base ───────────────────────────────────────────── */
 @layer base {
@@ -164,57 +111,75 @@ html.light {
   }
 
   .glass-card {
-    background: var(--surface-container-lowest);
-    border: 1px solid color-mix(in srgb, var(--outline-variant) 30%, transparent);
-    transition: background 0.3s ease, border-color 0.3s ease;
+    background: var(--surface);
+    border: 1px solid var(--outline);
+    border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
   }
 
   .glass-nav {
-    background: var(--surface-container-low);
-    border-bottom: 1px solid color-mix(in srgb, var(--outline-variant) 30%, transparent);
+    background: color-mix(in srgb, var(--background) 95%, transparent);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--outline);
     transition: background 0.3s ease;
   }
 
 
   .theme-input {
-    background: transparent;
+    background: var(--surface-bright);
     color: var(--on-surface);
     border: 1px solid var(--outline);
-    border-radius: 4px;
-    padding: 0.5rem 1rem;
-    transition: border-color 0.2s, border-width 0.2s;
+    border-radius: 8px;
+    padding: 0.625rem 1rem;
+    transition: border-color 0.2s, ring 0.2s;
   }
   .theme-input:focus {
     outline: none;
     border-color: var(--primary);
-    border-width: 2px;
+    box-shadow: 0 0 0 2px var(--primary-container);
   }
 
   .btn-primary {
-    background: linear-gradient(180deg, var(--primary), var(--primary-container));
+    background: var(--primary);
     color: var(--on-primary);
-    border: none;
-    transition: filter 0.2s ease;
+    border-radius: 8px;
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    transition: all 0.2s ease;
+  }
+  .btn-primary:hover {
+    filter: brightness(1.1);
+    transform: translateY(-1px);
   }
   .btn-primary:active {
-    filter: brightness(0.9);
+    transform: translateY(0);
   }
   
   .btn-secondary {
-    background: transparent;
-    border: 1.5px solid var(--primary);
-    color: var(--primary);
+    background: var(--surface);
+    border: 1px solid var(--outline);
+    color: var(--on-surface-variant);
+    border-radius: 8px;
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    transition: all 0.2s ease;
+  }
+  .btn-secondary:hover {
+    background: var(--surface-container-low);
+    color: var(--on-surface);
   }
 
   .shadow-ambient {
-    box-shadow: 0 4px 24px color-mix(in srgb, var(--on-surface) 4%, transparent);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
   }
 
   /* Scrollbar */
-  ::-webkit-scrollbar { width: 6px; }
-  ::-webkit-scrollbar-track { background: transparent; }
-  ::-webkit-scrollbar-thumb { background: color-mix(in srgb, var(--primary) 30%, transparent); border-radius: 3px; }
+  ::-webkit-scrollbar { width: 8px; }
+  ::-webkit-scrollbar-track { background: var(--background); }
+  ::-webkit-scrollbar-thumb { background: var(--outline-variant); border-radius: 10px; border: 2px solid var(--background); }
 }
+
 
 @media (prefers-reduced-motion: reduce) {
   .skeleton::after {

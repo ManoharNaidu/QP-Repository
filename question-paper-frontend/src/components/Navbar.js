@@ -31,43 +31,49 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className={`fixed top-0 w-full z-50 bg-surface flex items-center justify-between px-8 py-4 max-w-full font-body antialiased tracking-tight transition-shadow duration-300 ${scrolled ? "border-b border-outline-variant/20 shadow-sm" : ""}`}>
-        <div className="flex items-center gap-12">
-          <Link to="/" className="flex items-center gap-2 text-xl font-bold tracking-tighter text-primary">
-            <img src="/logo.png" alt="QP Repository Logo" className="w-8 h-8 object-contain" />
-            <span>QP REPOSITORY</span>
+      <nav className={`fixed top-0 w-full z-50 bg-background flex items-center justify-between px-6 md:px-12 py-4 tracking-tight transition-all duration-300 ${scrolled ? "border-b border-outline shadow-sm" : ""}`}>
+        <div className="flex items-center gap-10">
+          <Link to="/" className="flex items-center gap-2.5 text-xl font-extrabold tracking-tighter text-primary">
+            <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-white">
+              <span className="material-symbols-outlined text-xl">school</span>
+            </div>
+            <span className="hidden sm:inline">QP Repository</span>
           </Link>
-          <div className="hidden md:flex items-center space-x-6">
+          <div className="hidden md:flex items-center space-x-8">
             {navLinks.map((link) => (
               <Link
                 key={link.to}
                 to={link.to}
-                className={
+                className={`text-sm font-semibold transition-all hover:text-primary ${
                   isActive(link.to)
-                    ? "text-primary font-medium border-b-2 border-primary pb-1"
-                    : "text-on-surface-variant font-normal hover:text-on-surface transition-colors pb-1"
-                }
+                    ? "text-primary border-b-2 border-primary pb-0.5"
+                    : "text-on-surface-variant"
+                }`}
               >
                 {link.label}
               </Link>
             ))}
           </div>
         </div>
-        <div className="flex items-center gap-4">
+        
+        <div className="flex items-center gap-3">
           <button 
             onClick={toggleTheme}
-            className="p-2 text-on-surface-variant hover:bg-surface-container transition-all duration-200 scale-95 active:scale-100 rounded-md flex items-center justify-center">
-            <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>
+            className="w-10 h-10 flex items-center justify-center text-on-surface-variant hover:bg-surface-container-low hover:text-primary rounded-full transition-all"
+            title={isDark ? "Switch to Light Mode" : "Switch to Dark Mode"}
+          >
+            <span className="material-symbols-outlined text-[22px]">
               {isDark ? "light_mode" : "dark_mode"}
             </span>
           </button>
           <button 
             onClick={() => setMenuOpen((v) => !v)}
-            className="p-2 md:hidden text-on-surface-variant hover:bg-surface-container transition-all flex items-center justify-center rounded-md">
+            className="md:hidden w-10 h-10 flex items-center justify-center text-on-surface-variant hover:bg-surface-container-low rounded-full transition-all">
             <span className="material-symbols-outlined">{menuOpen ? "close" : "menu"}</span>
           </button>
         </div>
       </nav>
+
 
       {/* Mobile Drawer */}
       <AnimatePresence>

@@ -23,31 +23,35 @@ const Footer = () => {
 
   return (
     <>
-      <footer className="w-full py-12 mt-auto border-t border-outline-variant/30 bg-surface-dim">
-        <div className="flex flex-col md:flex-row justify-between items-center px-12 max-w-7xl mx-auto gap-6 md:gap-0">
-          <span className="text-sm font-body text-on-surface-variant">
-            © {new Date().getFullYear()} QP Repository. Institutional Authority.
-          </span>
+      <footer className="w-full py-10 mt-auto border-t border-outline bg-surface-bright">
+        <div className="flex flex-col md:flex-row justify-between items-center px-6 md:px-12 max-w-7xl mx-auto gap-6 md:gap-0">
+          <div className="flex items-center gap-2 text-primary font-bold opacity-80">
+            <span className="material-symbols-outlined text-xl">school</span>
+            <span className="text-sm">QP Repository</span>
+          </div>
           <div className="flex items-center gap-8">
             <button
               onClick={() => setActiveModal("terms")}
-              className="text-sm font-body text-on-surface-variant hover:text-on-surface hover:underline transition-all"
+              className="text-xs font-semibold text-on-surface-variant hover:text-primary transition-all uppercase tracking-wider"
             >
               Terms
             </button>
             <button
               onClick={() => setActiveModal("privacy")}
-              className="text-sm font-body text-on-surface-variant hover:text-on-surface hover:underline transition-all"
+              className="text-xs font-semibold text-on-surface-variant hover:text-primary transition-all uppercase tracking-wider"
             >
               Privacy
             </button>
             <button
               onClick={() => setActiveModal("rules")}
-              className="text-sm font-body text-on-surface-variant hover:text-on-surface hover:underline transition-all"
+              className="text-xs font-semibold text-on-surface-variant hover:text-primary transition-all uppercase tracking-wider"
             >
               Archive Rules
             </button>
           </div>
+          <span className="text-xs font-medium text-on-surface-variant/60">
+            © {new Date().getFullYear()} Institutional Authority.
+          </span>
         </div>
       </footer>
 
@@ -60,36 +64,36 @@ const Footer = () => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={closeModal}
-              className="absolute inset-0 bg-surface/80 backdrop-blur-sm"
+              className="absolute inset-0 bg-on-background/40 backdrop-blur-[2px]"
             />
             <motion.div
               initial={{ opacity: 0, scale: 0.95, y: 10 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 10 }}
-              className="relative w-full max-w-lg bg-surface-container-high border border-outline-variant/30 rounded-xl shadow-2xl p-8"
+              className="relative w-full max-w-lg bg-background border border-outline rounded-2xl shadow-2xl p-8"
             >
               <div className="flex items-center justify-between mb-6">
-                <h3 className="text-2xl font-bold font-headline text-on-surface">
+                <h3 className="text-2xl font-bold text-on-surface tracking-tight">
                   {modalContent[activeModal].title}
                 </h3>
                 <button
                   onClick={closeModal}
-                  className="w-8 h-8 rounded-full flex items-center justify-center bg-surface-container-low hover:bg-surface-bright text-on-surface-variant transition-colors"
+                  className="w-10 h-10 rounded-full flex items-center justify-center bg-surface-container-low hover:bg-surface-container text-on-surface-variant transition-colors"
                 >
-                  <span className="material-symbols-outlined text-sm">
+                  <span className="material-symbols-outlined text-lg">
                     close
                   </span>
                 </button>
               </div>
-              <div className="prose prose-invert max-w-none">
-                <p className="text-on-surface-variant leading-relaxed font-body">
+              <div className="max-w-none">
+                <p className="text-on-surface-variant leading-relaxed text-sm">
                   {modalContent[activeModal].body}
                 </p>
               </div>
-              <div className="mt-8 pt-6 border-t border-outline-variant/20 flex justify-end">
+              <div className="mt-8 pt-6 border-t border-outline flex justify-end">
                 <button
                   onClick={closeModal}
-                  className="px-6 py-2.5 bg-primary-container text-on-primary-container font-medium rounded hover:brightness-110 transition-all font-body text-sm"
+                  className="px-8 py-2.5 bg-primary text-white font-bold rounded-lg hover:brightness-110 transition-all text-sm shadow-lg shadow-primary/20"
                 >
                   Acknowledge
                 </button>
@@ -98,6 +102,7 @@ const Footer = () => {
           </div>
         )}
       </AnimatePresence>
+
     </>
   );
 };
