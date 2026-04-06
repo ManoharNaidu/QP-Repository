@@ -29,7 +29,7 @@ const FeedBackPage = () => {
   const handleFeedbackSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
+
     try {
       const response = await api.post("/api/feedback", {
         content: feedback,
@@ -55,11 +55,15 @@ const FeedBackPage = () => {
     <div className="bg-background text-on-surface font-body selection:bg-primary-container selection:text-on-primary-container min-h-screen flex flex-col pt-24">
       {message && (
         <div className="fixed top-28 left-1/2 -translate-x-1/2 z-50 animate-in fade-in slide-in-from-top-4 duration-300">
-          <div className={`px-6 py-4 rounded-xl shadow-2xl border flex items-center gap-3 ${message.includes("Failed") ? "bg-error-container text-on-error-container border-error" : "bg-primary text-white border-primary/20"}`}>
+          <div
+            className={`px-6 py-4 rounded-xl shadow-2xl border flex items-center gap-3 ${message.includes("Failed") ? "bg-error-container text-on-error-container border-error" : "bg-primary text-white border-primary/20"}`}
+          >
             <span className="material-symbols-outlined">
               {message.includes("Failed") ? "error" : "verified"}
             </span>
-            <span className="font-bold text-sm uppercase tracking-wider">{message}</span>
+            <span className="font-bold text-sm uppercase tracking-wider">
+              {message}
+            </span>
           </div>
         </div>
       )}
@@ -71,69 +75,114 @@ const FeedBackPage = () => {
               Your Feedback
             </h1>
             <p className="text-on-surface-variant font-medium text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
-              Help us refine the digital archive. Every insight drives our institutional progress.
+              Help us refine the digital archive. Every insight drives our
+              institutional progress.
             </p>
           </div>
 
           <AnimatePresence mode="wait">
             {isSubmitting ? (
-              <motion.div key="loading" {...fadeTransition} className="py-20 flex flex-col items-center justify-center">
+              <motion.div
+                key="loading"
+                {...fadeTransition}
+                className="py-20 flex flex-col items-center justify-center"
+              >
                 <FeedbackPageLoading />
-                <p className="mt-8 text-primary font-black uppercase tracking-widest text-xs animate-pulse">Processing Insights...</p>
+                <p className="mt-8 text-primary font-black uppercase tracking-widest text-xs animate-pulse">
+                  Processing Insights...
+                </p>
               </motion.div>
             ) : (
-              <motion.div key="content" {...fadeTransition} className="grid grid-cols-1 md:grid-cols-12 gap-16 items-start">
+              <motion.div
+                key="content"
+                {...fadeTransition}
+                className="grid grid-cols-1 md:grid-cols-12 gap-16 items-start"
+              >
                 {/* Info Column */}
                 <div className="md:col-span-5 space-y-12">
                   <div className="space-y-6">
-                    <h3 className="text-2xl font-bold tracking-tight text-on-surface">Community Voices</h3>
+                    <h3 className="text-2xl font-bold tracking-tight text-on-surface">
+                      Community Voices
+                    </h3>
                     <p className="text-on-surface-variant font-medium leading-relaxed">
-                      Whether it's a bug report or a suggestion for a new feature, your input shapes the future of academic research.
+                      Whether it's a bug report or a suggestion for a new
+                      feature, your input shapes the future of academic
+                      research.
                     </p>
                   </div>
 
                   <div className="space-y-8">
                     <div className="flex gap-4">
                       <div className="w-12 h-12 rounded-xl bg-primary/5 text-primary flex items-center justify-center flex-shrink-0">
-                        <span className="material-symbols-outlined">lightbulb</span>
+                        <span className="material-symbols-outlined">
+                          lightbulb
+                        </span>
                       </div>
                       <div>
-                        <h4 className="font-bold text-on-surface text-sm uppercase tracking-wider">Feature Suggestions</h4>
-                        <p className="text-on-surface-variant text-sm mt-1">Tell us what tools you need for better studying.</p>
+                        <h4 className="font-bold text-on-surface text-sm uppercase tracking-wider">
+                          Feature Suggestions
+                        </h4>
+                        <p className="text-on-surface-variant text-sm mt-1">
+                          Tell us what tools you need for better studying.
+                        </p>
                       </div>
                     </div>
                     <div className="flex gap-4">
                       <div className="w-12 h-12 rounded-xl bg-primary/5 text-primary flex items-center justify-center flex-shrink-0">
-                        <span className="material-symbols-outlined">bug_report</span>
+                        <span className="material-symbols-outlined">
+                          bug_report
+                        </span>
                       </div>
                       <div>
-                        <h4 className="font-bold text-on-surface text-sm uppercase tracking-wider">Bug Reporting</h4>
-                        <p className="text-on-surface-variant text-sm mt-1">Found a broken link or a typo? Let us know immediately.</p>
+                        <h4 className="font-bold text-on-surface text-sm uppercase tracking-wider">
+                          Bug Reporting
+                        </h4>
+                        <p className="text-on-surface-variant text-sm mt-1">
+                          Found a broken link or a typo? Let us know
+                          immediately.
+                        </p>
                       </div>
                     </div>
                   </div>
 
                   <div className="pt-8 border-t border-outline flex gap-8 opacity-40 grayscale">
                     <div className="flex flex-col items-center gap-1">
-                      <span className="material-symbols-outlined text-xl">security</span>
-                      <span className="text-[9px] font-black uppercase tracking-tighter">Secure</span>
+                      <span className="material-symbols-outlined text-xl">
+                        security
+                      </span>
+                      <span className="text-[9px] font-black uppercase tracking-tighter">
+                        Secure
+                      </span>
                     </div>
                     <div className="flex flex-col items-center gap-1">
-                      <span className="material-symbols-outlined text-xl">history</span>
-                      <span className="text-[9px] font-black uppercase tracking-tighter">Fast Response</span>
+                      <span className="material-symbols-outlined text-xl">
+                        history
+                      </span>
+                      <span className="text-[9px] font-black uppercase tracking-tighter">
+                        Fast Response
+                      </span>
                     </div>
                     <div className="flex flex-col items-center gap-1">
-                      <span className="material-symbols-outlined text-xl">verified_user</span>
-                      <span className="text-[9px] font-black uppercase tracking-tighter">Institutional</span>
+                      <span className="material-symbols-outlined text-xl">
+                        verified_user
+                      </span>
+                      <span className="text-[9px] font-black uppercase tracking-tighter">
+                        Institutional
+                      </span>
                     </div>
                   </div>
                 </div>
 
                 {/* Form Column */}
-                <form onSubmit={handleFeedbackSubmit} className="md:col-span-7 bg-surface-bright border border-outline rounded-3xl p-8 md:p-12 shadow-sm space-y-10">
+                <form
+                  onSubmit={handleFeedbackSubmit}
+                  className="md:col-span-7 bg-surface-bright border border-outline rounded-3xl p-8 md:p-12 shadow-sm space-y-10"
+                >
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <div className="space-y-1.5">
-                      <label className="text-[11px] uppercase tracking-[0.1em] font-black text-primary ml-1">Full Name</label>
+                      <label className="text-[11px] uppercase tracking-[0.1em] font-black text-primary ml-1">
+                        Full Name
+                      </label>
                       <input
                         type="text"
                         value={name}
@@ -143,7 +192,9 @@ const FeedBackPage = () => {
                       />
                     </div>
                     <div className="space-y-1.5">
-                      <label className="text-[11px] uppercase tracking-[0.1em] font-black text-primary ml-1">Email Address</label>
+                      <label className="text-[11px] uppercase tracking-[0.1em] font-black text-primary ml-1">
+                        Email Address
+                      </label>
                       <input
                         type="email"
                         value={email}
@@ -155,7 +206,9 @@ const FeedBackPage = () => {
                   </div>
 
                   <div className="space-y-1.5">
-                    <label className="text-[11px] uppercase tracking-[0.1em] font-black text-primary ml-1">Classification</label>
+                    <label className="text-[11px] uppercase tracking-[0.1em] font-black text-primary ml-1">
+                      Classification
+                    </label>
                     <select
                       value={category}
                       onChange={(e) => setCategory(e.target.value)}
@@ -169,7 +222,9 @@ const FeedBackPage = () => {
                   </div>
 
                   <div className="space-y-1.5">
-                    <label className="text-[11px] uppercase tracking-[0.1em] font-black text-primary ml-1">Your Insights *</label>
+                    <label className="text-[11px] uppercase tracking-[0.1em] font-black text-primary ml-1">
+                      Your Insights *
+                    </label>
                     <textarea
                       value={feedback}
                       onChange={(e) => setFeedback(e.target.value)}
@@ -187,7 +242,9 @@ const FeedBackPage = () => {
                       className="w-full btn-primary h-16 text-lg flex items-center justify-center gap-3 shadow-xl shadow-primary/20 hover:scale-[1.02] active:scale-[0.98] transition-all disabled:opacity-50 disabled:grayscale"
                     >
                       <span className="material-symbols-outlined">send</span>
-                      <span className="font-black uppercase tracking-widest text-sm">Submit Insights</span>
+                      <span className="font-black uppercase tracking-widest text-sm">
+                        Submit Insights
+                      </span>
                     </button>
                   </div>
                 </form>

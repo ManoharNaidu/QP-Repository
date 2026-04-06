@@ -41,12 +41,16 @@ const Navbar = () => {
         {/* Logo - Independent on the left */}
         <Link
           to="/"
-          className="flex items-center gap-2.5 text-xl font-extrabold tracking-tighter text-primary"
+          className="flex items-center gap-3 text-xl font-extrabold tracking-tighter text-on-surface group"
         >
-          <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-white">
-            <span className="material-symbols-outlined text-xl">school</span>
+          <div className="w-9 h-9 bg-primary rounded-xl flex items-center justify-center text-white shadow-lg shadow-primary/20 group-hover:scale-110 transition-transform">
+            <span className="material-symbols-outlined text-xl leading-none">
+              school
+            </span>
           </div>
-          <span className="hidden sm:inline">QP Repository</span>
+          <span className="hidden sm:inline">
+            QP <span className="text-primary italic">Repository</span>
+          </span>
         </Link>
 
         {/* Desktop Navigation Links - Pushed to the right using ml-auto */}
