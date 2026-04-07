@@ -6,6 +6,7 @@ import errorMiddleware from "./middlewares/error.middleware.js";
 import notFoundMiddleware from "./middlewares/not-found.middleware.js";
 import questionPaperRoutes from "./routes/questionPaper.routes.js";
 import feedbackRoutes from "./routes/feedback.routes.js";
+import predictRoutes from "./routes/predict.routes.js";
 
 const app = express();
 
@@ -16,6 +17,7 @@ app.use(arcjetMiddleware);
 
 app.use("/api", questionPaperRoutes);
 app.use("/api", feedbackRoutes);
+app.use("/api", predictRoutes);
 
 app.use(notFoundMiddleware);
 app.use(errorMiddleware);

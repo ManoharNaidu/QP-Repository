@@ -23,6 +23,7 @@ const Navbar = () => {
     { to: "/", label: "Home" },
     { to: "/download", label: "Archive" },
     { to: "/upload", label: "Upload" },
+    { to: "/predict", label: "Predict" },
     { to: "/feedback", label: "Feedback" },
   ];
 

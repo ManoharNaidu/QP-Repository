@@ -7,7 +7,7 @@ const LandingPage = () => {
     <div className="bg-background text-on-surface font-body selection:bg-primary-container selection:text-on-primary-container antialiased flex flex-col">
       <main className="flex-grow">
         {/* Hero Section */}
-        <section className="relative px-6 md:px-12 pt-32 pb-24 lg:pt-48 lg:pb-40 max-w-7xl mx-auto w-full">
+        <section className="relative px-6 md:px-12 pt-32 pb-16 lg:pt-24 lg:pb-16 max-w-7xl mx-auto w-full">
           <div className="flex flex-col items-center text-center space-y-10">
             <div className="space-y-4 max-w-4xl">
               <h1 className="text-5xl md:text-8xl font-black tracking-tight leading-[0.95] text-on-surface">

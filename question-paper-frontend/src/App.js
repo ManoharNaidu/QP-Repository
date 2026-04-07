@@ -5,6 +5,7 @@ import LandingPage from "./pages/LandingPage";
 import DownloadPage from "./pages/DownloadPage";
 import UploadPage from "./pages/UploadPage";
 import FeedbackPage from "./pages/FeedBackPage";
+import PredictPage from "./pages/PredictPage";
 
 const App = () => {
   return (
@@ -15,6 +16,7 @@ const App = () => {
           <Route path="/upload" element={<UploadPage />} />
           <Route path="/download" element={<DownloadPage />} />
           <Route path="/feedback" element={<FeedbackPage />} />
+          <Route path="/predict" element={<PredictPage />} />
           <Route path="*" element={<h1>404 Not Found</h1>} />
         </Route>
       </Routes>

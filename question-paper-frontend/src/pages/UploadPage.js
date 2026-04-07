@@ -122,7 +122,7 @@ const UploadPage = () => {
   }, [message]);
 
   return (
-    <div className="bg-background text-on-surface font-body selection:bg-primary-container selection:text-on-primary-container min-h-screen flex flex-col pt-24">
+    <div className="bg-background text-on-surface font-body selection:bg-primary-container selection:text-on-primary-container min-h-screen flex flex-col pt-0 pb-0 overflow-hidden">
       {message && (
         <div className="fixed top-28 left-1/2 -translate-x-1/2 z-50 animate-in fade-in slide-in-from-top-4 duration-300">
           <div
@@ -141,10 +141,10 @@ const UploadPage = () => {
       <main className="flex-grow py-20 px-6 md:px-12">
         <div className="max-w-4xl mx-auto w-full">
           <div className="text-center space-y-4 mb-20">
-            <h1 className="text-4xl md:text-7xl font-black tracking-tight text-on-surface leading-none">
+            <h1 className="text-2xl md:text-4xl font-bold tracking-tight text-on-surface leading-none">
               Upload Portal
             </h1>
-            <p className="text-on-surface-variant font-medium text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
+            <p className="text-on-surface-variant font-medium text-sm md:text-lg max-w-2xl mx-auto leading-relaxed">
               Join the institutional network of contributors by archiving
               high-quality digital examination assets.
             </p>

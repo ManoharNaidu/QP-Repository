@@ -1,3 +1,4 @@
+import pdf from "pdf-parse";
 import QuestionPaper from "../models/QuestionPaper.js";
 import configureCloudinary from "../config/cloudinary.config.js";
 import {
@@ -18,6 +19,15 @@ const createHttpError = (statusCode, message) => {
 export const createQuestionPaper = async ({ body, file }) => {
   if (!file) {
     throw createHttpError(400, "File not uploaded");
+  }
+
+  let extractedText = "";
+  try {
+    const data = await pdf(file.buffer);
+    extractedText = data.text;
+  } catch (err) {
+    console.error("PDF Extraction failed:", err);
+    // Continue without extraction if it fails, but log it
   }
 
   const payload = normalizeQuestionPaperPayload(body);
@@ -61,6 +71,7 @@ export const createQuestionPaper = async ({ body, file }) => {
       branch: normalizeBranch(payload.branch),
       courseCode: normalizeCourseCode(payload.courseCode),
       fileUrl: uploadResult.secure_url,
+      extractedText,
     },
     {
       upsert: true,

@@ -19,6 +19,7 @@ const QPaperSchema = new mongoose.Schema(
       match: /^[A-Z]{2}\d{5}$/,
     },
     fileUrl: { type: String, required: true },
+    extractedText: { type: String },
   },
   {
     timestamps: true,

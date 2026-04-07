@@ -218,14 +218,14 @@ const DownloadPage = () => {
   };
 
   return (
-    <div className="bg-background text-on-surface font-body min-h-screen relative flex flex-col pt-24 selection:bg-primary-container selection:text-on-primary-container antialiased">
+    <div className="bg-background text-on-surface font-body min-h-screen relative flex flex-col pt-0 pb-0 overflow-hidden selection:bg-primary-container selection:text-on-primary-container antialiased">
       <main className="flex-grow py-12 px-6 md:px-12 max-w-7xl mx-auto w-full">
         {/* Header Section */}
         <header className="mb-16">
-          <h1 className="text-4xl md:text-6xl font-black tracking-tight text-on-surface leading-none mb-4">
+          <h1 className="text-2xl md:text-4xl font-bold tracking-tight text-on-surface leading-none mb-4">
             Archive Explorer
           </h1>
-          <p className="text-on-surface-variant text-lg md:text-xl font-medium max-w-2xl leading-relaxed">
+          <p className="text-on-surface-variant text-sm md:text-lg font-medium max-w-2xl leading-relaxed">
             Navigate the institutional repository of digital examination assets.
             Optimized for speed and precision.
           </p>
