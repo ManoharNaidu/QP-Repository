@@ -1,4 +1,4 @@
-import pdf from "pdf-parse";
+import pdf from "pdf-parse/lib/pdf-parse.js";
 import QuestionPaper from "../models/QuestionPaper.js";
 import configureCloudinary from "../config/cloudinary.config.js";
 import {
