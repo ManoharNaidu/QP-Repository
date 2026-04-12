@@ -11,6 +11,10 @@ const fadeTransition = {
   transition: { duration: 0.3, ease: "easeOut" },
 };
 
+/**
+ * Renders feedback submission UI for suggestions, bugs, and general comments.
+ * @returns {JSX.Element} Feedback page UI.
+ */
 const FeedBackPage = () => {
   const [feedback, setFeedback] = useState("");
   const [name, setName] = useState("");
@@ -26,6 +30,11 @@ const FeedBackPage = () => {
     }
   }, [message]);
 
+  /**
+   * Sends feedback payload to the backend and resets form fields on success.
+   * @param {React.FormEvent<HTMLFormElement>} e Submit event.
+   * @returns {Promise<void>} Resolves when submission completes.
+   */
   const handleFeedbackSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);

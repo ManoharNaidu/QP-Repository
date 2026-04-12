@@ -2,6 +2,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Footer from "../components/Footer";
 
+/**
+ * Renders the main marketing and navigation landing page.
+ * @returns {JSX.Element} Landing page UI.
+ */
 const LandingPage = () => {
   return (
     <div className="bg-background text-on-surface font-body selection:bg-primary-container selection:text-on-primary-container antialiased flex flex-col">

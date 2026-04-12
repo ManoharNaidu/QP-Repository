@@ -25,6 +25,10 @@ const fadeTransition = {
   transition: { duration: 0.3, ease: "easeOut" },
 };
 
+/**
+ * Renders the upload workflow for question paper metadata and PDF files.
+ * @returns {JSX.Element} Upload page UI.
+ */
 const UploadPage = () => {
   const [formData, setFormData] = useState({
     module: "",
@@ -51,17 +55,32 @@ const UploadPage = () => {
       ? BACHELOR_ACADEMIC_OPTIONS
       : BASE_ACADEMIC_OPTIONS;
 
+  /**
+   * Updates a form field from standard input/select change events.
+   * @param {React.ChangeEvent<HTMLInputElement | HTMLSelectElement>} e Change event.
+   * @returns {void}
+   */
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  /**
+   * Captures a file selected via the hidden file input.
+   * @param {React.ChangeEvent<HTMLInputElement>} e File input change event.
+   * @returns {void}
+   */
   const handleFileChange = (e) => {
     if (e.target.files && e.target.files[0]) {
       handleFileSelection(e.target.files[0]);
     }
   };
 
+  /**
+   * Validates and stores a selected PDF file in local component state.
+   * @param {File} selectedFile Browser File object chosen by the user.
+   * @returns {void}
+   */
   const handleFileSelection = (selectedFile) => {
     if (
       selectedFile.type !== "application/pdf" &&
@@ -73,6 +92,11 @@ const UploadPage = () => {
     setFormData((prev) => ({ ...prev, file: selectedFile }));
   };
 
+  /**
+   * Submits upload metadata and file as multipart form data.
+   * @param {React.FormEvent<HTMLFormElement>} e Form submit event.
+   * @returns {Promise<void>} Resolves when submission lifecycle completes.
+   */
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!formData.file) {

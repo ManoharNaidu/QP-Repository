@@ -30,6 +30,10 @@ const fadeTransition = {
   transition: { duration: 0.3, ease: "easeOut" },
 };
 
+/**
+ * Renders searchable and paginated archive listings for uploaded papers.
+ * @returns {JSX.Element} Download/search page UI.
+ */
 const DownloadPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [filters, setFilters] = useState(defaultFilters);
@@ -50,6 +54,12 @@ const DownloadPage = () => {
       ? academicYearOptions.slice(0, 2)
       : academicYearOptions;
 
+  /**
+   * Reflects selected filters and page into the URL query string.
+   * @param {Record<string, string>} filtersToUpdate Filter values to serialize.
+   * @param {number} [page=1] Target page number.
+   * @returns {void}
+   */
   const updateUrlWithFilters = useCallback(
     (filtersToUpdate, page = 1) => {
       const params = new URLSearchParams();
@@ -69,6 +79,12 @@ const DownloadPage = () => {
     [setSearchParams],
   );
 
+  /**
+   * Fetches papers from the backend for a specific filter set and page.
+   * @param {Record<string, string>} filtersToFetch Filters to include in the request.
+   * @param {number} [pageToFetch=1] Page number to request.
+   * @returns {Promise<void>} Resolves after state has been updated.
+   */
   const fetchPapers = useCallback(async (filtersToFetch, pageToFetch = 1) => {
     setIsLoading(true);
 
@@ -128,6 +144,11 @@ const DownloadPage = () => {
     }
   }, [filters.academicYear, filteredAcademicYears]);
 
+  /**
+   * Updates local filter state from input/select controls.
+   * @param {React.ChangeEvent<HTMLInputElement | HTMLSelectElement>} event Change event.
+   * @returns {void}
+   */
   const handleInputChange = (event) => {
     const { name, value } = event.target;
 
@@ -137,11 +158,20 @@ const DownloadPage = () => {
     }));
   };
 
+  /**
+   * Applies active filters and resets pagination to the first page.
+   * @param {React.FormEvent<HTMLFormElement> | React.MouseEvent<HTMLButtonElement>} event Submit/click event.
+   * @returns {void}
+   */
   const handleFilterSubmit = (event) => {
     event.preventDefault();
     updateUrlWithFilters(filters, 1);
   };
 
+  /**
+   * Clears all filters and resets the URL query state.
+   * @returns {void}
+   */
   const handleResetFilters = () => {
     setFilters(defaultFilters);
     setCurrentPage(1);
@@ -149,6 +179,11 @@ const DownloadPage = () => {
     updateUrlWithFilters(defaultFilters, 1);
   };
 
+  /**
+   * Executes a filter search when the Enter key is pressed in course input.
+   * @param {React.KeyboardEvent<HTMLInputElement>} e Key event.
+   * @returns {void}
+   */
   const handleSearchKeyPress = (e) => {
     if (e.key === "Enter") {
       e.preventDefault();
@@ -156,6 +191,11 @@ const DownloadPage = () => {
     }
   };
 
+  /**
+   * Creates a stable, sanitized filename for downloaded paper blobs.
+   * @param {Record<string, unknown>} paper Paper record from API response.
+   * @returns {string} Download-safe filename ending with `.pdf`.
+   */
   const buildFileName = (paper) => {
     const parts = [
       paper.module,
@@ -170,6 +210,11 @@ const DownloadPage = () => {
     return `${parts.join("_").replace(/[^\w.-]+/g, "_")}.pdf`;
   };
 
+  /**
+   * Downloads a paper URL as a browser blob and triggers file save.
+   * @param {Record<string, unknown>} paper Paper record containing `fileUrl` and metadata.
+   * @returns {Promise<void>} Resolves when download flow completes.
+   */
   const downloadPaper = async (paper) => {
     try {
       const response = await api.get(paper.fileUrl, { responseType: "blob" });
@@ -191,6 +236,11 @@ const DownloadPage = () => {
     }
   };
 
+  /**
+   * Navigates to a target page if it is in valid range.
+   * @param {number} pageNumber Candidate page number.
+   * @returns {void}
+   */
   const changePage = (pageNumber) => {
     if (pageNumber >= 1 && pageNumber <= totalPages) {
       setCurrentPage(pageNumber);
@@ -199,6 +249,10 @@ const DownloadPage = () => {
     }
   };
 
+  /**
+   * Generates compact pagination numbers around the active page.
+   * @returns {number[]} Page numbers to render in the pager control.
+   */
   const getPageNumbers = () => {
     const pages = [];
     let startPage = Math.max(1, currentPage - 1);
