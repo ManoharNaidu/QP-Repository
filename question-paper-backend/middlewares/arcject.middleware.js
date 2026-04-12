@@ -1,5 +1,12 @@
 import aj from "../config/arcject.config.js";
 
+/**
+ * Applies Arcjet request protection and blocks denied traffic with appropriate HTTP codes.
+ * @param {import("express").Request} req Incoming request.
+ * @param {import("express").Response} res Outgoing response.
+ * @param {import("express").NextFunction} next Express next callback.
+ * @returns {Promise<void>} Resolves when request is forwarded or blocked.
+ */
 const arcjetMiddleware = async (req, res, next) => {
   try {
     const decision = await aj.protect(req, { requested: 1 });

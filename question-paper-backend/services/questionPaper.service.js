@@ -10,12 +10,23 @@ import {
 } from "../utils/questionPaper.utils.js";
 import { uploadBufferToCloudinary } from "../utils/cloudinary.utils.js";
 
+/**
+ * Creates an Error instance enriched with an HTTP status code.
+ * @param {number} statusCode HTTP status code to attach.
+ * @param {string} message Human-readable error message.
+ * @returns {Error & { statusCode: number }} Error with status code metadata.
+ */
 const createHttpError = (statusCode, message) => {
   const error = new Error(message);
   error.statusCode = statusCode;
   return error;
 };
 
+/**
+ * Validates, uploads, and upserts a question paper record.
+ * @param {{ body: Record<string, unknown>, file?: Express.Multer.File }} params Incoming form payload and uploaded file.
+ * @returns {Promise<{ fileUrl: string, paper: import("mongoose").Document }>} Stored cloud URL and paper document.
+ */
 export const createQuestionPaper = async ({ body, file }) => {
   if (!file) {
     throw createHttpError(400, "File not uploaded");
@@ -87,6 +98,11 @@ export const createQuestionPaper = async ({ body, file }) => {
   };
 };
 
+/**
+ * Retrieves paginated question papers from MongoDB using normalized filters.
+ * @param {Record<string, unknown>} queryParams Raw query params from the HTTP request.
+ * @returns {Promise<{ papers: Array<unknown>, pagination: { page: number, pageSize: number, totalItems: number, totalPages: number }, filters: Record<string, string>}>} Paginated records with metadata.
+ */
 export const getQuestionPapers = async (queryParams) => {
   const {
     page,

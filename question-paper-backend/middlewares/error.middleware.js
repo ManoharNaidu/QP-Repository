@@ -1,3 +1,11 @@
+/**
+ * Normalizes and responds to runtime errors from controllers/services.
+ * @param {Error & { statusCode?: number, code?: number, errors?: Record<string, { message?: string }> }} err Error object.
+ * @param {import("express").Request} req Incoming request.
+ * @param {import("express").Response} res Outgoing response.
+ * @param {import("express").NextFunction} next Express next callback.
+ * @returns {void}
+ */
 const errorMiddleware = (err, req, res, next) => {
   try {
     let error = { ...err };

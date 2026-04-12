@@ -22,4 +22,8 @@ app.use("/api", predictRoutes);
 app.use(notFoundMiddleware);
 app.use(errorMiddleware);
 
+/**
+ * Configured Express application instance with global middleware and API routes.
+ * @type {import("express").Express}
+ */
 export default app;

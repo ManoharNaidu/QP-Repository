@@ -2,6 +2,10 @@
 
 Question paper repository with a React frontend and an Express + MongoDB backend.
 
+## Documentation
+
+- Full technical documentation: `TECHNICAL_DOCUMENTATION.md`
+
 ## Projects
 
 - `question-paper-frontend` — upload, search, pagination, and feedback UI.
@@ -33,6 +37,7 @@ CLOUDINARY_CLOUD_NAME=your_cloud_name
 CLOUDINARY_API_KEY=your_api_key
 CLOUDINARY_API_SECRET=your_api_secret
 ARCJET_KEY=your_arcjet_key
+GEMINI_API_KEY=your_gemini_api_key
 PORT=5000
 ```
 

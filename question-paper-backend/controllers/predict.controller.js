@@ -1,6 +1,13 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import QuestionPaper from "../models/QuestionPaper.js";
 
+/**
+ * Predicts likely exam questions by analyzing historical extracted paper text using Gemini.
+ * @param {import("express").Request} req Incoming request with `courseCode` path param.
+ * @param {import("express").Response} res Express response.
+ * @param {import("express").NextFunction} next Express error-forwarding callback.
+ * @returns {Promise<void>} Resolves when a response is sent.
+ */
 export const predictQuestions = async (req, res, next) => {
   try {
     const { courseCode } = req.params;
@@ -16,7 +23,8 @@ export const predictQuestions = async (req, res, next) => {
 
     if (!papers || papers.length === 0) {
       return res.status(404).json({
-        message: "No historical data found for this course code to make a prediction.",
+        message:
+          "No historical data found for this course code to make a prediction.",
       });
     }
 
@@ -28,7 +36,8 @@ export const predictQuestions = async (req, res, next) => {
 
     if (!combinedText) {
       return res.status(400).json({
-        message: "No text content available in existing papers for this course.",
+        message:
+          "No text content available in existing papers for this course.",
       });
     }
 

@@ -2,6 +2,10 @@
 
 Express API for uploading question papers, searching them with backend pagination, and collecting feedback.
 
+## Documentation
+
+- Full system documentation: `../TECHNICAL_DOCUMENTATION.md`
+
 ## Structure
 
 - `app.js` — Express app setup and middleware registration.
@@ -30,6 +34,7 @@ CLOUDINARY_CLOUD_NAME=your_cloud_name
 CLOUDINARY_API_KEY=your_api_key
 CLOUDINARY_API_SECRET=your_api_secret
 ARCJET_KEY=your_arcjet_key
+GEMINI_API_KEY=your_gemini_api_key
 PORT=5000
 ```
 
@@ -87,3 +92,7 @@ Accepts:
   "category": "Optional category"
 }
 ```
+
+### `GET /api/predict/:courseCode`
+
+Runs AI-based analysis against historical paper text for a course code and returns predicted topics/questions.
